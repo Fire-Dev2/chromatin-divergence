@@ -1,0 +1,126 @@
+{
+ "figshare_article_20029387": {
+  "url": "https://plus.figshare.com/articles/dataset/_Mapping_information-rich_genotype-phenotype_landscapes_with_genome-scale_Perturb-seq_Replogle_et_al_2022_processed_Perturb-seq_datasets/20029387",
+  "head": "HTTP/2 202 \ncontent-length: 0"
+ },
+ "figshare_doi_20029387": {
+  "url": "https://doi.org/10.25452/figshare.plus.20029387",
+  "head": "HTTP/2 302 \nlocation: https://plus.figshare.com/articles/dataset/_Mapping_information-rich_genotype-phenotype_landscapes_with_genome-scale_Perturb-seq_Replogle_et_al_2022_processed_Perturb-seq_datasets/20029387"
+ },
+ "K562_essential_raw_singlecell_01.h5ad": {
+  "url": "https://ndownloader.figshare.com/files/35773219",
+  "head": "HTTP/2 302 \ncontent-length: 0\nlocation: https://s3-eu-west-1.amazonaws.com/pstorage-plus-7003492043/35773219/K562_essential_raw_singlecell_01.h5ad?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA3O...ODUZ/20261011/eu-west-1/s3/aws4_request&X-Amz-Date=20261011T185152Z&X-Amz-Expires=10&X-Amz-SignedHeaders=host&X-Amz-Signature=d7146969fa4e3a5e8f379c9f26111025c12b13fd2ac1f528ebcab5a09afacc76"
+ },
+ "K562_essential_normalized_singlecell_01.h5ad": {
+  "url": "https://ndownloader.figshare.com/files/35773075",
+  "head": "HTTP/2 302 \ncontent-length: 0\nlocation: https://s3-eu-west-1.amazonaws.com/pstorage-plus-7003492043/35773075/K562_essential_normalized_singlecell_01.h5ad?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA3O...ODUZ/20261011/eu-west-1/s3/aws4_request&X-Amz-Date=20261011T185153Z&X-Amz-Expires=10&X-Amz-SignedHeaders=host&X-Amz-Signature=ebb49800caf91dccefb13893ae5f1578d47fd1bdd554ebd35a7211805b2c1df0"
+ },
+ "K562_gwps_raw_singlecell_01.h5ad": {
+  "url": "https://ndownloader.figshare.com/files/35775507",
+  "head": "HTTP/2 302 \ncontent-length: 0\nlocation: https://s3-eu-west-1.amazonaws.com/ptemp-plus-8475456492/35775507/K562_gwps_raw_singlecell_01.h5ad?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA3O...ODUZ/20261011/eu-west-1/s3/aws4_request&X-Amz-Date=20261011T185154Z&X-Amz-Expires=10&X-Amz-SignedHeaders=host&X-Amz-Signature=422b6ef1b4f24fad475f1067eae72d05406fd2231bfb62a09053c4db1692a501"
+ },
+ "K562_gwps_normalized_singlecell_01.h5ad": {
+  "url": "https://ndownloader.figshare.com/files/35774440",
+  "head": "HTTP/2 302 \ncontent-length: 0\nlocation: https://s3-eu-west-1.amazonaws.com/ptemp-plus-8475456492/35774440/K562_gwps_normalized_singlecell_01.h5ad?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA3O...ODUZ/20261011/eu-west-1/s3/aws4_request&X-Amz-Date=20261011T185155Z&X-Amz-Expires=10&X-Amz-SignedHeaders=host&X-Amz-Signature=c265fe7ddffe0d2c3cb33483e635afd102a255d46ee5de7a368f2e262946a0d0"
+ },
+ "rpe1_raw_singlecell_01.h5ad": {
+  "url": "https://ndownloader.figshare.com/files/35775606",
+  "head": "HTTP/2 302 \ncontent-length: 0\nlocation: https://s3-eu-west-1.amazonaws.com/ptemp-plus-8475456492/35775606/rpe1_raw_singlecell_01.h5ad?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA3O...ODUZ/20261011/eu-west-1/s3/aws4_request&X-Amz-Date=20261011T185155Z&X-Amz-Expires=10&X-Amz-SignedHeaders=host&X-Amz-Signature=5ac19083d19de5a90423424ca431d22e0d19e0c991b915a160a9b01483222d05"
+ },
+ "rpe1_normalized_singlecell_01.h5ad": {
+  "url": "https://ndownloader.figshare.com/files/35775554",
+  "head": "HTTP/2 302 \ncontent-length: 0\nlocation: https://s3-eu-west-1.amazonaws.com/pstorage-plus-7003492043/35775554/rpe1_normalized_singlecell_01.h5ad?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA3O...ODUZ/20261011/eu-west-1/s3/aws4_request&X-Amz-Date=20261011T185157Z&X-Amz-Expires=10&X-Amz-SignedHeaders=host&X-Amz-Signature=e29262f381319171ef4f07920fc4af53b723e3b4a36e41f5ca4b8c71b3f9de54"
+ },
+ "K562_essential_raw_bulk_01.h5ad": {
+  "url": "https://ndownloader.figshare.com/files/35773070",
+  "head": "HTTP/2 302 \ncontent-length: 0\nlocation: https://s3-eu-west-1.amazonaws.com/pstorage-plus-7003492043/35773070/K562_essential_raw_bulk_01.h5ad?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA3O...ODUZ/20261011/eu-west-1/s3/aws4_request&X-Amz-Date=20261011T185158Z&X-Amz-Expires=10&X-Amz-SignedHeaders=host&X-Amz-Signature=09982d9b4e42b4b09046421b53b4616e54dfa73f542534f93e827c4e0d266c90"
+ },
+ "K562_gwps_raw_bulk_01.h5ad": {
+  "url": "https://ndownloader.figshare.com/files/35774443",
+  "head": "HTTP/2 302 \ncontent-length: 0\nlocation: https://s3-eu-west-1.amazonaws.com/pstorage-plus-7003492043/35774443/K562_gwps_raw_bulk_01.h5ad?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA3O...ODUZ/20261011/eu-west-1/s3/aws4_request&X-Amz-Date=20261011T185159Z&X-Amz-Expires=10&X-Amz-SignedHeaders=host&X-Amz-Signature=873974910b40ab07620d0e9efe4a4c127a94a4aba466f2c6e419da9778b75cac"
+ },
+ "rpe1_raw_bulk_01.h5ad": {
+  "url": "https://ndownloader.figshare.com/files/35775581",
+  "head": "HTTP/2 302 \ncontent-length: 0\nlocation: https://s3-eu-west-1.amazonaws.com/pstorage-plus-7003492043/35775581/rpe1_raw_bulk_01.h5ad?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA3O...ODUZ/20261011/eu-west-1/s3/aws4_request&X-Amz-Date=20261011T185159Z&X-Amz-Expires=10&X-Amz-SignedHeaders=host&X-Amz-Signature=7da5c3a4f54a43960a74e1cb29df4802595503b318e90d8cc4cad77e8d43232e"
+ },
+ "figshare_MTX_20127869": {
+  "url": "https://plus.figshare.com/articles/dataset/_Mapping_information-rich_genotype-phenotype_landscapes_with_genome-scale_Perturb-seq_Replogle_et_al_2022_MTX_files/20127869",
+  "head": "HTTP/2 202 \ncontent-length: 0"
+ },
+ "figshare_manifest_20022944": {
+  "url": "https://doi.org/10.25452/figshare.plus.20022944",
+  "head": "HTTP/2 302 \nlocation: https://plus.figshare.com/articles/dataset/_Mapping_information-rich_genotype-phenotype_landscapes_with_genome-scale_Perturb-seq_Replogle_et_al_2022_SRA_and_GEO_file_manifest/20022944"
+ },
+ "gwps_portal": {
+  "url": "https://gwps.wi.mit.edu/",
+  "head": "HTTP/1.1 200 OK\nContent-Length: 2537"
+ },
+ "GEO_GSE264667": {
+  "url": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE264667",
+  "head": "HTTP/2 200 \ncontent-length: 0"
+ },
+ "GSE264667_jurkat_raw_singlecell_01.h5ad": {
+  "url": "https://ftp.ncbi.nlm.nih.gov/geo/series/GSE264nnn/GSE264667/suppl/GSE264667_jurkat_raw_singlecell_01.h5ad",
+  "head": "HTTP/1.1 200 OK\nContent-Length: 9366490264"
+ },
+ "GSE264667_hepg2_raw_singlecell_01.h5ad": {
+  "url": "https://ftp.ncbi.nlm.nih.gov/geo/series/GSE264nnn/GSE264667/suppl/GSE264667_hepg2_raw_singlecell_01.h5ad",
+  "head": "HTTP/1.1 200 OK\nContent-Length: 5614460941"
+ },
+ "GSE264667_RAW.tar": {
+  "url": "https://ftp.ncbi.nlm.nih.gov/geo/series/GSE264nnn/GSE264667/suppl/GSE264667_RAW.tar",
+  "head": "HTTP/1.1 200 OK\nContent-Length: 16321884160"
+ },
+ "scPerturb_zenodo_13350497": {
+  "url": "https://zenodo.org/records/13350497",
+  "head": "HTTP/1.1 403 Forbidden\ncontent-length: 763"
+ },
+ "scPerturb_K562_essential": {
+  "url": "https://zenodo.org/api/records/13350497/files/ReplogleWeissman2022_K562_essential.h5ad/content",
+  "head": "HTTP/1.1 403 Forbidden\ncontent-length: 763"
+ },
+ "scPerturb_K562_gwps": {
+  "url": "https://zenodo.org/api/records/13350497/files/ReplogleWeissman2022_K562_gwps.h5ad/content",
+  "head": "HTTP/1.1 403 Forbidden\ncontent-length: 763"
+ },
+ "scPerturb_rpe1": {
+  "url": "https://zenodo.org/api/records/13350497/files/ReplogleWeissman2022_rpe1.h5ad/content",
+  "head": "HTTP/1.1 403 Forbidden\ncontent-length: 763"
+ },
+ "scPerturb_jurkat": {
+  "url": "https://zenodo.org/api/records/13350497/files/NadigOConner2024_jurkat.h5ad/content",
+  "head": "HTTP/1.1 403 Forbidden\ncontent-length: 763"
+ },
+ "scPerturb_hepg2": {
+  "url": "https://zenodo.org/api/records/13350497/files/NadigOConner2024_hepg2.h5ad/content",
+  "head": "HTTP/1.1 403 Forbidden\ncontent-length: 763"
+ },
+ "HF_Pisces": {
+  "url": "https://huggingface.co/datasets/Xaira-Therapeutics/X-Atlas-Pisces",
+  "head": "HTTP/2 200 \ncontent-length: 98968"
+ },
+ "HF_Pisces_README": {
+  "url": "https://huggingface.co/datasets/Xaira-Therapeutics/X-Atlas-Pisces/resolve/main/README.md",
+  "head": "HTTP/2 307 \ncontent-length: 279\nlocation: /api/resolve-cache/datasets/Xaira-Therapeutics/X-Atlas-Pisces/8ace335dfe4d23d8fb36cf0df55f7a643991475e/README.md?%2Fdatasets%2FXaira-Therapeutics%2FX-Atlas-Pisces%2Fresolve%2Fmain%2FREADME.md=&etag=%22f85695bd6d73516ec88858e0ea6a1591f580822f%22"
+ },
+ "HF_Pisces_LICENSE": {
+  "url": "https://huggingface.co/datasets/Xaira-Therapeutics/X-Atlas-Pisces/resolve/main/LICENSE.md",
+  "head": "HTTP/2 307 \ncontent-length: 281\nlocation: /api/resolve-cache/datasets/Xaira-Therapeutics/X-Atlas-Pisces/8ace335dfe4d23d8fb36cf0df55f7a643991475e/LICENSE.md?%2Fdatasets%2FXaira-Therapeutics%2FX-Atlas-Pisces%2Fresolve%2Fmain%2FLICENSE.md=&etag=%22bfef380bf7d9cb74ec9ba533b37c3fbeef3bdc09%22"
+ },
+ "HF_Orion": {
+  "url": "https://huggingface.co/datasets/Xaira-Therapeutics/X-Atlas-Orion",
+  "head": "HTTP/2 200 \ncontent-length: 728672"
+ },
+ "XCell_data_page": {
+  "url": "https://xaira-therapeutics.github.io/X-Cell/data/",
+  "head": "HTTP/2 200 \ncontent-length: 23424"
+ },
+ "scperteval_jurkat": {
+  "url": "https://storage.googleapis.com/scperteval/processed/nadig25jurkat_processed_complete.h5ad",
+  "head": "HTTP/2 200 \ncontent-length: 2004474709"
+ },
+ "scperteval_hepg2": {
+  "url": "https://storage.googleapis.com/scperteval/processed/nadig25hepg2_processed_complete.h5ad",
+  "head": "HTTP/2 200 \ncontent-length: 1236448196"
+ }
+}
