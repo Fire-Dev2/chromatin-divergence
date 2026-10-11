@@ -47,3 +47,32 @@ Search date: 2026-10-11. Methods: about 50 varied web_search queries, web_extrac
 1. **Perturbation response decomposition** (Molina et al., bioRxiv 10.64898/2026.07.24.740459). Isolates the perturbation × cell-line interaction on the same CRISPRi lines and shows it is not explained by control expression. It does not test chromatin.
 2. **COMPASS** (bioRxiv 10.64898/2026.08.03.742643). Same 4 lines plus 2 more; quantifies cross-line conservation of shared and gene-specific components and explains them with STRING. No ATAC.
 3. **ChromaPert** (arXiv 2610.09054). The only perturbation-response model that uses control ATAC as context, but it works within K562 across states and is predictive rather than an attribution/test. (TRADE, Nadig 2025, is the data and divergence-metric source and is a near-equal fourth.)
+
+---
+
+## Full-text check of the three closest preprints (2026-10-11)
+
+PDFs supplied by the user (bioRxiv blocks automated download); stored in
+recon/papers/ with pdftotext output. Each full text was searched for
+ATAC | chromatin | DNase | open chromatin | accessib | enhancer | histone | epigen.
+
+| Preprint | Pages / chars | Supplement in PDF? | Relevant hits | Verdict |
+|---|---|---|---|---|
+| Molina & Zhang, Perturbation response decomposition (10.64898/2026.07.24.740459) | 44 / 262k | Yes (Appendix A, Supplementary Material) | 0 — three uses of "accessible" mean "recoverable", e.g. "the more accessible cell-line specific component" | Does not pre-empt; uses DepMap co-essentiality and expression only |
+| COMPASS (10.64898/2026.08.03.742643) | 33 / 118k | Supp. tables on GitHub (rohitsinghlab/compass), not yet released | 0 — "chromatin remodeling" appears only as a GO term enriched among perturbed genes | Does not pre-empt |
+| Maffa et al., Dissecting context-dependent cancer vulnerabilities using Perturb-seq (10.64898/2026.08.24.746802) | 43 / 93k | Supp. tables on Figshare | 0 — one reference title only | Partially overlaps in framing (context-dependent knockout responses in 16 cancer lines, explained by genomic features such as copy number and TP53/HPV status), but no accessibility features and different data |
+
+**Updated overall verdict: not pre-empted (moderate-to-high confidence).** None of
+the three closest competitors uses baseline chromatin accessibility to explain
+cross-line divergence. Remaining residual risk: COMPASS and Maffa supplementary
+tables (data tables, not methods) and preprints posted after ~1 Oct 2026. Rerun
+the search before submission and again before any "first" claim. Mentor must still
+confirm the gap (proposal requirement).
+
+Useful for the design:
+- Maffa et al. find total UMIs per cell is the strongest predictor of Perturb-seq
+  statistical power, which supports the proposal's cell-count- and
+  expression-dependent noise null.
+- Maffa et al. report p53-pathway induction after MDM2/UBE3A knockout only in subsets
+  of TP53-wild-type lines, so the proposal's p53 positive control should use
+  pathway-level target sets, not single knockdowns.
