@@ -1,0 +1,45 @@
+^SAMPLE = GSM4706088
+!Sample_title = Jurkat_stim_1-Tag-30_ATAC
+!Sample_geo_accession = GSM4706088
+!Sample_status = Public on Mar 01 2021
+!Sample_submission_date = Aug 03 2020
+!Sample_last_update_date = Mar 02 2021
+!Sample_type = SRA
+!Sample_channel_count = 1
+!Sample_source_name_ch1 = T cell line
+!Sample_organism_ch1 = Homo sapiens
+!Sample_taxid_ch1 = 9606
+!Sample_characteristics_ch1 = cell line: Jurkat
+!Sample_characteristics_ch1 = stimulation: anti-CD3 PMA 4hr
+!Sample_characteristics_ch1 = assay: ATAC-Seq
+!Sample_treatment_protocol_ch1 = We stimulated BJAB cells with 4 µg/ml anti-CD40 (Invitrogen-140409-82) and 10 µg/ml anti-IgM (Sigma-I0759) for 4 hours. We stimulated Jurkat cells with 5 µg/ml anti-CD3 (Biolegend-317315) and 100 ng/ml phorbol 12-myristate 13-acetate (PMA, Sigma-P1585) for 4 hours. We stimulated U937 cells with 200 ng/ml LPS for 4 hours. We stimulated THP1 cells with 1 µg/ml bacterial lipopolysaccharide (LPS) from E. coli K12 (LPS-EK Invivogen tlrl-peklps) for 4 hours.     For THP1 cells, we generated epigenomic data examining a longer time-course, by stimulating with PMA (100 ng/mL) for 12 hours, then removing PMA and adding LPS (1 µg/mL) and profiling at 0, 1, 2, 6, 12, 24, 48, 72, 96, and 120 hours after addition of LPS. Because THP1 cells adhere when stimulated with PMA (changing into a more macrophage-like state), we harvested cells by taking out the media, washing twice, adding TrypLE for 5 minutes at 37°C, then supplementing with 100 µL of media, removing cells from the round-bottom plate and pelleting.
+!Sample_growth_protocol_ch1 = We maintained cells at a density between 100K and 1M per ml in RPMI-1640 (Thermo Fisher Scientific, Waltham, MA) with 10% heat-inactivated FBS (HIFBS, Thermo Fisher Scientific), 2mM L-glutamine, and 100 units/ml streptomycin and 100 mg/ml penicillin by diluting cells 1:8 in fresh media every three days.
+!Sample_molecule_ch1 = genomic DNA
+!Sample_extract_protocol_ch1 = ATAC-seq. We applied ATAC-seq as previously described [https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4374986/], with modifications. Briefly, we washed 50,000 cells once with 50 μl of cold 1x PBS and added 50 μl of Nuclei Isolation EZ Lysis Buffer (SIGMA NUC101-1KT) to resuspend gently, immediately centrifuging at 500xg for 10 minutes at 4°C. The lysis buffer was decanted away from the nuclei pellet. Afterwards, we resuspended the nuclei in 100 μl of Nuclei Isolation EZ Lysis Buffer again and centrifuged at 500xG for 5 minutes at 4°C and re-decant the lysis buffer, which we found to decrease mitochondrial reads although at the cost of library complexity. We then resuspended the nuclear pellet in 50 µl of transposition reaction mix (25 µl Buffer TD, 2.5 µl TDE1 (Illumina 15028212);  7.5 μl water, 15 μl PBS, to increase salinity which we found to increase signal-to-noise) and incubated the mix at 37°C for 30 minutes in a PCR block. Immediately following the transposition reaction, we split the 50 uL reaction volume into two and we added 25 uL of guanidine hydrochloride (Buffer PB, Qiagen 28606) to each as a chaotropic agent to stop the reaction and dissociate the proteins and transposase from the DNA. Keeping one of the reactions as backup, we proceeded with one by adding 1.8X SPRI beads (Agencourt A63881), waiting 5 minutes for the DNA to associate to the beads, and then washing the beads twice using 80% EtOH. We then eluted the DNA from the beads using 10 uL of water and added to it 25 uL NEBNext HiFi 2x PCR MasterMix (NEB M0541), with 2.5 uL of each of the dual-indexed Illumina Nextera primers (25 uM). We amplified the PCR reaction to 15 cycles, as previously described. We purified amplified libraries and removed adapters using two clean-ups with 1.8x volume SPRI (Agencourt A63881). We sequenced these libraries on an Illumina HiSeq 2500. We filtered, aligned, and processed the data to generate BAM files as previously described. [https://www.nature.com/articles/s41588-019-0538-0?proof=true1]    H3K27ac ChIP-seq. We generated and analyzed ChIP-seq data from 5 million cells in each cell line and stimulation state, following protocols previously described[]. Before harvesting for ChIP-seq, cells at 1 million cells per mL were replenished by a 1:2 (v/v) split in fresh media and allowed to grow for 4 hours. 10 million cells were harvested from each cell type at 500K cells/mL and washed 2x in cold PBS. Cells were resuspended in warm PBS with 1% formaldehyde (Cat #28906, Thermo Scientific) and incubated at 37°C for 10 minutes. Crosslinking was quenched by adding glycine to a concentration of 250 mM and incubating for 5 minutes at 37°C. Cells were placed on ice for 5 minutes, then washed 2x in ice-cold PBS and snap-frozen in liquid nitrogen and stored. Later, crosslinked cells were lysed in 1 mL cell lysis buffer (20 mM Tris pH 8.0, 85 mM KCl, 0.5% NP40) and incubated on ice for 10 minutes. The nuclear pellet was isolated by spinning the cell lysis mix at 5,600xg at 4°C for 3.5 minutes and discarding the supernatant. Nuclear pellets were lysed by adding 1 mL nuclear lysis buffer (10 mM Tris-HCl pH 7.5 ml, 1% NP-40 alternative (CAS 9016-45-9), 0.5% Na Deoxycholate, 0.1% SDS) with protease inhibitors on ice for 10 minutes. The chromatin-containing nuclear lysate was sonicated 3x using a Branson sonifier (ON 0.7s, OFF 1.3s, TIME 2 minutes, WATTS 10-12), with 1 minute rest between sonifications. Sonicated chromatin was spun down at maximum speed. 300 µL of the clarified supernatant was diluted 1:1 with ChIP dilution buffer (16.7 mM Tris-HCl pH 8.1, 1.1% Triton X-100, and 167 mM NaCl, 1.2 mM EDTA, 0.01% SDS). To immunoprecipitate H3K27ac, 3 uL of H3K27ac monoclonal antibody (Cat #39685, Active Motif) was added to each sample and rotated overnight at 4°C. The following morning, 50 uL of a 1:1 mix of Protein A (Cat #10008D, Invitrogen) and Protein G Dynabeads magnetic beads (Cat #10004D, Life Technologies) were washed with blocking buffer (PBS, 0.5% Tween20, 0.5% BSA with protease inhibitors), resuspended in 100 uL blocking buffer, and added to each sample. The samples were rotated end-over-end for 1 h at 4°C to capture antibody complexes, then washed as follows: once with 200 uL Low-Salt RIPA buffer (0.1% SDS, 1% Triton X-100, 1 mM EDTA, 20 mM Tris-HCl pH 8.1, 140 mM NaCl, 0.1% Na Deoxycholate), once with 200 µL High-Salt RIPA buffer (0.1% SDS, 1% Triton X-100, 1 mM EDTA, 20 mM Tris-HCl pH 8.1, 500 mM NaCl, 0.1% Na Deoxycholate), twice with 200 µL LiCl buffer (250 mM LiCl, 0.5% NP40, 0.5% Na Deoxycholate, 1 mM EDTA, 10 mM Tris-HCl pH 8.1), and twice with 200 µL TE buffer (10 mM Tris-HCl pH 8.0, 1 mM EDTA pH 8.0). Chromatin was then eluted from the beads with 60 µL ChIP elution buffer (10 mM Tris-HCl pH 8.0, 5 mM EDTA, 300 mM NaCl, 0.1% SDS). Crosslinking was reversed by adding 8 µL of reverse cross-linking enzyme mix (250 mM Tris-HCl pH 6.5, 62.5 mM EDTA pH 8.0, 1.25 M NaCl, 5 mg/ml Proteinase K (Cat #25530-049, Invitrogen), 62.5 µg/ml RNAse A (Cat #111199150001, Roche)) to each immunoprecipitated sample, as well as to 10 µL of the sheared chromatin input for each sample brought to volume of 60 µL ChIP elution buffer. Reverse crosslinking reactions were incubated 2 h at 65°C and cleaned using Agencourt Ampure XP SPRI beads (Cat #A63880, Beckman Coulter) with a 2x bead:sample ratio. Sequencing libraries were prepared with KAPA Library Preparation kit (Cat #KK8202, KAPA Biosystems). ChIP libraries were sequenced using single-end sequencing on an Illumina Hiseq 2500 machine (Read 1: 76 cycles, Index 1: 8 cycles), to a depth of >30 million reads per ChIP sample.
+!Sample_description = ATAC-Seq of Jurkat in condition: anti-CD3 PMA 4hr
+!Sample_data_processing = Aligned reads using BWA (v0.7.17)
+!Sample_data_processing = Removed PCR duplicates using the MarkDuplicates function from Picard (v1.731)
+!Sample_data_processing = filtered to uniquely aligning reads using samtools (MAPQ >= 30)
+!Sample_data_processing = tdf files computed using igvtools
+!Sample_data_processing = Genome_build: hg19
+!Sample_data_processing = Supplementary_files_format_and_content: tdf
+!Sample_platform_id = GPL16791
+!Sample_contact_name = Jesse,,Engreitz
+!Sample_contact_email = engreitz@stanford.edu
+!Sample_contact_laboratory = Engreitz Lab
+!Sample_contact_department = Genetics
+!Sample_contact_institute = Stanford University
+!Sample_contact_address = 450 Serra Mall
+!Sample_contact_city = Stanford
+!Sample_contact_state = CA
+!Sample_contact_zip/postal_code = 94305
+!Sample_contact_country = USA
+!Sample_instrument_model = Illumina HiSeq 2500
+!Sample_library_selection = other
+!Sample_library_source = genomic
+!Sample_library_strategy = ATAC-seq
+!Sample_relation = BioSample: https://www.ncbi.nlm.nih.gov/biosample/SAMN15702280
+!Sample_relation = SRA: https://www.ncbi.nlm.nih.gov/sra?term=SRX8867480
+!Sample_supplementary_file_1 = ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM4706nnn/GSM4706088/suppl/GSM4706088_Jurkat_stim_1-Tag-30.sorted.unique_alignment.bam.tdf
+!Sample_series_id = GSE155555
+!Sample_data_row_count = 0
