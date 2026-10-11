@@ -198,14 +198,15 @@ def plot(pc: pd.DataFrame, pr: pd.DataFrame, path: str, chosen=None):
         g = pc[pc.rule == rule].groupby("design").fpr05
         worst = g.max().reindex(DESIGNS).to_numpy()
         mean = g.mean().reindex(DESIGNS).to_numpy()
-        ax[0].bar(xs + i * w, worst, w, color=cols[i], label=rule + (" (chosen)" if rule == chosen else ""))
+        ax[0].bar(xs + i * w, worst, w, color=cols[i], label=rule + (" (v1.1)" if rule == chosen else ""))
         ax[0].scatter(xs + i * w, mean, color="k", s=6, zorder=3)
     ax[0].axhline(0.05, color="k", lw=0.8)
     ax[0].axhline(FPR_MAX05, color="r", ls="--", lw=0.8)
     ax[0].set_xticks(xs + 0.4 - w / 2, list(DESIGNS))
     ax[0].set_ylabel("FPR at alpha 0.05 (bar: worst cell; dot: mean)")
     ax[0].set_title("Size by module design (16 null cells each, n=1000)")
-    ax[0].legend(fontsize=7, ncol=2)
+    ax[0].set_ylim(0, 0.21)
+    ax[0].legend(fontsize=7, ncol=3, loc="upper center")
     p = pr.set_index("rule").reindex(order)
     for i, rule in enumerate(order):
         ax[1].errorbar(p.fpr05_worst[rule], p.power_matched_small[rule],
@@ -246,7 +247,8 @@ def main(argv=None):
         sel = select_rule(pr)
         pc.to_csv("results/aim3/k_rule_selection_by_cell.csv", index=False)
         pr.to_csv("results/aim3/k_rule_selection.csv", index=False)
-        plot(pc, pr, "figures/aim3_k_rule_selection.png", sel.get("chosen"))
+        # criterion met -> chosen rule; otherwise the protocol's fallback (lowest worst-case FPR)
+        plot(pc, pr, "figures/aim3_k_rule_selection.png", sel.get("chosen") or sel.get("best_fpr_rule"))
         print(sel)
 
 

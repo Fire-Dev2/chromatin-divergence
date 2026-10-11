@@ -52,8 +52,13 @@ to M, then we recompute T for each.
 2. **Order genes along the genome** by (chromosome, TSS position).
 3. **Choose the block size k from the feature alone.** Compute the
    autocorrelation of r_x along the genome (pairs within the same arm only)
-   at lags 1, 2, …, 50. k is the first lag where it drops below 0.05, kept
-   within [5, 50] (`choose_k`). M is never looked at.
+   at lags 1, 2, …, 50. Let k_v1.0 be the first lag where it drops below 0.05,
+   kept within [5, 50]. M is never looked at.
+   - **Plan v1.1 (primary): k = 4 × k_v1.0, kept within [5, 100]**
+     (`choose_k`, default `rule="x4"`).
+   - The v1.0 rule, k = k_v1.0 (`rule="v1.0"`), is reported as a sensitivity
+     analysis.
+   - Why the rule changed: §5.4 and `results/aim3/k_rule_selection.md`.
 4. **Cut each chromosome arm into blocks** of k consecutive genes. If the arm
    leaves a shorter remainder, it joins the previous block, so blocks have
    between k and 2k−1 genes. An arm with fewer than k genes forms one block
@@ -310,3 +315,54 @@ feature shares the modules and rows for confounding, one line per test.
   about twice the dependence scale.
 - **Decoys hold 5%.** By construction this is their best case.
 - **CAMERA is conservative.** Its FPR is about 2%.
+
+### 5.4 Choosing the block-size rule (plan v1.1; `cdtest.k_rule_sim`)
+
+The grid in §5.3 showed that the v1.0 rule for k gives blocks that are too
+small when the response and the feature share modules. Eight feature-only rules
+were therefore compared in a targeted simulation. The protocol and the
+selection criterion were committed before the run
+(`results/aim3/k_rule_selection_protocol.md`).
+
+**Candidate rules.** All are bounded to [5, 100]; v1.0 keeps its frozen [5, 50].
+
+- v1.0;
+- an autocorrelation threshold of 0.01 instead of 0.05;
+- 2×, 3× and 4× k_v1.0;
+- ⌈c·τ⌉ for c = 1, 2, where τ = 1 + 2·Σ ACF up to the first lag below 0.05;
+- the Politis–White automatic block length (2004; Patton et al. 2009
+  correction).
+
+**Grid.**
+
+- The shared-structure settings only: ρ_M {0.3, 0.5} × ρ_x {0.3, 0.6} ×
+  confounding {0, 0.3} × 2 noise models.
+- Four module designs **[added to `simulate.make_genome`]**: Geometric with
+  mean 5, 10 and 25, and a mixed LogNormal design (median 8, σ = 1, clipped to
+  [1, 150]). Modules are cut at arm ends.
+- 1,000 null replicates per cell; 300 per cell at partial R² 0.5% and 2%.
+
+**Pre-set criterion.**
+
+1. Worst null cell ≤ 0.065 at α = 0.05 and ≤ 0.02 at α = 0.01.
+2. Then the highest mean matched power at R² = 0.5%.
+3. Ties within 0.02 go to the simpler rule.
+
+**Outcome: no rule met the criterion.**
+
+- FPR at α = 0.05, mean / worst cell:
+  - v1.0: 7.9% / 11.5%;
+  - 4×: 5.4% / 7.0%;
+  - 3×: 5.6% / 7.3%;
+  - Politis–White: 5.7% / 7.7%;
+  - oracle (true modules): 5.0% / 6.5%.
+- The τ rules were worse than v1.0.
+- At n = 1,000 even an exact test passes the worst-of-64 limit only about 38%
+  of the time.
+- Under the protocol's fallback, the rule with the lowest worst-case FPR (4×)
+  was adopted as plan v1.1.
+- It costs power. Matched power at R² = 0.5% is 0.26 against 0.45 for v1.0.
+  Part of this is due to the 45-gene simulated arms: few blocks can be
+  exchanged once k approaches the arm length.
+- Details, MC SEs and the k chosen per design: `results/aim3/k_rule_selection.md`.
+

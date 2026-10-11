@@ -29,3 +29,15 @@ def test_runner_checkpoint_resume_and_summary(tmp_path):
     sm = S.summarize(a)
     assert set(sm.test) == set(S.ALL_TESTS)
     assert {"rej05", "rej01", "coverage", "bias", "power_matched"} <= set(sm.columns)
+
+
+def test_module_designs():
+    rng = np.random.default_rng(0)
+    raw = np.array([S.module_size(rng, "mixed") for _ in range(20000)])
+    assert raw.min() >= 1 and raw.max() <= 150
+    assert abs(np.median(raw) - 8) <= 1 and raw.mean() > 11  # long right tail
+    g5 = np.bincount(S.make_genome(2000, np.random.default_rng(1), 5.0).module).mean()
+    g25 = np.bincount(S.make_genome(2000, np.random.default_rng(1), 25.0).module).mean()
+    assert g5 < g25
+    s = S.Setting(0.3, 0.3, 0.0, "homo", "zero", module_design="mixed")
+    assert S.simulate_replicate(s, np.random.default_rng(2), 0)["M"].shape == (2000,)

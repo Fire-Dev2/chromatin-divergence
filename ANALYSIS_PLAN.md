@@ -199,3 +199,45 @@ all other covariates enter linearly.
   provisionally. They will be replaced by ENCODE v1.9.1 reprocessing of the
   same FASTQs before any matched-pair analysis.
 - **Random seeds.** Master seed 20261011; each job derives its seed from it.
+
+---
+
+## v1.1 amendment (2026-10-11): block-size rule of the main test
+
+Made before any test of any feature against a real response difference.
+The text above (v1.0) is unchanged. Where they differ, this section replaces
+§5 "Main null", step 4, for the primary analysis.
+
+- **New rule.** k = 4 × k_v1.0, bounded to [5, 100]. Here k_v1.0 is the v1.0
+  rule: the smallest gene lag at which the within-arm autocorrelation of the x
+  residuals falls below 0.05, bounded to [5, 50]. The feature alone determines
+  k, as before. Code: `crt.choose_k(rule="x4")`, now the default.
+- **Reason.** In the Aim 3 synthetic grid (200 reps/setting), the v1.0 rule was
+  anti-conservative under shared response–feature module structure. It averaged
+  7.9% at α = 0.05, with a worst cell of 10.2%. Oracle blocks and 4k blocks held
+  5%.
+- **Selection evidence.** See `results/aim3/k_rule_selection.md`; the protocol
+  was committed before the run.
+  - Design: a targeted simulation of 8 candidate rules over 64 shared-structure
+    null cells: ρ_M {0.3, 0.5} × ρ_x {0.3, 0.6} × confounding {0, 0.3} ×
+    2 noise models × 4 module designs (geometric mean 5, 10, 25; mixed
+    lognormal). 1,000 reps per null cell and 300 per power cell.
+  - Results (FPR at α = 0.05, mean / worst):
+    - v1.0: 7.9% / 11.5%;
+    - 4k: 5.4% / 7.0%;
+    - oracle: 5.0% / 6.5%.
+  - **The pre-set criterion was not met by any rule.** It required worst cell
+    ≤ 6.5% at α = 0.05 and ≤ 2% at α = 0.01. 4k came closest: 7.0% at 5% and
+    2.2% at 1%. It is adopted under the protocol's no-eligible-rule clause, as
+    the rule with the lowest worst-case FPR.
+  - For scale: an exactly valid test passes that worst-of-64 threshold only 38%
+    of the time at 1,000 reps.
+  - Cost: power at matched FPR (partial R² 0.5%) falls from 0.45 (v1.0) to
+    0.26 (4k). Part of this is due to the short simulated arms (G = 2,000).
+- **v1.0 rule kept as a sensitivity analysis.** It is reported alongside the
+  primary result for every pre-specified test.
+- **Sign-off.** This amendment needs author/mentor sign-off before any
+  confirmatory real-data test.
+- **Benchmark report.** The planted-signal benchmark on real M (§6) reports the
+  main test under both rules.
+- Tagged `plan-v1.1`.

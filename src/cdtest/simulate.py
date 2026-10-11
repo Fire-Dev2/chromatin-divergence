@@ -208,7 +208,9 @@ def analyze_replicate(sim: dict, B: int, rng) -> dict:
 
     chrom, arm, pos = gen["chrom"].to_numpy(), gen["arm"].to_numpy(), gen["pos"].to_numpy()
     order = crt.genome_order(chrom, pos)
-    k = crt.choose_k(prep.r_x[order], arm[order])
+    # The v1.0 synthetic grid records the plan v1.0 rule as "block_main" (pinned so
+    # resumed runs stay consistent); the v1.1 rule is evaluated in cdtest.k_rule_sim.
+    k = crt.choose_k(prep.r_x[order], arm[order], rule="v1.0")
     out["k"] = k
     strata = crt.make_strata(C["d"].to_numpy(), C["cn"].to_numpy())
     rand_order = rng.permutation(G)

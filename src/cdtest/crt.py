@@ -340,8 +340,10 @@ def acf(r: np.ndarray, max_lag: int = 50, groups=None) -> np.ndarray:
 
 #: Block-size rules (see :func:`choose_k`). "v1.0" is the frozen plan v1.0 rule.
 K_RULES = ("v1.0", "acf01", "x2", "x3", "x4", "tau1", "tau2", "pw")
-#: Default rule of the main test (plan v1.1 amendment).
-K_RULE_DEFAULT = "v1.0"
+#: Default rule of the main test: plan v1.1 amendment (ANALYSIS_PLAN.md, end).
+#: Chosen under the protocol's no-eligible-rule clause; see results/aim3/k_rule_selection.md.
+#: The frozen v1.0 rule stays available as rule="v1.0" (sensitivity analysis).
+K_RULE_DEFAULT = "x4"
 
 
 def _first_below(a: np.ndarray, threshold: float, max_lag: int) -> int:

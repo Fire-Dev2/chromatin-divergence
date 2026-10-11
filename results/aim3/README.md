@@ -44,6 +44,8 @@ It resumes from the existing parts. Uncontended, 14 cores need about 75 min.
 | `synthetic_grid_summary.csv` | per setting × test: FPR@5%/1%, power, power at matched FPR, bias, coverage, all with MC SE | yes |
 | `fpr_vs_structure.csv` | data behind `figures/aim3_fpr_vs_structure.*` (θ = 0, noise models pooled, n = 400 per point) | yes |
 | `headline_by_test.csv` | the table below | yes |
+| `k_rule_selection*.{md,csv}`, `k_rule_selection_protocol.md` | plan v1.1 k-rule selection | yes |
+| `k_rule_grid.parquet`, `_parts_krule/`, `k_rule_run.log` | its per-replicate output | no |
 
 Read the summary with `pd.read_csv(..., keep_default_na=False)`. Effect level
 "zero" is θ = 0.
@@ -102,7 +104,21 @@ Monte Carlo SE of a 5% rate: 1.1 points per cell (n = 400), 1.5 points
    R² = 0.5%; 0.95 vs 0.98 at 2%). 4k pays heavily (0.47 and 0.77). θ̂ is
    unbiased: |mean bias| < 0.007, within MC SE.
 
-## Implications (not acted on; plan is frozen)
+## Follow-up: plan v1.1 k rule (2026-10-11)
+
+A targeted simulation compared 8 block-size rules over 4 module designs
+(`k_rule_selection.md`, `k_rule_selection.csv`, `k_rule_selection_by_cell.csv`,
+`figures/aim3_k_rule_selection.png`). No rule met the pre-set criterion. 4×k
+had the best size (mean 5.4%, worst 7.0%) and was adopted as plan v1.1. v1.0
+is kept as a sensitivity analysis.
+
+`synthetic_grid*` keeps the v1.0 rule as `block_main`: `simulate.analyze_replicate`
+pins `rule="v1.0"`.
+
+`k_rule_grid.parquet` holds the per-replicate output and is not in git.
+Regenerate it with `python -m cdtest.k_rule_sim run`.
+
+## Implications (written for v1.0; see the follow-up above)
 
 - The plan's k rule is mildly anti-conservative under strong shared local
   structure. In the worst simulated cell it doubles the 5% FPR. This is a

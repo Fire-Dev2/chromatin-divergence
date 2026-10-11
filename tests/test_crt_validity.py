@@ -93,7 +93,7 @@ def test_naive_ols_inflates_only_with_shared_modules():
 
 def test_choose_k_iid_hits_lower_bound():
     r = np.random.default_rng(0).normal(size=5000)
-    assert crt.choose_k(r) == 5
+    assert crt.choose_k(r, rule="v1.0") == 5
 
 
 def test_choose_k_ar1_matches_theory():
@@ -105,15 +105,59 @@ def test_choose_k_ar1_matches_theory():
     for i in range(1, G):
         r[i] = phi * r[i - 1] + np.sqrt(1 - phi ** 2) * e[i]
     expected = int(np.ceil(np.log(0.05) / np.log(phi)))  # 19
-    assert abs(crt.choose_k(r) - expected) <= 2
+    assert abs(crt.choose_k(r, rule="v1.0") - expected) <= 2
 
 
 def test_choose_k_upper_bound_and_groups():
     G = 4000
     r = np.repeat(np.random.default_rng(2).normal(size=G // 100), 100)
-    assert crt.choose_k(r) == 50
+    assert crt.choose_k(r, rule="v1.0") == 50
     # alternating constant groups: within-group pairs only
     smooth = np.sin(np.arange(G) / 3.0)
-    k_all = crt.choose_k(smooth)
+    k_all = crt.choose_k(smooth, rule="v1.0")
     assert 5 <= k_all <= 50
-    assert crt.choose_k(np.random.default_rng(3).normal(size=G), groups=np.arange(G) // 10) == 5
+    assert crt.choose_k(np.random.default_rng(3).normal(size=G), groups=np.arange(G) // 10, rule="v1.0") == 5
+
+
+# --- plan v1.1: k-rule options -------------------------------------------------
+
+def _ar1(phi, G, seed):
+    rng = np.random.default_rng(seed)
+    e = rng.normal(size=G)
+    r = np.empty(G)
+    r[0] = e[0]
+    for i in range(1, G):
+        r[i] = phi * r[i - 1] + np.sqrt(1 - phi ** 2) * e[i]
+    return r
+
+
+def test_k_rules_bounds_and_relations():
+    r = _ar1(0.85, 20_000, 4)
+    k = {rule: crt.choose_k(r, rule=rule) for rule in crt.K_RULES}
+    assert all(isinstance(v, int) and 5 <= v <= 100 for v in k.values())
+    assert k["v1.0"] <= 50
+    for m in (2, 3, 4):
+        assert k[f"x{m}"] == min(m * k["v1.0"], 100)
+    assert k["acf01"] >= k["v1.0"]
+    assert k["tau2"] >= k["tau1"]
+    # explicit v1.0 equals the frozen rule regardless of the default
+    assert crt.choose_k(r, rule="v1.0") == crt._v10_k(r, None)
+    with pytest.raises(ValueError):
+        crt.choose_k(r, rule="nope")
+
+
+def test_tau_matches_ar1_theory_and_pw_iid():
+    phi = 0.8
+    tau = crt.integrated_acf_time(_ar1(phi, 50_000, 5))
+    L = int(np.ceil(np.log(0.05) / np.log(phi)))
+    expected = 1 + 2 * sum(phi ** h for h in range(1, L + 1))
+    assert abs(tau - expected) < 0.6
+    assert crt.choose_k(np.random.default_rng(6).normal(size=5000), rule="pw") == 5
+    # PW grows with dependence
+    assert crt.politis_white_block(_ar1(0.9, 5000, 7)) > crt.politis_white_block(_ar1(0.5, 5000, 7))
+
+
+def test_default_rule_is_plan_v11():
+    assert crt.K_RULE_DEFAULT == "x4"
+    r = _ar1(0.7, 20_000, 8)
+    assert crt.choose_k(r) == min(4 * crt.choose_k(r, rule="v1.0"), 100)
