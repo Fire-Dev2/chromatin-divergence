@@ -1,0 +1,11 @@
+ENCSR868FGK K562 Michael Snyder, Stanford reps [1, 2, 3] treat [] gm [] default /analyses/ENCAN824UKX/ nfiles 36
+ENCSR483RKN K562 Michael Snyder, Stanford reps [1, 2] treat [] gm [] default /analyses/ENCAN217QUL/ nfiles 22
+ENCSR291GJU HepG2 Michael Snyder, Stanford reps [1, 2, 3] treat [] gm [] default /analyses/ENCAN877DUG/ nfiles 36
+ENCSR042AWH HepG2 Michael Snyder, Stanford reps [1, 2] treat [] gm [] default /analyses/ENCAN074ZCE/ nfiles 22
+ENCSR637XSC GM12878 Michael Snyder, Stanford reps [1, 2, 3] treat [] gm [] default /analyses/ENCAN038LHH/ nfiles 36
+ENCSR095QNB GM12878 Michael Snyder, Stanford reps [1, 2] treat [] gm [] default /analyses/ENCAN039YHB/ nfiles 22
+ENCSR422SUG MCF-7 Michael Snyder, Stanford reps [1, 2] treat [] gm [] default /analyses/ENCAN088EGP/ nfiles 22
+ENCSR032RGS A549 Michael Snyder, Stanford reps [1, 2, 3] treat [] gm [] default /analyses/ENCAN065GGH/ nfiles 36
+ENCSR587TRP SK-N-SH Michael Snyder, Stanford reps [1, 2, 3] treat ['all-trans-retinoic acid 6μM 48hour'] gm [] default /analyses/ENCAN752KCW/ nfiles 36
+ENCSR200OML IMR-90 Michael Snyder, Stanford reps [1, 2] treat [] gm [] default /analyses/ENCAN754KOE/ nfiles 22
+ENCSR499ASS PC-3 Michael Snyder, Stanford reps [1, 2] treat [] gm [] default /analyses/ENCAN146VQB/ nfiles 22

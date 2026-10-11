@@ -1,0 +1,1035 @@
+{
+ "Jurkat, Clone E6-1": [],
+ "Jurkat clone E6-1": [],
+ "hTERT-RPE1": [],
+ "RPE1": [],
+ "HeLa-S3": [],
+ "HEK293": [],
+ "HEK293T": [],
+ "GM12878": [
+  {
+   "accession": "ENCSR637XSC",
+   "status": "released",
+   "assembly": [
+    "GRCh38"
+   ],
+   "award": {
+    "rfa": "ENCODE4"
+   },
+   "internal_status": "release ready",
+   "lab": "Michael Snyder, Stanford",
+   "term": "GM12878",
+   "class": "cell line",
+   "nrep": 3
+  },
+  {
+   "accession": "ENCSR095QNB",
+   "status": "released",
+   "assembly": [
+    "GRCh38"
+   ],
+   "award": {
+    "rfa": "ENCODE4"
+   },
+   "internal_status": "release ready",
+   "lab": "Michael Snyder, Stanford",
+   "term": "GM12878",
+   "class": "cell line",
+   "nrep": 2
+  }
+ ],
+ "HepG2": [
+  {
+   "accession": "ENCSR291GJU",
+   "status": "released",
+   "assembly": [
+    "GRCh38"
+   ],
+   "award": {
+    "rfa": "ENCODE4"
+   },
+   "internal_status": "release ready",
+   "lab": "Michael Snyder, Stanford",
+   "term": "HepG2",
+   "class": "cell line",
+   "nrep": 3
+  },
+  {
+   "accession": "ENCSR042AWH",
+   "status": "released",
+   "assembly": [
+    "GRCh38"
+   ],
+   "award": {
+    "rfa": "ENCODE4"
+   },
+   "internal_status": "release ready",
+   "lab": "Michael Snyder, Stanford",
+   "term": "HepG2",
+   "class": "cell line",
+   "nrep": 2
+  }
+ ],
+ "K562": [
+  {
+   "accession": "ENCSR165JXS",
+   "status": "released",
+   "assembly": [
+    "GRCh38"
+   ],
+   "award": {
+    "rfa": "ENCODE4"
+   },
+   "internal_status": "release ready",
+   "lab": "Will Greenleaf, Stanford",
+   "term": "K562",
+   "class": "cell line",
+   "nrep": 2
+  },
+  {
+   "accession": "ENCSR962TDN",
+   "status": "released",
+   "assembly": [
+    "GRCh38"
+   ],
+   "award": {
+    "rfa": "ENCODE4"
+   },
+   "internal_status": "release ready",
+   "lab": "Will Greenleaf, Stanford",
+   "term": "K562",
+   "class": "cell line",
+   "nrep": 2
+  },
+  {
+   "accession": "ENCSR644KPP",
+   "status": "released",
+   "assembly": [
+    "GRCh38"
+   ],
+   "award": {
+    "rfa": "ENCODE4"
+   },
+   "internal_status": "release ready",
+   "lab": "Will Greenleaf, Stanford",
+   "term": "K562",
+   "class": "cell line",
+   "nrep": 2
+  },
+  {
+   "accession": "ENCSR180IJO",
+   "status": "released",
+   "assembly": [
+    "GRCh38"
+   ],
+   "award": {
+    "rfa": "ENCODE4"
+   },
+   "internal_status": "release ready",
+   "lab": "Will Greenleaf, Stanford",
+   "term": "K562",
+   "class": "cell line",
+   "nrep": 2
+  },
+  {
+   "accession": "ENCSR868FGK",
+   "status": "released",
+   "assembly": [
+    "GRCh38"
+   ],
+   "award": {
+    "rfa": "ENCODE4"
+   },
+   "internal_status": "release ready",
+   "lab": "Michael Snyder, Stanford",
+   "term": "K562",
+   "class": "cell line",
+   "nrep": 3
+  },
+  {
+   "accession": "ENCSR524ZSN",
+   "status": "released",
+   "assembly": [
+    "GRCh38"
+   ],
+   "award": {
+    "rfa": "ENCODE4"
+   },
+   "internal_status": "release ready",
+   "lab": "Will Greenleaf, Stanford",
+   "term": "K562",
+   "class": "cell line",
+   "nrep": 2
+  },
+  {
+   "accession": "ENCSR390UVH",
+   "status": "released",
+   "assembly": [
+    "GRCh38"
+   ],
+   "award": {
+    "rfa": "ENCODE4"
+   },
+   "internal_status": "release ready",
+   "lab": "Will Greenleaf, Stanford",
+   "term": "K562",
+   "class": "cell line",
+   "nrep": 2
+  },
+  {
+   "accession": "ENCSR503EZG",
+   "status": "released",
+   "assembly": [
+    "GRCh38"
+   ],
+   "award": {
+    "rfa": "ENCODE4"
+   },
+   "internal_status": "release ready",
+   "lab": "Will Greenleaf, Stanford",
+   "term": "K562",
+   "class": "cell line",
+   "nrep": 2
+  },
+  {
+   "accession": "ENCSR199HSR",
+   "status": "released",
+   "assembly": [
+    "GRCh38"
+   ],
+   "award": {
+    "rfa": "ENCODE4"
+   },
+   "internal_status": "release ready",
+   "lab": "Will Greenleaf, Stanford",
+   "term": "K562",
+   "class": "cell line",
+   "nrep": 2
+  },
+  {
+   "accession": "ENCSR420NIU",
+   "status": "released",
+   "assembly": [
+    "GRCh38"
+   ],
+   "award": {
+    "rfa": "ENCODE4"
+   },
+   "internal_status": "release ready",
+   "lab": "Will Greenleaf, Stanford",
+   "term": "K562",
+   "class": "cell line",
+   "nrep": 2
+  },
+  {
+   "accession": "ENCSR442DWQ",
+   "status": "released",
+   "assembly": [
+    "GRCh38"
+   ],
+   "award": {
+    "rfa": "ENCODE4"
+   },
+   "internal_status": "release ready",
+   "lab": "Will Greenleaf, Stanford",
+   "term": "K562",
+   "class": "cell line",
+   "nrep": 2
+  },
+  {
+   "accession": "ENCSR632VDU",
+   "status": "released",
+   "assembly": [
+    "GRCh38"
+   ],
+   "award": {
+    "rfa": "ENCODE4"
+   },
+   "internal_status": "release ready",
+   "lab": "Will Greenleaf, Stanford",
+   "term": "K562",
+   "class": "cell line",
+   "nrep": 2
+  },
+  {
+   "accession": "ENCSR800RAH",
+   "status": "released",
+   "assembly": [
+    "GRCh38"
+   ],
+   "award": {
+    "rfa": "ENCODE4"
+   },
+   "internal_status": "release ready",
+   "lab": "Will Greenleaf, Stanford",
+   "term": "K562",
+   "class": "cell line",
+   "nrep": 2
+  },
+  {
+   "accession": "ENCSR803QIE",
+   "status": "released",
+   "assembly": [
+    "GRCh38"
+   ],
+   "award": {
+    "rfa": "ENCODE4"
+   },
+   "internal_status": "release ready",
+   "lab": "Will Greenleaf, Stanford",
+   "term": "K562",
+   "class": "cell line",
+   "nrep": 2
+  },
+  {
+   "accession": "ENCSR017LGQ",
+   "status": "released",
+   "assembly": [
+    "GRCh38"
+   ],
+   "award": {
+    "rfa": "ENCODE4"
+   },
+   "internal_status": "release ready",
+   "lab": "Will Greenleaf, Stanford",
+   "term": "K562",
+   "class": "cell line",
+   "nrep": 2
+  },
+  {
+   "accession": "ENCSR793YFK",
+   "status": "released",
+   "assembly": [
+    "GRCh38"
+   ],
+   "award": {
+    "rfa": "ENCODE4"
+   },
+   "internal_status": "release ready",
+   "lab": "Will Greenleaf, Stanford",
+   "term": "K562",
+   "class": "cell line",
+   "nrep": 2
+  },
+  {
+   "accession": "ENCSR745KUZ",
+   "status": "released",
+   "assembly": [
+    "GRCh38"
+   ],
+   "award": {
+    "rfa": "ENCODE4"
+   },
+   "internal_status": "release ready",
+   "lab": "Will Greenleaf, Stanford",
+   "term": "K562",
+   "class": "cell line",
+   "nrep": 2
+  },
+  {
+   "accession": "ENCSR343TQX",
+   "status": "released",
+   "assembly": [
+    "GRCh38"
+   ],
+   "award": {
+    "rfa": "ENCODE4"
+   },
+   "internal_status": "release ready",
+   "lab": "Will Greenleaf, Stanford",
+   "term": "K562",
+   "class": "cell line",
+   "nrep": 2
+  },
+  {
+   "accession": "ENCSR548GGF",
+   "status": "released",
+   "assembly": [
+    "GRCh38"
+   ],
+   "award": {
+    "rfa": "ENCODE4"
+   },
+   "internal_status": "release ready",
+   "lab": "Will Greenleaf, Stanford",
+   "term": "K562",
+   "class": "cell line",
+   "nrep": 2
+  },
+  {
+   "accession": "ENCSR509MYW",
+   "status": "released",
+   "assembly": [
+    "GRCh38"
+   ],
+   "award": {
+    "rfa": "ENCODE4"
+   },
+   "internal_status": "release ready",
+   "lab": "Will Greenleaf, Stanford",
+   "term": "K562",
+   "class": "cell line",
+   "nrep": 2
+  },
+  {
+   "accession": "ENCSR935JVI",
+   "status": "released",
+   "assembly": [
+    "GRCh38"
+   ],
+   "award": {
+    "rfa": "ENCODE4"
+   },
+   "internal_status": "release ready",
+   "lab": "Will Greenleaf, Stanford",
+   "term": "K562",
+   "class": "cell line",
+   "nrep": 2
+  },
+  {
+   "accession": "ENCSR888JRM",
+   "status": "released",
+   "assembly": [
+    "GRCh38"
+   ],
+   "award": {
+    "rfa": "ENCODE4"
+   },
+   "internal_status": "release ready",
+   "lab": "Will Greenleaf, Stanford",
+   "term": "K562",
+   "class": "cell line",
+   "nrep": 2
+  },
+  {
+   "accession": "ENCSR522ALT",
+   "status": "released",
+   "assembly": [
+    "GRCh38"
+   ],
+   "award": {
+    "rfa": "ENCODE4"
+   },
+   "internal_status": "release ready",
+   "lab": "Will Greenleaf, Stanford",
+   "term": "K562",
+   "class": "cell line",
+   "nrep": 2
+  },
+  {
+   "accession": "ENCSR243BXK",
+   "status": "released",
+   "assembly": [
+    "GRCh38"
+   ],
+   "award": {
+    "rfa": "ENCODE4"
+   },
+   "internal_status": "release ready",
+   "lab": "Will Greenleaf, Stanford",
+   "term": "K562",
+   "class": "cell line",
+   "nrep": 2
+  },
+  {
+   "accession": "ENCSR680XOP",
+   "status": "released",
+   "assembly": [
+    "GRCh38"
+   ],
+   "award": {
+    "rfa": "ENCODE4"
+   },
+   "internal_status": "release ready",
+   "lab": "Will Greenleaf, Stanford",
+   "term": "K562",
+   "class": "cell line",
+   "nrep": 2
+  },
+  {
+   "accession": "ENCSR217QAB",
+   "status": "released",
+   "assembly": [
+    "GRCh38"
+   ],
+   "award": {
+    "rfa": "ENCODE4"
+   },
+   "internal_status": "release ready",
+   "lab": "Will Greenleaf, Stanford",
+   "term": "K562",
+   "class": "cell line",
+   "nrep": 2
+  },
+  {
+   "accession": "ENCSR121GEL",
+   "status": "released",
+   "assembly": [
+    "GRCh38"
+   ],
+   "award": {
+    "rfa": "ENCODE4"
+   },
+   "internal_status": "release ready",
+   "lab": "Will Greenleaf, Stanford",
+   "term": "K562",
+   "class": "cell line",
+   "nrep": 2
+  },
+  {
+   "accession": "ENCSR874GAJ",
+   "status": "released",
+   "assembly": [
+    "GRCh38"
+   ],
+   "award": {
+    "rfa": "ENCODE4"
+   },
+   "internal_status": "release ready",
+   "lab": "Will Greenleaf, Stanford",
+   "term": "K562",
+   "class": "cell line",
+   "nrep": 2
+  },
+  {
+   "accession": "ENCSR741QNS",
+   "status": "released",
+   "assembly": [
+    "GRCh38"
+   ],
+   "award": {
+    "rfa": "ENCODE4"
+   },
+   "internal_status": "release ready",
+   "lab": "Will Greenleaf, Stanford",
+   "term": "K562",
+   "class": "cell line",
+   "nrep": 2
+  },
+  {
+   "accession": "ENCSR508LLL",
+   "status": "released",
+   "assembly": [
+    "GRCh38"
+   ],
+   "award": {
+    "rfa": "ENCODE4"
+   },
+   "internal_status": "release ready",
+   "lab": "Will Greenleaf, Stanford",
+   "term": "K562",
+   "class": "cell line",
+   "nrep": 2
+  },
+  {
+   "accession": "ENCSR582NPJ",
+   "status": "released",
+   "assembly": [
+    "GRCh38"
+   ],
+   "award": {
+    "rfa": "ENCODE4"
+   },
+   "internal_status": "release ready",
+   "lab": "Will Greenleaf, Stanford",
+   "term": "K562",
+   "class": "cell line",
+   "nrep": 2
+  },
+  {
+   "accession": "ENCSR214SFA",
+   "status": "released",
+   "assembly": [
+    "GRCh38"
+   ],
+   "award": {
+    "rfa": "ENCODE4"
+   },
+   "internal_status": "release ready",
+   "lab": "Will Greenleaf, Stanford",
+   "term": "K562",
+   "class": "cell line",
+   "nrep": 2
+  },
+  {
+   "accession": "ENCSR021GTX",
+   "status": "released",
+   "assembly": [
+    "GRCh38"
+   ],
+   "award": {
+    "rfa": "ENCODE4"
+   },
+   "internal_status": "release ready",
+   "lab": "Will Greenleaf, Stanford",
+   "term": "K562",
+   "class": "cell line",
+   "nrep": 2
+  },
+  {
+   "accession": "ENCSR091YVK",
+   "status": "released",
+   "assembly": [
+    "GRCh38"
+   ],
+   "award": {
+    "rfa": "ENCODE4"
+   },
+   "internal_status": "release ready",
+   "lab": "Will Greenleaf, Stanford",
+   "term": "K562",
+   "class": "cell line",
+   "nrep": 2
+  },
+  {
+   "accession": "ENCSR446UJL",
+   "status": "released",
+   "assembly": [
+    "GRCh38"
+   ],
+   "award": {
+    "rfa": "ENCODE4"
+   },
+   "internal_status": "release ready",
+   "lab": "Will Greenleaf, Stanford",
+   "term": "K562",
+   "class": "cell line",
+   "nrep": 2
+  },
+  {
+   "accession": "ENCSR096HVF",
+   "status": "released",
+   "assembly": [
+    "GRCh38"
+   ],
+   "award": {
+    "rfa": "ENCODE4"
+   },
+   "internal_status": "release ready",
+   "lab": "Will Greenleaf, Stanford",
+   "term": "K562",
+   "class": "cell line",
+   "nrep": 2
+  },
+  {
+   "accession": "ENCSR966ZCL",
+   "status": "released",
+   "assembly": [
+    "GRCh38"
+   ],
+   "award": {
+    "rfa": "ENCODE4"
+   },
+   "internal_status": "release ready",
+   "lab": "Will Greenleaf, Stanford",
+   "term": "K562",
+   "class": "cell line",
+   "nrep": 2
+  },
+  {
+   "accession": "ENCSR934FTO",
+   "status": "released",
+   "assembly": [
+    "GRCh38"
+   ],
+   "award": {
+    "rfa": "ENCODE4"
+   },
+   "internal_status": "release ready",
+   "lab": "Will Greenleaf, Stanford",
+   "term": "K562",
+   "class": "cell line",
+   "nrep": 2
+  },
+  {
+   "accession": "ENCSR005BVE",
+   "status": "released",
+   "assembly": [
+    "GRCh38"
+   ],
+   "award": {
+    "rfa": "ENCODE4"
+   },
+   "internal_status": "release ready",
+   "lab": "Will Greenleaf, Stanford",
+   "term": "K562",
+   "class": "cell line",
+   "nrep": 2
+  },
+  {
+   "accession": "ENCSR259HTB",
+   "status": "released",
+   "assembly": [
+    "GRCh38"
+   ],
+   "award": {
+    "rfa": "ENCODE4"
+   },
+   "internal_status": "release ready",
+   "lab": "Will Greenleaf, Stanford",
+   "term": "K562",
+   "class": "cell line",
+   "nrep": 2
+  },
+  {
+   "accession": "ENCSR366CEQ",
+   "status": "released",
+   "assembly": [
+    "GRCh38"
+   ],
+   "award": {
+    "rfa": "ENCODE4"
+   },
+   "internal_status": "release ready",
+   "lab": "Will Greenleaf, Stanford",
+   "term": "K562",
+   "class": "cell line",
+   "nrep": 2
+  },
+  {
+   "accession": "ENCSR281LEY",
+   "status": "released",
+   "assembly": [
+    "GRCh38"
+   ],
+   "award": {
+    "rfa": "ENCODE4"
+   },
+   "internal_status": "release ready",
+   "lab": "Will Greenleaf, Stanford",
+   "term": "K562",
+   "class": "cell line",
+   "nrep": 2
+  },
+  {
+   "accession": "ENCSR737HKX",
+   "status": "released",
+   "assembly": [
+    "GRCh38"
+   ],
+   "award": {
+    "rfa": "ENCODE4"
+   },
+   "internal_status": "release ready",
+   "lab": "Will Greenleaf, Stanford",
+   "term": "K562",
+   "class": "cell line",
+   "nrep": 2
+  },
+  {
+   "accession": "ENCSR304UWR",
+   "status": "released",
+   "assembly": [
+    "GRCh38"
+   ],
+   "award": {
+    "rfa": "ENCODE4"
+   },
+   "internal_status": "release ready",
+   "lab": "Will Greenleaf, Stanford",
+   "term": "K562",
+   "class": "cell line",
+   "nrep": 2
+  },
+  {
+   "accession": "ENCSR214QZO",
+   "status": "released",
+   "assembly": [
+    "GRCh38"
+   ],
+   "award": {
+    "rfa": "ENCODE4"
+   },
+   "internal_status": "release ready",
+   "lab": "Will Greenleaf, Stanford",
+   "term": "K562",
+   "class": "cell line",
+   "nrep": 2
+  },
+  {
+   "accession": "ENCSR676UFY",
+   "status": "released",
+   "assembly": [
+    "GRCh38"
+   ],
+   "award": {
+    "rfa": "ENCODE4"
+   },
+   "internal_status": "release ready",
+   "lab": "Will Greenleaf, Stanford",
+   "term": "K562",
+   "class": "cell line",
+   "nrep": 2
+  },
+  {
+   "accession": "ENCSR956DNB",
+   "status": "released",
+   "assembly": [
+    "GRCh38"
+   ],
+   "award": {
+    "rfa": "ENCODE4"
+   },
+   "internal_status": "release ready",
+   "lab": "Will Greenleaf, Stanford",
+   "term": "K562",
+   "class": "cell line",
+   "nrep": 2
+  },
+  {
+   "accession": "ENCSR465IDZ",
+   "status": "released",
+   "assembly": [
+    "GRCh38"
+   ],
+   "award": {
+    "rfa": "ENCODE4"
+   },
+   "internal_status": "release ready",
+   "lab": "Will Greenleaf, Stanford",
+   "term": "K562",
+   "class": "cell line",
+   "nrep": 2
+  },
+  {
+   "accession": "ENCSR974QYY",
+   "status": "released",
+   "assembly": [
+    "GRCh38"
+   ],
+   "award": {
+    "rfa": "ENCODE4"
+   },
+   "internal_status": "release ready",
+   "lab": "Will Greenleaf, Stanford",
+   "term": "K562",
+   "class": "cell line",
+   "nrep": 2
+  },
+  {
+   "accession": "ENCSR296YAS",
+   "status": "released",
+   "assembly": [
+    "GRCh38"
+   ],
+   "award": {
+    "rfa": "ENCODE4"
+   },
+   "internal_status": "release ready",
+   "lab": "Will Greenleaf, Stanford",
+   "term": "K562",
+   "class": "cell line",
+   "nrep": 2
+  },
+  {
+   "accession": "ENCSR163VQD",
+   "status": "released",
+   "assembly": [
+    "GRCh38"
+   ],
+   "award": {
+    "rfa": "ENCODE4"
+   },
+   "internal_status": "release ready",
+   "lab": "Will Greenleaf, Stanford",
+   "term": "K562",
+   "class": "cell line",
+   "nrep": 2
+  },
+  {
+   "accession": "ENCSR822IYG",
+   "status": "released",
+   "assembly": [
+    "GRCh38"
+   ],
+   "award": {
+    "rfa": "ENCODE4"
+   },
+   "internal_status": "release ready",
+   "lab": "Will Greenleaf, Stanford",
+   "term": "K562",
+   "class": "cell line",
+   "nrep": 2
+  },
+  {
+   "accession": "ENCSR859USB",
+   "status": "released",
+   "assembly": [
+    "GRCh38"
+   ],
+   "award": {
+    "rfa": "ENCODE4"
+   },
+   "internal_status": "release ready",
+   "lab": "Will Greenleaf, Stanford",
+   "term": "K562",
+   "class": "cell line",
+   "nrep": 2
+  },
+  {
+   "accession": "ENCSR068MIW",
+   "status": "released",
+   "assembly": [
+    "GRCh38"
+   ],
+   "award": {
+    "rfa": "ENCODE4"
+   },
+   "internal_status": "release ready",
+   "lab": "Will Greenleaf, Stanford",
+   "term": "K562",
+   "class": "cell line",
+   "nrep": 2
+  },
+  {
+   "accession": "ENCSR314EDO",
+   "status": "released",
+   "assembly": [
+    "GRCh38"
+   ],
+   "award": {
+    "rfa": "ENCODE4"
+   },
+   "internal_status": "release ready",
+   "lab": "Will Greenleaf, Stanford",
+   "term": "K562",
+   "class": "cell line",
+   "nrep": 2
+  },
+  {
+   "accession": "ENCSR685YMG",
+   "status": "released",
+   "assembly": [
+    "GRCh38"
+   ],
+   "award": {
+    "rfa": "ENCODE4"
+   },
+   "internal_status": "release ready",
+   "lab": "Will Greenleaf, Stanford",
+   "term": "K562",
+   "class": "cell line",
+   "nrep": 2
+  },
+  {
+   "accession": "ENCSR303NUP",
+   "status": "released",
+   "assembly": [
+    "GRCh38"
+   ],
+   "award": {
+    "rfa": "ENCODE4"
+   },
+   "internal_status": "release ready",
+   "lab": "Will Greenleaf, Stanford",
+   "term": "K562",
+   "class": "cell line",
+   "nrep": 2
+  },
+  {
+   "accession": "ENCSR179IAC",
+   "status": "released",
+   "assembly": [
+    "GRCh38"
+   ],
+   "award": {
+    "rfa": "ENCODE4"
+   },
+   "internal_status": "release ready",
+   "lab": "Will Greenleaf, Stanford",
+   "term": "K562",
+   "class": "cell line",
+   "nrep": 2
+  },
+  {
+   "accession": "ENCSR761CBY",
+   "status": "released",
+   "assembly": [
+    "GRCh38"
+   ],
+   "award": {
+    "rfa": "ENCODE4"
+   },
+   "internal_status": "release ready",
+   "lab": "Will Greenleaf, Stanford",
+   "term": "K562",
+   "class": "cell line",
+   "nrep": 2
+  },
+  {
+   "accession": "ENCSR197GOQ",
+   "status": "released",
+   "assembly": [
+    "GRCh38"
+   ],
+   "award": {
+    "rfa": "ENCODE4"
+   },
+   "internal_status": "release ready",
+   "lab": "Will Greenleaf, Stanford",
+   "term": "K562",
+   "class": "cell line",
+   "nrep": 2
+  },
+  {
+   "accession": "ENCSR920YDG",
+   "status": "released",
+   "assembly": [
+    "GRCh38"
+   ],
+   "award": {
+    "rfa": "ENCODE4"
+   },
+   "internal_status": "release ready",
+   "lab": "Will Greenleaf, Stanford",
+   "term": "K562",
+   "class": "cell line",
+   "nrep": 2
+  },
+  {
+   "accession": "ENCSR978HFU",
+   "status": "released",
+   "assembly": [
+    "GRCh38"
+   ],
+   "award": {
+    "rfa": "ENCODE4"
+   },
+   "internal_status": "release ready",
+   "lab": "Will Greenleaf, Stanford",
+   "term": "K562",
+   "class": "cell line",
+   "nrep": 2
+  },
+  {
+   "accession": "ENCSR483RKN",
+   "status": "released",
+   "assembly": [
+    "GRCh38"
+   ],
+   "award": {
+    "rfa": "ENCODE4"
+   },
+   "internal_status": "release ready",
+   "lab": "Michael Snyder, Stanford",
+   "term": "K562",
+   "class": "cell line",
+   "nrep": 2
+  },
+  {
+   "accession": "ENCSR342GFK",
+   "status": "released",
+   "assembly": [
+    "GRCh38"
+   ],
+   "award": {
+    "rfa": "ENCODE4"
+   },
+   "internal_status": "release ready",
+   "lab": "Will Greenleaf, Stanford",
+   "term": "K562",
+   "class": "cell line",
+   "nrep": 2
+  }
+ ]
+}

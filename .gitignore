@@ -1,0 +1,9 @@
+data/
+env/
+*.h5ad
+*.h5
+*.bigWig
+*.bw
+*.bam
+__pycache__/
+.DS_Store
