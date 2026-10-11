@@ -12,3 +12,4 @@ results/aim3/*.parquet
 results/aim3/*.log
 .pytest_cache/
 results/aim3/_parts/
+results/aim3/_parts_krule/

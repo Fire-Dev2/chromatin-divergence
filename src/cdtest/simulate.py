@@ -3,8 +3,11 @@
 Generative model (one replicate)
 --------------------------------
 Genome: G genes on 22 autosomes x 2 arms (arm sizes random), in genome order.
-Modules: contiguous runs of genes within an arm (sizes 1 + Geometric, mean
-``module_mean``), standing in for co-regulated / co-accessible neighbourhoods.
+Modules: contiguous runs of genes within an arm, standing in for co-regulated /
+co-accessible neighbourhoods. ``module_design="geom"`` (default): sizes
+Geometric on {1, 2, ...} with mean ``module_mean``. ``module_design="mixed"``:
+sizes round(LogNormal(log 8, 1.0)) clipped to [1, 150] (median 8, mean ~13,
+long right tail). Modules are truncated at arm ends.
 
 Covariates C (per gene): log2 mean expression in line A and B (e_A, e_B,
 correlated 0.85), log2 variance in each line, expression difference d = e_A - e_B,
@@ -69,6 +72,7 @@ class Setting:
     effect: str
     G: int = 2000
     module_mean: float = 10.0
+    module_design: str = "geom"
 
     @property
     def r2(self) -> float:
@@ -89,7 +93,20 @@ def grid_settings(G: int = 2000, module_mean: float = 10.0) -> list[Setting]:
 # Generator
 # --------------------------------------------------------------------------
 
-def make_genome(G: int, rng, module_mean: float = 10.0) -> pd.DataFrame:
+MIXED_MEDIAN, MIXED_SIGMA, MIXED_MAX = 8.0, 1.0, 150
+
+
+def module_size(rng, design: str = "geom", module_mean: float = 10.0) -> int:
+    """One module size: Geometric (mean ``module_mean``) or the mixed lognormal design."""
+    if design == "geom":
+        return int(rng.geometric(1.0 / module_mean))
+    if design == "mixed":
+        v = rng.lognormal(np.log(MIXED_MEDIAN), MIXED_SIGMA)
+        return int(min(max(round(v), 1), MIXED_MAX))
+    raise ValueError(design)
+
+
+def make_genome(G: int, rng, module_mean: float = 10.0, module_design: str = "geom") -> pd.DataFrame:
     n_arms = 44
     w = rng.gamma(4.0, size=n_arms)
     sizes = np.maximum(1, np.floor(w / w.sum() * G).astype(int))
@@ -102,12 +119,11 @@ def make_genome(G: int, rng, module_mean: float = 10.0) -> pd.DataFrame:
     arm = np.array([f"chr{c}{'pq'[a % 2]}" for c, a in zip(chrom, arm_id)])
     pos = np.cumsum(rng.exponential(1.0, size=G))  # increasing within each chromosome
     module = np.empty(G, dtype=np.int64)
-    p = 1.0 / module_mean
     nxt, start = 0, 0
     for s in sizes:
         i = 0
         while i < s:
-            L = min(int(rng.geometric(p)), s - i)
+            L = min(module_size(rng, module_design, module_mean), s - i)
             module[start + i:start + i + L] = nxt
             nxt += 1
             i += L
@@ -122,7 +138,7 @@ def _z(v):
 
 def simulate_replicate(s: Setting, rng, n_decoys: int = 99) -> dict:
     G = s.G
-    gen = make_genome(G, rng, s.module_mean)
+    gen = make_genome(G, rng, s.module_mean, s.module_design)
     mod = gen["module"].to_numpy()
     n_mod = mod.max() + 1
 

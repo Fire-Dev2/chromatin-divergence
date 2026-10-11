@@ -39,7 +39,8 @@ __all__ = [
     "genome_order", "make_blocks", "block_permutation_test", "block_permuted_features",
     "stratified_permutation_test", "make_strata", "expression_bin_permutation_test",
     "unrestricted_permutation_test", "decoy_test", "decoy_similarity",
-    "naive_ols_test", "camera_vif_test", "theta_grid", "acf",
+    "naive_ols_test", "camera_vif_test", "theta_grid", "acf", "K_RULES", "K_RULE_DEFAULT",
+    "integrated_acf_time", "politis_white_block",
 ]
 
 # --------------------------------------------------------------------------
@@ -337,16 +338,99 @@ def acf(r: np.ndarray, max_lag: int = 50, groups=None) -> np.ndarray:
     return out
 
 
-def choose_k(x_resid_genome_order, groups=None, threshold: float = 0.05,
-             kmin: int = 5, kmax: int = 50) -> int:
-    """Smallest gene lag with autocorrelation of the x residuals < threshold, bounded to [kmin, kmax].
+#: Block-size rules (see :func:`choose_k`). "v1.0" is the frozen plan v1.0 rule.
+K_RULES = ("v1.0", "acf01", "x2", "x3", "x4", "tau1", "tau2", "pw")
+#: Default rule of the main test (plan v1.1 amendment).
+K_RULE_DEFAULT = "v1.0"
 
-    Uses the feature only (plan section 5, step 4). If the autocorrelation never
-    drops below the threshold up to kmax, returns kmax.
+
+def _first_below(a: np.ndarray, threshold: float, max_lag: int) -> int:
+    below = np.flatnonzero(a[:max_lag] < threshold)
+    return int(below[0] + 1) if below.size else max_lag
+
+
+def _v10_k(r, groups, threshold=0.05, kmin=5, kmax=50) -> int:
+    a = acf(r, kmax, groups)
+    return int(min(max(_first_below(a, threshold, kmax), kmin), kmax))
+
+
+def integrated_acf_time(r, groups=None, threshold: float = 0.05, max_lag: int = 100) -> float:
+    """tau = 1 + 2 * sum_{h=1}^{L} acf(h), L = first lag with acf < threshold (inclusive)."""
+    a = acf(r, max_lag, groups)
+    L = _first_below(a, threshold, max_lag)
+    return float(1.0 + 2.0 * np.nansum(a[:L]))
+
+
+def politis_white_block(r, groups=None, max_lag: int | None = None) -> float:
+    """Politis & White (2004) automatic block length for the circular block bootstrap,
+    with the Patton, Politis & White (2009) correction.
+
+    Flat-top lag window lambda(t) = 1 (|t| <= 1/2), 2(1 - |t|) (1/2 < |t| <= 1).
+    Bandwidth M = 2 m_hat, m_hat the smallest lag after which K_N = max(5,
+    ceil(sqrt(log10 n))) consecutive autocorrelations are all within
+    2 sqrt(log10(n) / n). b = (2 G^2 / D)^(1/3) n^(1/3) with
+    G = sum lambda(h/M) |h| R(h), D = (4/3) g(0)^2, g(0) = sum lambda(h/M) R(h).
+    Autocovariances use within-group pairs when ``groups`` is given.
     """
-    a = acf(x_resid_genome_order, kmax, groups)
-    below = np.flatnonzero(a < threshold)
-    lag = int(below[0] + 1) if below.size else kmax
+    r = np.asarray(r, float)
+    n = r.size
+    KN = max(5, int(np.ceil(np.sqrt(np.log10(n)))))
+    mmax = max_lag or int(np.ceil(np.sqrt(n))) + KN
+    a = acf(r, mmax + KN, groups)
+    crit = 2.0 * np.sqrt(np.log10(n) / n)
+    small = np.abs(np.nan_to_num(a, nan=0.0)) < crit
+    m_hat = mmax
+    for m in range(0, mmax + 1):  # lags m+1..m+KN all small
+        if small[m:m + KN].all():
+            m_hat = m
+            break
+    M = min(2 * max(m_hat, 1), mmax)
+    rc = r - r.mean()
+    R0 = rc @ rc / n
+    h = np.arange(1, M + 1)
+    lam = np.where(h / M <= 0.5, 1.0, 2.0 * (1.0 - h / M))
+    Rh = np.nan_to_num(a[:M], nan=0.0) * R0
+    Gh = 2.0 * np.sum(lam * h * Rh)
+    g0 = R0 + 2.0 * np.sum(lam * Rh)
+    D = (4.0 / 3.0) * g0 ** 2
+    if D <= 0 or Gh == 0:
+        return 1.0
+    return float((2.0 * Gh ** 2 / D) ** (1.0 / 3.0) * n ** (1.0 / 3.0))
+
+
+def choose_k(x_resid_genome_order, groups=None, rule: str | None = None, threshold: float = 0.05,
+             kmin: int = 5, kmax: int | None = None) -> int:
+    """Block size k from the x residuals in genome order (the feature only; M is never used).
+
+    Rules (``rule``; default :data:`K_RULE_DEFAULT`):
+
+    - ``"v1.0"``: plan v1.0 -- smallest lag with autocorrelation < ``threshold``
+      (0.05), bounded to [5, 50].
+    - ``"acf01"``: the same with threshold 0.01.
+    - ``"x2"``, ``"x3"``, ``"x4"``: 2, 3, 4 times the v1.0 k.
+    - ``"tau1"``, ``"tau2"``: ceil(c * tau), c = 1, 2, with tau the integrated
+      autocorrelation time 1 + 2 * sum of acf up to the first lag < 0.05
+      (:func:`integrated_acf_time`).
+    - ``"pw"``: Politis-White automatic block length (:func:`politis_white_block`).
+
+    All rules except v1.0 are bounded to [kmin, kmax] = [5, 100]. Autocorrelations
+    use pairs within the same ``groups`` label (chromosome arm) only.
+    """
+    rule = K_RULE_DEFAULT if rule is None else rule
+    r = x_resid_genome_order
+    if rule == "v1.0":
+        return _v10_k(r, groups, threshold, kmin, 50 if kmax is None else kmax)
+    kmax = 100 if kmax is None else kmax
+    if rule == "acf01":
+        lag = _first_below(acf(r, kmax, groups), 0.01, kmax)
+    elif rule in ("x2", "x3", "x4"):
+        lag = int(rule[1]) * _v10_k(r, groups, threshold, kmin, 50)
+    elif rule in ("tau1", "tau2"):
+        lag = int(np.ceil(int(rule[3]) * integrated_acf_time(r, groups, threshold, kmax)))
+    elif rule == "pw":
+        lag = int(np.ceil(politis_white_block(r, groups)))
+    else:
+        raise ValueError(f"unknown k rule {rule!r}; choose from {K_RULES}")
     return int(min(max(lag, kmin), kmax))
 
 
@@ -425,7 +509,7 @@ def _rng(rng):
 def block_permutation_test(M, x, Z=None, chrom=None, pos=None, arm=None, k: int | None = None,
                            B: int = 9999, rng=None, blocks=None, chunk: int | None = None,
                            prep: Prepared | None = None, order: np.ndarray | None = None,
-                           k_bounds=(5, 50)) -> TestResult:
+                           k_bounds=(5, None), k_rule: str | None = None) -> TestResult:
     """Main null (plan section 5): block permutation of the x residuals.
 
     1. Residualize x on C (Z); order genes by (chrom, pos).
@@ -434,7 +518,8 @@ def block_permutation_test(M, x, Z=None, chrom=None, pos=None, arm=None, k: int 
     3. Permute residual blocks among blocks of equal size, keeping within-block
        order, and add back the fitted part (adding back is a no-op for T because
        the fitted part lies in col(Z)).
-    4. k defaults to :func:`choose_k` on the residuals in genome order.
+    4. k defaults to :func:`choose_k` (rule ``k_rule``, default
+       :data:`K_RULE_DEFAULT`) on the residuals in genome order.
 
     ``blocks`` (gene-level ids in the original gene order) overrides steps 1-2
     (e.g. co-accessibility clusters, or oracle blocks in simulation); genes in a
@@ -459,7 +544,7 @@ def block_permutation_test(M, x, Z=None, chrom=None, pos=None, arm=None, k: int 
             grp = np.asarray(chrom)[order]
         r_sorted = prep.r_x[order]
         if k is None:
-            k = choose_k(r_sorted, grp, kmin=k_bounds[0], kmax=k_bounds[1])
+            k = choose_k(r_sorted, grp, rule=k_rule, kmin=k_bounds[0], kmax=k_bounds[1])
         bid_sorted = make_blocks(grp if grp is not None else np.zeros(G), int(k))
     else:
         b = np.asarray(blocks)[order]
