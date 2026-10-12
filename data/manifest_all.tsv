@@ -57,3 +57,4 @@ priority	path	url	size	md5
 7	atac_bam/PC-3__rep1__ENCFF024FNF.bam	https://www.encodeproject.org/files/ENCFF024FNF/@@download/ENCFF024FNF.bam	3015887781	4bd2da7affc2ee131d27d5d6ac9c77e6
 7	atac_bam/Panc1__rep2__ENCFF836WDC.bam	https://www.encodeproject.org/files/ENCFF836WDC/@@download/ENCFF836WDC.bam	2995568147	4da303499b33a5ff5d5a782ab68e6f6b
 7	atac_bam/Panc1__rep1__ENCFF822BKT.bam	https://www.encodeproject.org/files/ENCFF822BKT/@@download/ENCFF822BKT.bam	3332910047	b5a0de17c8700f085ec4e7b954a532d2
+8	perturbseq/K562_gwps_raw_singlecell_01.h5ad	https://ndownloader.figshare.com/files/35775507	65830941948	887e3e6a8c8df6eadf7a3030a53c9546
