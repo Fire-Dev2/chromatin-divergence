@@ -130,4 +130,26 @@ genome-wide (B), restricted to shared knockdowns and genes
 shows how large M, its reliability and the generic share are when the cell line
 does not change and only the experiment does.
 
-SAME_LINE_PLACEHOLDER
+The genome-wide file was checked before use: same obs fields as the essential
+screen (`gene`, `gene_id`, `gem_group`, `UMI_count`, `mitopercent`, `sgID_AB`, …),
+dense float32 `X` of 1,989,578 × 8,248, 75,328 non-targeting cells, 9,866
+targets. The pass kept the 2,053 targets shared with the essential screen
+(491,053 kept cells incl. 74,574 controls).
+
+| | same line (K562 ess − K562 gw) | cross line (RPE1 − K562) |
+|---|---|---|
+| genes | 6,207 | 5,262 |
+| knockdowns kept / shared | 1,508 / 2,053 | 1,314 / 2,055 |
+| mean M | 0.0024 | 0.048 |
+| SD of M | 0.0095 | 0.100 |
+| split-half r (median of 20) | 0.567 | 0.991 |
+| reliability | 0.72 | 0.996 |
+| generic share, median (A / B) | 2.5% / 2.9% | 13.0% / 2.7% |
+
+- The same-line M is about 10 times smaller in SD; its reproducible variance
+  (reliability × variance) is 0.65% of the cross-line one.
+- It is still reproducible (reliability 0.72): the two K562 screens differ
+  systematically (separate experiments; median control UMI 13,920 vs 11,603), so
+  not all of a cross-line M is "line" — but at this pair the batch part is ~1% of it.
+- Over the 5,044 genes in both analyses the same-line and cross-line M are
+  uncorrelated (r = −0.03).

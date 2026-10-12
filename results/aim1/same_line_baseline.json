@@ -1,0 +1,132 @@
+{
+ "description": "Same-line baseline: A = K562 essential screen, B = K562 genome-wide screen (Replogle 2022). Knockdowns restricted to those in both screens; genes to those passing the filter in both.",
+ "layout_check": {
+  "K562": {
+   "obs": [
+    "UMI_count",
+    "__categories",
+    "cell_barcode",
+    "core_adjusted_UMI_count",
+    "core_scale_factor",
+    "gem_group",
+    "gene",
+    "gene_id",
+    "gene_transcript",
+    "mitopercent",
+    "sgID_AB",
+    "transcript",
+    "z_gemgroup_UMI"
+   ],
+   "var": [
+    "__categories",
+    "chr",
+    "class",
+    "cv",
+    "end",
+    "fano",
+    "gene_id",
+    "gene_name",
+    "in_matrix",
+    "length",
+    "mean",
+    "start",
+    "std",
+    "strand"
+   ],
+   "X_type": "Dataset",
+   "X_shape": [
+    310385,
+    8563
+   ],
+   "X_dtype": "float32",
+   "X_chunks": null,
+   "X_compression": null
+  },
+  "K562gw": {
+   "obs": [
+    "UMI_count",
+    "__categories",
+    "cell_barcode",
+    "core_adjusted_UMI_count",
+    "core_scale_factor",
+    "gem_group",
+    "gene",
+    "gene_id",
+    "gene_transcript",
+    "mitopercent",
+    "sgID_AB",
+    "transcript",
+    "z_gemgroup_UMI"
+   ],
+   "var": [
+    "__categories",
+    "chr",
+    "class",
+    "cv",
+    "end",
+    "fano",
+    "gene_id",
+    "gene_name",
+    "in_matrix",
+    "length",
+    "mean",
+    "start",
+    "std",
+    "strand"
+   ],
+   "X_type": "Dataset",
+   "X_shape": [
+    1989578,
+    8248
+   ],
+   "X_dtype": "float32",
+   "X_chunks": null,
+   "X_compression": null
+  }
+ },
+ "n_ctrl_K562gw_raw": 75328,
+ "pseudobulk_K562gw": {
+  "line": "K562gw",
+  "n_cells": 1989578,
+  "n_kept": 491053,
+  "n_ctrl_kept": 74574,
+  "n_targets": 2053,
+  "n_targets_in_screen": 9866,
+  "restricted_to": "K562",
+  "n_genes": 8248,
+  "median_ctrl_umi": 11602.5,
+  "mito_cut_pct": 0.1838764876,
+  "n_splits": 20,
+  "seed": 20261465,
+  "seconds": 42.1
+ },
+ "same_line": {
+  "n_genes": 6207,
+  "n_kd_total": 2053,
+  "n_kd_kept": 1508,
+  "split_r_median": 0.5669074620939065,
+  "reliability": 0.7236004369222043,
+  "generic_share_median_A": 0.02498586718709272,
+  "generic_share_median_B": 0.02927485538250816,
+  "M_mean": 0.002380022572818182,
+  "M_sd": 0.009522927146448057
+ },
+ "cross_line_RPE1_vs_K562": {
+  "n_genes": 5262,
+  "n_kd_total": 2055,
+  "n_kd_kept": 1314,
+  "split_r_median": 0.991101423294604,
+  "reliability": 0.9955308270079624,
+  "generic_share_median_A": 0.13014783749797598,
+  "generic_share_median_B": 0.02716950165093507,
+  "M_mean": 0.04764021269924927,
+  "M_sd": 0.10036629666140864
+ },
+ "ratio_M_sd_same_over_cross": 0.09488172288127944,
+ "ratio_reproducible_var_same_over_cross": 0.006543486819372344,
+ "n_genes_common": 5044,
+ "corr_M_same_vs_cross_common_genes": -0.025767164062481872,
+ "M_sd_cross_on_common_genes": 0.1016865216966005,
+ "M_sd_same_on_common_genes": 0.008155092933762723,
+ "seconds": 313.9
+}

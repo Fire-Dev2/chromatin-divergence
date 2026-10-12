@@ -64,6 +64,8 @@ out = {
     "layout_check": check, "n_ctrl_K562gw_raw": n_ctrl, "pseudobulk_K562gw": pb,
     "same_line": pick(same), "cross_line_RPE1_vs_K562": pick(cross),
     "ratio_M_sd_same_over_cross": same["M_sd"] / cross["M_sd"],
+    "ratio_reproducible_var_same_over_cross": (same["reliability"] * same["M_sd"] ** 2)
+                                              / (cross["reliability"] * cross["M_sd"] ** 2),
     "n_genes_common": len(common),
     "corr_M_same_vs_cross_common_genes": float(np.corrcoef(common.M_same, common.M_cross)[0, 1]),
     "M_sd_cross_on_common_genes": float(common.M_cross.std(ddof=0)),

@@ -32,6 +32,7 @@ DECOY_LINES = ("GM12878", "HCT116", "MCF-7", "A549", "IMR-90", "PC-3", "Panc1")
 FEATURES = (("combined_cpm", "combined", "cpm"), ("promoter_cpm", "promoter", "cpm"),
             ("distal_cpm", "distal", "cpm"), ("combined_fc", "combined", "fc"))
 NEG_CONTROL_SIM = 0.05
+ACF_LAGS = (1, 2, 5, 10, 25, 50, 100)
 
 
 def job_seed(*keys) -> np.random.Generator:
@@ -235,6 +236,8 @@ def test_feature(P: dict, label: str, B: int = 9999, rho_bar: float = 0.0, decoy
     out = {"feature": label, "G": prep.G, "design_rank": prep.rank, "sd_x": float(np.std(x)),
            "theta_hat": prep.theta_hat, "k_x4": k_x4, "k_v1.0": k_v10,
            "main_block_x4": _summ(main, grid),
+           "acf_x_resid_within_arm": dict(zip(map(str, ACF_LAGS), np.round(
+               crt.acf(prep.r_x[order], max(ACF_LAGS), arm[order])[np.array(ACF_LAGS) - 1], 4).tolist())),
            "exchangeability_x4": block_exchangeability(gen, k_x4),
            "exchangeability_v1.0": block_exchangeability(gen, k_v10),
            "theta_grid": [float(grid[0]), float(grid[-1]), len(grid)],
@@ -293,6 +296,7 @@ def run(a: str = "RPE1", b: str = "K562", B: int = 9999, n_boot: int = 500,
            "n_knockdowns": P["summary"]["n_kd_kept"], "reliability": P["summary"]["reliability"],
            "reliability_boot_ci95": [float(np.quantile(relb, .025)), float(np.quantile(relb, .975))],
            "rho_bar_controls": rho, "rho_bar_controls_log2p1": rho_log, "rho_bar_used": rho_bar,
+           "acf_M_resid_within_arm_diagnostic": _acf_M(P),
            "covariates": cov.COLUMNS, "design_columns": int(P["Z"].shape[1]), "features": {}}
     nulls = {}
     for label, kind, signal in FEATURES:
@@ -306,6 +310,15 @@ def run(a: str = "RPE1", b: str = "K562", B: int = 9999, n_boot: int = 500,
     (out_dir / f"{tag}_test.json").write_text(json.dumps(res, indent=1, default=_json_default))
     np.savez_compressed(out_dir / f"{tag}_null.npz", **nulls)
     return res
+
+
+def _acf_M(P):
+    """Diagnostic only (never used to choose k): within-arm ACF of M residualized on f(C)."""
+    g = P["gen"]
+    o = crt.genome_order(g.chrom.to_numpy(), g.pos.to_numpy())
+    r = P["M"] - P["Q"] @ (P["Q"].T @ P["M"])
+    a = crt.acf(r[o], max(ACF_LAGS), g.arm.to_numpy()[o])
+    return dict(zip(map(str, ACF_LAGS), np.round(a[np.array(ACF_LAGS) - 1], 4).tolist()))
 
 
 def _json_default(o):

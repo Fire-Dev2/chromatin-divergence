@@ -28,6 +28,16 @@ least one other block of the same size, i.e. that the permutation can move.
 | distal_cpm | 49 [143] | 21 [126] | 41% [86%] | -0.002771 | 0.00122 |
 | combined_fc | 49 [207] | 17 [197] | 30% [93%] | -0.000187 | 0.00201 |
 
+Within-arm autocorrelation of the residuals (x residuals choose k; the M row is a diagnostic only, computed after k was fixed and not used by any test):
+
+| series | lag 1 | lag 2 | lag 5 | lag 10 | lag 25 | lag 50 | lag 100 |
+|---|---|---|---|---|---|---|---|
+| x: combined_cpm | 0.377 | 0.260 | 0.227 | 0.194 | 0.169 | 0.055 | 0.031 |
+| x: promoter_cpm | 0.269 | 0.194 | 0.177 | 0.168 | 0.160 | 0.061 | 0.030 |
+| x: distal_cpm | 0.328 | 0.193 | 0.137 | 0.100 | 0.093 | 0.015 | 0.013 |
+| x: combined_fc | 0.237 | 0.132 | 0.105 | 0.075 | 0.063 | 0.063 | 0.056 |
+| M | 0.057 | 0.009 | 0.002 | -0.019 | 0.025 | 0.001 | 0.011 |
+
 ## Sensitivity analyses and comparators (one-sided p for θ > 0; two-sided p; 95% CI)
 
 | feature | block_v1.0 | naive_ols | unrestricted | expr_bin | stratified | camera | block_coaccess_clusters | decoy_neg_control |
@@ -52,5 +62,6 @@ least one other block of the same size, i.e. that the permutation can move.
 - Size: partial R² 0.67% of reproducible variance for combined, 1.08% for promoter.
 - This is the development pair, which differs in p53, tissue and growth; it is not evidence for or against H1.
 - **Pipeline issue found here (for the author, before the matched pairs).** At G ≈ 5,300 genes on 41 arms the x residuals stay autocorrelated past lag 50, so k_v1.0 hits its cap (50) and the x4 rule its cap (100). Blocks are then 100–199 genes, and because the plan permutes blocks only within equal-size classes, only ~41% of genes (21 of 49 blocks) can move. The fixed blocks keep their real x, so the block null is centred near the observed association (null mean of T* ≈ −0.017 for combined), not at 0. The test stays valid (exchangeable units), but it tests only the movable part and loses power; see the planted benchmark (results/aim3/planted_RPE1_vs_K562.md). No parameter was changed.
+- The x residuals are autocorrelated over long ranges (≈0.17 at lag 25 for combined), while the M residuals are almost white (≈0.06 at lag 1). With nearly independent M errors OLS is close to valid for any x, so the naive tests' level-0 rejections in the planted benchmark more likely reflect decoys that are genuinely associated with M than miscalibration; with 12 configurations the two cannot be separated firmly.
 - CI: the plan's 201-point grid spans ±max(4|θ̂|, 0.5/SD(x)); with SD(x) ≈ 0.3 its step (≈0.017) is about the size of θ̂, so the plan-grid CI collapses to one or two grid points. The table also gives the same inversion on a 2,001-point grid inside the plan span (docs/methods_aim2_aim3.md §6.2).
 - Partial-R² bootstrap: approximate (β̃ and s̃² held at full-data values; see methods §6.3). It reflects knockdown sampling only, not gene-level dependence.

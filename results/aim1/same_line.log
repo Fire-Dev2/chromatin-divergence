@@ -1,0 +1,233 @@
+{
+ "K562": {
+  "obs": [
+   "UMI_count",
+   "__categories",
+   "cell_barcode",
+   "core_adjusted_UMI_count",
+   "core_scale_factor",
+   "gem_group",
+   "gene",
+   "gene_id",
+   "gene_transcript",
+   "mitopercent",
+   "sgID_AB",
+   "transcript",
+   "z_gemgroup_UMI"
+  ],
+  "var": [
+   "__categories",
+   "chr",
+   "class",
+   "cv",
+   "end",
+   "fano",
+   "gene_id",
+   "gene_name",
+   "in_matrix",
+   "length",
+   "mean",
+   "start",
+   "std",
+   "strand"
+  ],
+  "X_type": "Dataset",
+  "X_shape": [
+   310385,
+   8563
+  ],
+  "X_dtype": "float32",
+  "X_chunks": null,
+  "X_compression": null
+ },
+ "K562gw": {
+  "obs": [
+   "UMI_count",
+   "__categories",
+   "cell_barcode",
+   "core_adjusted_UMI_count",
+   "core_scale_factor",
+   "gem_group",
+   "gene",
+   "gene_id",
+   "gene_transcript",
+   "mitopercent",
+   "sgID_AB",
+   "transcript",
+   "z_gemgroup_UMI"
+  ],
+  "var": [
+   "__categories",
+   "chr",
+   "class",
+   "cv",
+   "end",
+   "fano",
+   "gene_id",
+   "gene_name",
+   "in_matrix",
+   "length",
+   "mean",
+   "start",
+   "std",
+   "strand"
+  ],
+  "X_type": "Dataset",
+  "X_shape": [
+   1989578,
+   8248
+  ],
+  "X_dtype": "float32",
+  "X_chunks": null,
+  "X_compression": null
+ }
+}
+K562gw: 1,989,578 cells, 75,328 'non-targeting' cells, 9,867 gene labels
+  K562gw: 4,000/1,989,578 cells      1s
+  K562gw: 44,000/1,989,578 cells      2s
+  K562gw: 84,000/1,989,578 cells      3s
+  K562gw: 124,000/1,989,578 cells      4s
+  K562gw: 164,000/1,989,578 cells      5s
+  K562gw: 204,000/1,989,578 cells      6s
+  K562gw: 244,000/1,989,578 cells      7s
+  K562gw: 284,000/1,989,578 cells      7s
+  K562gw: 324,000/1,989,578 cells      8s
+  K562gw: 364,000/1,989,578 cells      9s
+  K562gw: 404,000/1,989,578 cells     10s
+  K562gw: 444,000/1,989,578 cells     11s
+  K562gw: 484,000/1,989,578 cells     11s
+  K562gw: 524,000/1,989,578 cells     12s
+  K562gw: 564,000/1,989,578 cells     13s
+  K562gw: 604,000/1,989,578 cells     14s
+  K562gw: 644,000/1,989,578 cells     15s
+  K562gw: 684,000/1,989,578 cells     15s
+  K562gw: 724,000/1,989,578 cells     16s
+  K562gw: 764,000/1,989,578 cells     17s
+  K562gw: 804,000/1,989,578 cells     18s
+  K562gw: 844,000/1,989,578 cells     19s
+  K562gw: 884,000/1,989,578 cells     20s
+  K562gw: 924,000/1,989,578 cells     21s
+  K562gw: 964,000/1,989,578 cells     21s
+  K562gw: 1,004,000/1,989,578 cells     22s
+  K562gw: 1,044,000/1,989,578 cells     23s
+  K562gw: 1,084,000/1,989,578 cells     24s
+  K562gw: 1,124,000/1,989,578 cells     25s
+  K562gw: 1,164,000/1,989,578 cells     25s
+  K562gw: 1,204,000/1,989,578 cells     26s
+  K562gw: 1,244,000/1,989,578 cells     27s
+  K562gw: 1,284,000/1,989,578 cells     28s
+  K562gw: 1,324,000/1,989,578 cells     28s
+  K562gw: 1,364,000/1,989,578 cells     29s
+  K562gw: 1,404,000/1,989,578 cells     30s
+  K562gw: 1,444,000/1,989,578 cells     31s
+  K562gw: 1,484,000/1,989,578 cells     32s
+  K562gw: 1,524,000/1,989,578 cells     32s
+  K562gw: 1,564,000/1,989,578 cells     33s
+  K562gw: 1,604,000/1,989,578 cells     34s
+  K562gw: 1,644,000/1,989,578 cells     35s
+  K562gw: 1,684,000/1,989,578 cells     36s
+  K562gw: 1,724,000/1,989,578 cells     36s
+  K562gw: 1,764,000/1,989,578 cells     37s
+  K562gw: 1,804,000/1,989,578 cells     38s
+  K562gw: 1,844,000/1,989,578 cells     39s
+  K562gw: 1,884,000/1,989,578 cells     39s
+  K562gw: 1,924,000/1,989,578 cells     40s
+  K562gw: 1,964,000/1,989,578 cells     41s
+K562gw done in 42s: 491,053 kept cells, 74,574 controls, 2,053 knockdowns, 8,248 genes
+pseudobulk done 43s
+[K562_vs_K562gw] 6,207 genes, 1,508/2,053 knockdowns kept (58 few cells, 374 target not expressed, 369 weak repression)
+[K562_vs_K562gw] full-data M done 85s
+[K562_vs_K562gw] split 1/20: r = 0.553  (95s)
+[K562_vs_K562gw] split 2/20: r = 0.566  (104s)
+[K562_vs_K562gw] split 3/20: r = 0.585  (113s)
+[K562_vs_K562gw] split 4/20: r = 0.579  (122s)
+[K562_vs_K562gw] split 5/20: r = 0.583  (131s)
+[K562_vs_K562gw] split 6/20: r = 0.555  (141s)
+[K562_vs_K562gw] split 7/20: r = 0.585  (150s)
+[K562_vs_K562gw] split 8/20: r = 0.578  (159s)
+[K562_vs_K562gw] split 9/20: r = 0.572  (167s)
+[K562_vs_K562gw] split 10/20: r = 0.585  (176s)
+[K562_vs_K562gw] split 11/20: r = 0.567  (185s)
+[K562_vs_K562gw] split 12/20: r = 0.538  (194s)
+[K562_vs_K562gw] split 13/20: r = 0.533  (203s)
+[K562_vs_K562gw] split 14/20: r = 0.557  (212s)
+[K562_vs_K562gw] split 15/20: r = 0.531  (221s)
+[K562_vs_K562gw] split 16/20: r = 0.528  (230s)
+[K562_vs_K562gw] split 17/20: r = 0.556  (239s)
+[K562_vs_K562gw] split 18/20: r = 0.576  (248s)
+[K562_vs_K562gw] split 19/20: r = 0.574  (258s)
+[K562_vs_K562gw] split 20/20: r = 0.561  (267s)
+{
+ "pair": "K562_vs_K562gw",
+ "A": "K562",
+ "B": "K562gw",
+ "n_genes": 6207,
+ "n_kd_total": 2053,
+ "n_kd_kept": 1508,
+ "split_r": [
+  0.5531,
+  0.5665,
+  0.5849,
+  0.579,
+  0.5826,
+  0.5554,
+  0.5846,
+  0.5779,
+  0.5716,
+  0.5851,
+  0.5673,
+  0.5379,
+  0.533,
+  0.5574,
+  0.5306,
+  0.5276,
+  0.5565,
+  0.5764,
+  0.5737,
+  0.5614
+ ],
+ "split_r_median": 0.5669074620939065,
+ "reliability": 0.7236004369222043,
+ "generic_share_median_A": 0.02498586718709272,
+ "generic_share_median_B": 0.02927485538250816,
+ "M_mean": 0.002380022572818182,
+ "M_sd": 0.009522927146448057,
+ "K_fake": 50,
+ "K_fake_halves": 10,
+ "seed": 32883897,
+ "generic": "global",
+ "n_kd_groups": null,
+ "seconds": 270.6
+}
+{
+ "description": "Same-line baseline: A = K562 essential screen, B = K562 genome-wide screen (Replogle 2022). Knockdowns restricted to those in both screens; genes to those passing the filter in both.",
+ "n_ctrl_K562gw_raw": 75328,
+ "same_line": {
+  "n_genes": 6207,
+  "n_kd_total": 2053,
+  "n_kd_kept": 1508,
+  "split_r_median": 0.5669074620939065,
+  "reliability": 0.7236004369222043,
+  "generic_share_median_A": 0.02498586718709272,
+  "generic_share_median_B": 0.02927485538250816,
+  "M_mean": 0.002380022572818182,
+  "M_sd": 0.009522927146448057
+ },
+ "cross_line_RPE1_vs_K562": {
+  "n_genes": 5262,
+  "n_kd_total": 2055,
+  "n_kd_kept": 1314,
+  "split_r_median": 0.991101423294604,
+  "reliability": 0.9955308270079624,
+  "generic_share_median_A": 0.13014783749797598,
+  "generic_share_median_B": 0.02716950165093507,
+  "M_mean": 0.04764021269924927,
+  "M_sd": 0.10036629666140864
+ },
+ "ratio_M_sd_same_over_cross": 0.09488172288127944,
+ "n_genes_common": 5044,
+ "corr_M_same_vs_cross_common_genes": -0.025767164062481872,
+ "M_sd_cross_on_common_genes": 0.1016865216966005,
+ "M_sd_same_on_common_genes": 0.008155092933762723,
+ "seconds": 313.9
+}

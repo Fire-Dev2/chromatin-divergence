@@ -53,6 +53,13 @@ def aim2_md():
         e, e1, m = d["exchangeability_x4"], d["exchangeability_v1.0"], d["main_block_x4"]
         L.append(f"| {lab} | {e['n_blocks']} [{e1['n_blocks']}] | {e['n_movable_blocks']} [{e1['n_movable_blocks']}] | "
                  f"{e['frac_genes_movable']:.0%} [{e1['frac_genes_movable']:.0%}] | {m['null_mean']:.4g} | {m['null_sd']:.3g} |")
+    lags = list(r["acf_M_resid_within_arm_diagnostic"])
+    L += ["", "Within-arm autocorrelation of the residuals (x residuals choose k; the M row is a diagnostic only, "
+          "computed after k was fixed and not used by any test):", "",
+          "| series | " + " | ".join(f"lag {l}" for l in lags) + " |", "|---" * (len(lags) + 1) + "|"]
+    for lab, d in r["features"].items():
+        L.append(f"| x: {lab} | " + " | ".join(f"{d['acf_x_resid_within_arm'][l]:.3f}" for l in lags) + " |")
+    L.append("| M | " + " | ".join(f"{r['acf_M_resid_within_arm_diagnostic'][l]:.3f}" for l in lags) + " |")
     L += ["", "## Sensitivity analyses and comparators (one-sided p for θ > 0; two-sided p; 95% CI)", ""]
     names = ["block_v1.0", "naive_ols", "unrestricted", "expr_bin", "stratified", "camera",
              "block_coaccess_clusters", "decoy_neg_control"]
@@ -90,6 +97,11 @@ def aim2_md():
           "block null is centred near the observed association (null mean of T* ≈ −0.017 for combined), not at 0. "
           "The test stays valid (exchangeable units), but it tests only the movable part and loses power; see the "
           "planted benchmark (results/aim3/planted_RPE1_vs_K562.md). No parameter was changed.",
+          "- The x residuals are autocorrelated over long ranges (≈0.17 at lag 25 for combined), while the M "
+          "residuals are almost white (≈0.06 at lag 1). With nearly independent M errors OLS is close to valid "
+          "for any x, so the naive tests' level-0 rejections in the planted benchmark more likely reflect decoys "
+          "that are genuinely associated with M than miscalibration; with 12 configurations the two cannot be "
+          "separated firmly.",
           "- CI: the plan's 201-point grid spans ±max(4|θ̂|, 0.5/SD(x)); with SD(x) ≈ 0.3 its step (≈0.017) is "
           "about the size of θ̂, so the plan-grid CI collapses to one or two grid points. The table also gives the "
           "same inversion on a 2,001-point grid inside the plan span (docs/methods_aim2_aim3.md §6.2).",
