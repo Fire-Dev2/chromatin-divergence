@@ -1,0 +1,74 @@
+[RPE1_vs_HepG2_groupmean] 5,631 genes, 1,424/2,392 knockdowns kept (386 few cells, 620 target not expressed, 416 weak repression)
+[RPE1_vs_HepG2_groupmean] knockdown groups: {'other': 1146, 'spliceosome': 87, 'cytosolic_ribosome': 72, 'mitochondrial_ribosome': 58, 'proteasome': 33, 'nuclear_pore': 16, 'mediator': 8, 'rna_pol_ii': 4}
+[RPE1_vs_HepG2_groupmean] full-data M done 56s
+[RPE1_vs_HepG2_groupmean] split 1/20: r = 0.937  (63s)
+[RPE1_vs_HepG2_groupmean] split 2/20: r = 0.952  (70s)
+[RPE1_vs_HepG2_groupmean] split 3/20: r = 0.952  (77s)
+[RPE1_vs_HepG2_groupmean] split 4/20: r = 0.953  (84s)
+[RPE1_vs_HepG2_groupmean] split 5/20: r = 0.954  (91s)
+[RPE1_vs_HepG2_groupmean] split 6/20: r = 0.948  (99s)
+[RPE1_vs_HepG2_groupmean] split 7/20: r = 0.954  (107s)
+[RPE1_vs_HepG2_groupmean] split 8/20: r = 0.954  (113s)
+[RPE1_vs_HepG2_groupmean] split 9/20: r = 0.948  (120s)
+[RPE1_vs_HepG2_groupmean] split 10/20: r = 0.954  (127s)
+[RPE1_vs_HepG2_groupmean] split 11/20: r = 0.950  (135s)
+[RPE1_vs_HepG2_groupmean] split 12/20: r = 0.952  (142s)
+[RPE1_vs_HepG2_groupmean] split 13/20: r = 0.948  (149s)
+[RPE1_vs_HepG2_groupmean] split 14/20: r = 0.954  (156s)
+[RPE1_vs_HepG2_groupmean] split 15/20: r = 0.953  (164s)
+[RPE1_vs_HepG2_groupmean] split 16/20: r = 0.947  (170s)
+[RPE1_vs_HepG2_groupmean] split 17/20: r = 0.952  (177s)
+[RPE1_vs_HepG2_groupmean] split 18/20: r = 0.953  (184s)
+[RPE1_vs_HepG2_groupmean] split 19/20: r = 0.945  (190s)
+[RPE1_vs_HepG2_groupmean] split 20/20: r = 0.951  (197s)
+{
+ "pair": "RPE1_vs_HepG2_groupmean",
+ "A": "RPE1",
+ "B": "HepG2",
+ "n_genes": 5631,
+ "n_kd_total": 2392,
+ "n_kd_kept": 1424,
+ "split_r": [
+  0.9371,
+  0.9521,
+  0.9525,
+  0.9528,
+  0.9545,
+  0.9485,
+  0.9538,
+  0.9545,
+  0.9483,
+  0.9544,
+  0.9503,
+  0.9517,
+  0.9482,
+  0.9539,
+  0.9529,
+  0.9473,
+  0.9524,
+  0.953,
+  0.9455,
+  0.9509
+ ],
+ "split_r_median": 0.9522314951384749,
+ "reliability": 0.9755313317193786,
+ "generic_share_median_A": 0.11897331184411912,
+ "generic_share_median_B": 0.04316294427259811,
+ "M_mean": 0.021385292423034472,
+ "M_sd": 0.05589540210126774,
+ "K_fake": 50,
+ "K_fake_halves": 10,
+ "seed": 32123673,
+ "generic": "group",
+ "n_kd_groups": {
+  "other": 1146,
+  "spliceosome": 87,
+  "cytosolic_ribosome": 72,
+  "mitochondrial_ribosome": 58,
+  "proteasome": 33,
+  "nuclear_pore": 16,
+  "mediator": 8,
+  "rna_pol_ii": 4
+ },
+ "seconds": 200.4
+}

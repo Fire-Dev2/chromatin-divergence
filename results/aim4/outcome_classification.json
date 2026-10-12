@@ -1,0 +1,45 @@
+{
+ "rows": [
+  {
+   "outcome": "Positive effect in both matched pairs, rising with similarity",
+   "supported": "no",
+   "evidence": "K562 \u2212 Jurkat \u03b8\u0302 \u2248 0; RPE1 \u2212 HepG2 \u03b8\u0302 < 0; H4 slopes \u2264 0 where the own effect is nonzero."
+  },
+  {
+   "outcome": "Effect in the mixed pairs only",
+   "supported": "no (as stated)",
+   "evidence": "Mixed pooled \u03b8\u0302 -0.0096 (CI [-0.0187, -0.00702]) is nonzero but negative, and a matched pair (RPE1 \u2212 HepG2) shows the same negative sign; gap mixed \u2212 matched -0.0042 (approx. CI [-0.00863, 0.000325], p 0.056)."
+  },
+  {
+   "outcome": "The generic response accounts for most of the raw difference",
+   "supported": "no",
+   "evidence": "Median generic share 2\u201313% per line in every pair."
+  },
+  {
+   "outcome": "Naive tests find an effect; the main test does not",
+   "supported": "no (one borderline mixed pair)",
+   "evidence": "Naive and main agree in sign and significance in 5 of 6 pairs; K562 \u2212 HepG2 (mixed): permutation-free naive tests p\u2082 0.008\u20130.022 vs main 0.055. The naive step-7 estimate is not larger than the main one."
+  },
+  {
+   "outcome": "No effect under any test, with adequate power",
+   "supported": "yes, for K562 \u2212 Jurkat",
+   "evidence": "\u03b8\u0302 \u2248 0 under every test and sensitivity; planted detection limit 0.5% partial R\u00b2; pR\u00b2/rel upper bound 0.023%."
+  },
+  {
+   "outcome": "Cross-line numbers sit near the same-line baseline",
+   "supported": "partly, for K562 \u2212 Jurkat",
+   "evidence": "K562 \u2212 Jurkat reproducible variance of M is 3.6\u00d7 the same-line baseline (other pairs 43\u2013154\u00d7); reliability 0.86."
+  },
+  {
+   "outcome": "The two matched pairs disagree",
+   "supported": "YES \u2014 lead",
+   "evidence": "K562 \u2212 Jurkat null; RPE1 \u2212 HepG2 significantly negative (opposite to H1). What differs: RPE1 \u2212 HepG2 still diverges at p53 targets (z 3.3) and every RPE1-containing pair shows the same promoter-driven negative association, while the three pairs without RPE1 do not."
+  },
+  {
+   "outcome": "Signal in distal accessibility only (secondary)",
+   "supported": "no (weak hint only)",
+   "evidence": "Distal \u03b8\u0302 weakly positive in the pairs without RPE1 (K562 \u2212 Jurkat one-sided p 0.021) but H2's non-overlap criterion fails in both matched pairs."
+  }
+ ],
+ "lead_with": "pair-by-pair comparison of the two matched pairs (they disagree) with K562 \u2212 Jurkat's detection limit (null with adequate power) and RPE1 \u2212 HepG2's opposite-sign association traced to RPE1-containing pairs and residual p53 divergence"
+}

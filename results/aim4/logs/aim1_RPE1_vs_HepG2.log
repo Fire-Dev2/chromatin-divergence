@@ -1,0 +1,64 @@
+[RPE1_vs_HepG2] 5,631 genes, 1,424/2,392 knockdowns kept (386 few cells, 620 target not expressed, 416 weak repression)
+[RPE1_vs_HepG2] full-data M done 70s
+[RPE1_vs_HepG2] split 1/20: r = 0.945  (79s)
+[RPE1_vs_HepG2] split 2/20: r = 0.958  (88s)
+[RPE1_vs_HepG2] split 3/20: r = 0.958  (97s)
+[RPE1_vs_HepG2] split 4/20: r = 0.958  (105s)
+[RPE1_vs_HepG2] split 5/20: r = 0.959  (114s)
+[RPE1_vs_HepG2] split 6/20: r = 0.955  (124s)
+[RPE1_vs_HepG2] split 7/20: r = 0.959  (135s)
+[RPE1_vs_HepG2] split 8/20: r = 0.959  (146s)
+[RPE1_vs_HepG2] split 9/20: r = 0.953  (157s)
+[RPE1_vs_HepG2] split 10/20: r = 0.959  (166s)
+[RPE1_vs_HepG2] split 11/20: r = 0.957  (175s)
+[RPE1_vs_HepG2] split 12/20: r = 0.957  (184s)
+[RPE1_vs_HepG2] split 13/20: r = 0.956  (194s)
+[RPE1_vs_HepG2] split 14/20: r = 0.959  (204s)
+[RPE1_vs_HepG2] split 15/20: r = 0.958  (215s)
+[RPE1_vs_HepG2] split 16/20: r = 0.954  (226s)
+[RPE1_vs_HepG2] split 17/20: r = 0.958  (237s)
+[RPE1_vs_HepG2] split 18/20: r = 0.959  (250s)
+[RPE1_vs_HepG2] split 19/20: r = 0.951  (263s)
+[RPE1_vs_HepG2] split 20/20: r = 0.956  (276s)
+{
+ "pair": "RPE1_vs_HepG2",
+ "A": "RPE1",
+ "B": "HepG2",
+ "n_genes": 5631,
+ "n_kd_total": 2392,
+ "n_kd_kept": 1424,
+ "split_r": [
+  0.9454,
+  0.9582,
+  0.9584,
+  0.958,
+  0.9591,
+  0.9547,
+  0.9588,
+  0.9594,
+  0.9527,
+  0.9591,
+  0.957,
+  0.9573,
+  0.9561,
+  0.9586,
+  0.9575,
+  0.9544,
+  0.958,
+  0.9587,
+  0.9515,
+  0.956
+ ],
+ "split_r_median": 0.9577568334276045,
+ "reliability": 0.9784226693268965,
+ "generic_share_median_A": 0.11897331184411912,
+ "generic_share_median_B": 0.04316294427259811,
+ "M_mean": 0.021370055588882227,
+ "M_sd": 0.061949732739130584,
+ "K_fake": 50,
+ "K_fake_halves": 10,
+ "seed": 32123673,
+ "generic": "global",
+ "n_kd_groups": null,
+ "seconds": 281.9
+}

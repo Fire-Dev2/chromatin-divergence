@@ -1,0 +1,434 @@
+{
+ "mixed": {
+  "label": "combined_cpm",
+  "pairs": [
+   "RPE1_vs_K562",
+   "K562_vs_HepG2",
+   "Jurkat_vs_RPE1",
+   "Jurkat_vs_HepG2"
+  ],
+  "B": 9999,
+  "n_common_genes": 4688,
+  "k_shared": 28,
+  "exchangeability": {
+   "n_blocks": 146,
+   "n_size_classes": 24,
+   "n_movable_blocks": 135,
+   "n_movable_classes": 13,
+   "frac_genes_movable": 0.9072098976109215
+  },
+  "T_pooled": -0.009614406783092742,
+  "p_one_sided": 1.0,
+  "p_two_sided": 0.0001,
+  "ci95_plan_grid": [
+   -0.01781017159899534,
+   -0.01781017159899534
+  ],
+  "ci95": [
+   -0.018718490350544112,
+   -0.0070172076100040275
+  ],
+  "ci_info": {
+   "at_edge": false,
+   "contiguous": true,
+   "empty": false
+  },
+  "ci_fine_info": {
+   "at_edge": false,
+   "contiguous": true,
+   "empty": false,
+   "step": 1.7810171598998947e-05
+  },
+  "null_mean": 0.00046204189927468673,
+  "null_sd": 0.0023865472879427514,
+  "null_corr_between_pairs": [
+   [
+    1.0,
+    0.225,
+    0.477,
+    -0.236
+   ],
+   [
+    0.225,
+    1.0,
+    -0.015,
+    0.362
+   ],
+   [
+    0.477,
+    -0.015,
+    1.0,
+    0.343
+   ],
+   [
+    -0.236,
+    0.362,
+    0.343,
+    1.0
+   ]
+  ],
+  "per_pair": {
+   "RPE1_vs_K562": {
+    "T_common_genes": -0.023038168579883375,
+    "k_x4_common": 20,
+    "n_genes_full": 5262,
+    "p_one_sided": 1.0,
+    "p_two_sided": 0.0001,
+    "null_sd": 0.004596191459300449
+   },
+   "K562_vs_HepG2": {
+    "T_common_genes": 0.007954186673056656,
+    "k_x4_common": 20,
+    "n_genes_full": 5785,
+    "p_one_sided": 0.0463,
+    "p_two_sided": 0.0469,
+    "null_sd": 0.0033070576289614528
+   },
+   "Jurkat_vs_RPE1": {
+    "T_common_genes": -0.025511041231737648,
+    "k_x4_common": 24,
+    "n_genes_full": 5222,
+    "p_one_sided": 1.0,
+    "p_two_sided": 0.0001,
+    "null_sd": 0.004350491752986931
+   },
+   "Jurkat_vs_HepG2": {
+    "T_common_genes": 0.0021373960061933993,
+    "k_x4_common": 28,
+    "n_genes_full": 5587,
+    "p_one_sided": 0.262,
+    "p_two_sided": 0.3992,
+    "null_sd": 0.00254933556269061
+   }
+  }
+ },
+ "matched": {
+  "label": "combined_cpm",
+  "pairs": [
+   "K562_vs_Jurkat",
+   "RPE1_vs_HepG2"
+  ],
+  "B": 9999,
+  "n_common_genes": 4688,
+  "k_shared": 28,
+  "exchangeability": {
+   "n_blocks": 146,
+   "n_size_classes": 24,
+   "n_movable_blocks": 135,
+   "n_movable_classes": 13,
+   "frac_genes_movable": 0.9072098976109215
+  },
+  "T_pooled": -0.005461375009301424,
+  "p_one_sided": 1.0,
+  "p_two_sided": 0.0001,
+  "ci95_plan_grid": [
+   NaN,
+   NaN
+  ],
+  "ci95": [
+   -0.010410845672086555,
+   -0.004136868775598365
+  ],
+  "ci_info": {
+   "empty": true
+  },
+  "ci_fine_info": {
+   "at_edge": false,
+   "contiguous": true,
+   "empty": false,
+   "step": 3.485542720271101e-05
+  },
+  "null_mean": 0.00016140180395137784,
+  "null_sd": 0.0012631567020081516,
+  "null_corr_between_pairs": [
+   [
+    1.0,
+    -0.021
+   ],
+   [
+    -0.021,
+    1.0
+   ]
+  ],
+  "per_pair": {
+   "K562_vs_Jurkat": {
+    "T_common_genes": 0.0015619032795283518,
+    "k_x4_common": 20,
+    "n_genes_full": 5675,
+    "p_one_sided": 0.3501,
+    "p_two_sided": 0.3501,
+    "null_sd": 0.0007240617515078368
+   },
+   "RPE1_vs_HepG2": {
+    "T_common_genes": -0.0124846532981312,
+    "k_x4_common": 28,
+    "n_genes_full": 5631,
+    "p_one_sided": 1.0,
+    "p_two_sided": 0.0001,
+    "null_sd": 0.0024358347691641213
+   }
+  }
+ },
+ "all6": {
+  "label": "combined_cpm",
+  "pairs": [
+   "K562_vs_Jurkat",
+   "RPE1_vs_HepG2",
+   "RPE1_vs_K562",
+   "K562_vs_HepG2",
+   "Jurkat_vs_RPE1",
+   "Jurkat_vs_HepG2"
+  ],
+  "B": 9999,
+  "n_common_genes": 4688,
+  "k_shared": 28,
+  "exchangeability": {
+   "n_blocks": 146,
+   "n_size_classes": 24,
+   "n_movable_blocks": 135,
+   "n_movable_classes": 13,
+   "frac_genes_movable": 0.9072098976109215
+  },
+  "T_pooled": -0.008230062858495637,
+  "p_one_sided": 1.0,
+  "p_two_sided": 0.0001,
+  "ci95_plan_grid": [
+   NaN,
+   NaN
+  ],
+  "ci95": [
+   -0.015160949783007052,
+   -0.006709511135260991
+  ],
+  "ci_info": {
+   "empty": true
+  },
+  "ci_fine_info": {
+   "at_edge": false,
+   "contiguous": true,
+   "empty": false,
+   "step": 3.5361667982201916e-05
+  },
+  "null_mean": 0.0002450160748357275,
+  "null_sd": 0.0017687936270386858,
+  "null_corr_between_pairs": [
+   [
+    1.0,
+    -0.01,
+    0.145,
+    0.099,
+    -0.013,
+    -0.028
+   ],
+   [
+    -0.01,
+    1.0,
+    0.538,
+    -0.149,
+    0.372,
+    -0.205
+   ],
+   [
+    0.145,
+    0.538,
+    1.0,
+    0.237,
+    0.476,
+    -0.225
+   ],
+   [
+    0.099,
+    -0.149,
+    0.237,
+    1.0,
+    -0.019,
+    0.356
+   ],
+   [
+    -0.013,
+    0.372,
+    0.476,
+    -0.019,
+    1.0,
+    0.351
+   ],
+   [
+    -0.028,
+    -0.205,
+    -0.225,
+    0.356,
+    0.351,
+    1.0
+   ]
+  ],
+  "per_pair": {
+   "K562_vs_Jurkat": {
+    "T_common_genes": 0.0015619032795283518,
+    "k_x4_common": 20,
+    "n_genes_full": 5675,
+    "p_one_sided": 0.3461,
+    "p_two_sided": 0.3462,
+    "null_sd": 0.0007135759851850759
+   },
+   "RPE1_vs_HepG2": {
+    "T_common_genes": -0.0124846532981312,
+    "k_x4_common": 28,
+    "n_genes_full": 5631,
+    "p_one_sided": 1.0,
+    "p_two_sided": 0.0001,
+    "null_sd": 0.0024235706502001935
+   },
+   "RPE1_vs_K562": {
+    "T_common_genes": -0.023038168579883375,
+    "k_x4_common": 20,
+    "n_genes_full": 5262,
+    "p_one_sided": 1.0,
+    "p_two_sided": 0.0001,
+    "null_sd": 0.004568914516587074
+   },
+   "K562_vs_HepG2": {
+    "T_common_genes": 0.007954186673056656,
+    "k_x4_common": 20,
+    "n_genes_full": 5785,
+    "p_one_sided": 0.039,
+    "p_two_sided": 0.0397,
+    "null_sd": 0.0032496218857972353
+   },
+   "Jurkat_vs_RPE1": {
+    "T_common_genes": -0.025511041231737648,
+    "k_x4_common": 24,
+    "n_genes_full": 5222,
+    "p_one_sided": 1.0,
+    "p_two_sided": 0.0001,
+    "null_sd": 0.00431797583679417
+   },
+   "Jurkat_vs_HepG2": {
+    "T_common_genes": 0.0021373960061933993,
+    "k_x4_common": 28,
+    "n_genes_full": 5587,
+    "p_one_sided": 0.2554,
+    "p_two_sided": 0.4027,
+    "null_sd": 0.0025507500206379758
+   }
+  }
+ },
+ "gap": {
+  "pairs_common": [
+   "K562_vs_Jurkat",
+   "RPE1_vs_HepG2",
+   "RPE1_vs_K562",
+   "K562_vs_HepG2",
+   "Jurkat_vs_RPE1",
+   "Jurkat_vs_HepG2"
+  ],
+  "n_common_genes_all6": 4688,
+  "k_shared": 28,
+  "T_mixed_mean_common6": -0.009614406783092742,
+  "T_matched_mean_common6": -0.005461375009301424,
+  "gap_mixed_minus_matched": -0.004153031773791318,
+  "null_sd_gap": 0.0022848675152742103,
+  "null_mean_gap": 0.00019207229367157374,
+  "approx_ci95": [
+   -0.00863137210372877,
+   0.0003253085561461342
+  ],
+  "p_two_sided_joint_null": 0.0564,
+  "gap_full_gene_sets": -0.004153031773791318,
+  "note": "Gap on the genes common to all six pairs; null = the same single block permutation applied to all six pairs (B = 9,999); interval = gap +/- 1.96 x null SD of the gap (approximate, descriptive). gap_full_gene_sets uses the 4-pair and 2-pair common gene sets."
+ },
+ "mixed_union_rank_coupling": {
+  "label": "combined_cpm",
+  "pairs": [
+   "RPE1_vs_K562",
+   "K562_vs_HepG2",
+   "Jurkat_vs_RPE1",
+   "Jurkat_vs_HepG2"
+  ],
+  "B": 9999,
+  "T_pooled": -0.008699071005146617,
+  "p_one_sided": 1.0,
+  "p_two_sided": 0.0001,
+  "ci95_plan_grid": [
+   NaN,
+   NaN
+  ],
+  "ci95": [
+   -0.013001845697024013,
+   -0.00491262927629451
+  ],
+  "ci_info": {
+   "empty": true
+  },
+  "ci_fine_info": {
+   "at_edge": false,
+   "contiguous": true,
+   "empty": false,
+   "step": 3.442219753502229e-05
+  },
+  "null_mean": -0.0014691829048972221,
+  "null_sd": 0.0016758394457450285,
+  "k_union": 32,
+  "n_union_genes": 6546,
+  "n_union_blocks": 186,
+  "null_corr_between_pairs": [
+   [
+    1.0,
+    -0.004,
+    0.002,
+    -0.006
+   ],
+   [
+    -0.004,
+    1.0,
+    0.002,
+    -0.002
+   ],
+   [
+    0.002,
+    0.002,
+    1.0,
+    0.005
+   ],
+   [
+    -0.006,
+    -0.002,
+    0.005,
+    1.0
+   ]
+  ],
+  "per_pair": {
+   "RPE1_vs_K562": {
+    "T": -0.022353982650031877,
+    "k_x4": 20,
+    "n_genes": 5262,
+    "p_one_sided_shared_draws": 1.0,
+    "p_two_sided_shared_draws": 0.0001,
+    "null_sd_shared_draws": 0.004033540542411126
+   },
+   "K562_vs_HepG2": {
+    "T": 0.007051758376387864,
+    "k_x4": 28,
+    "n_genes": 5785,
+    "p_one_sided_shared_draws": 0.0582,
+    "p_two_sided_shared_draws": 0.0587,
+    "null_sd_shared_draws": 0.0028955607752031974
+   },
+   "Jurkat_vs_RPE1": {
+    "T": -0.0218987560008619,
+    "k_x4": 28,
+    "n_genes": 5222,
+    "p_one_sided_shared_draws": 0.9999,
+    "p_two_sided_shared_draws": 0.0002,
+    "null_sd_shared_draws": 0.004031355211745071
+   },
+   "Jurkat_vs_HepG2": {
+    "T": 0.002404696253919449,
+    "k_x4": 32,
+    "n_genes": 5587,
+    "p_one_sided_shared_draws": 0.1321,
+    "p_two_sided_shared_draws": 0.2376,
+    "null_sd_shared_draws": 0.002014557885421905
+   }
+  }
+ }
+}

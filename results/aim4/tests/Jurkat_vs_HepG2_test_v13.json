@@ -1,0 +1,1185 @@
+{
+ "pair": "Jurkat_vs_HepG2",
+ "A": "Jurkat",
+ "B": "HepG2",
+ "status": "Aim 4 mixed pair (p53/tissue/growth confounded; enters the pooled contrast; descriptive)",
+ "B_perm": 9999,
+ "n_boot": 500,
+ "n_genes": 5587,
+ "n_knockdowns": 1482,
+ "reliability": 0.9766638566667312,
+ "reliability_boot_ci95": [
+  0.9523032589270305,
+  0.9672810013978608
+ ],
+ "rho_bar_controls": {
+  "Jurkat": 0.0021612903709806305,
+  "HepG2": 0.004215033634106863
+ },
+ "rho_bar_controls_log2p1": {
+  "Jurkat": 0.00996926556384439,
+  "HepG2": 0.01424657395762583
+ },
+ "rho_bar_used": 0.003188162002543747,
+ "acf_M_resid_within_arm_diagnostic": {
+  "1": -0.0025,
+  "2": 0.0102,
+  "5": -0.0124,
+  "10": -0.0022,
+  "25": 0.0142,
+  "50": -0.0476,
+  "100": -0.0279
+ },
+ "covariates": [
+  "log2_meanA",
+  "log2_meanB",
+  "log2_varA",
+  "log2_varB",
+  "expr_diff",
+  "cn_diff",
+  "cpg_oe"
+ ],
+ "design_columns": 54,
+ "features": {
+  "combined_cpm": {
+   "feature": "combined_cpm",
+   "G": 5587,
+   "design_rank": 53,
+   "sd_x": 0.2982855114966294,
+   "theta_hat": 0.002404696253919453,
+   "k_x4": 32,
+   "k_v1.0": 8,
+   "main_block_x4": {
+    "T": 0.002404696253919449,
+    "p_one_sided": 0.1369,
+    "p_two_sided": 0.2443,
+    "B": 9999,
+    "ci95_plan_grid": [
+     0.0,
+     0.0
+    ],
+    "ci_info": {
+     "at_edge": false,
+     "contiguous": true,
+     "empty": false
+    },
+    "ci95": [
+     -0.0024808445984757996,
+     0.008146557262562425
+    ],
+    "ci_fine_info": {
+     "at_edge": false,
+     "contiguous": true,
+     "empty": false,
+     "step": 1.6762463503215003e-05
+    },
+    "null_sd": 0.00204529241245906,
+    "null_mean": 0.0001374676735887574,
+    "k": 32,
+    "n_blocks": 153
+   },
+   "acf_x_resid_within_arm": {
+    "1": 0.2779,
+    "2": 0.1264,
+    "5": 0.0626,
+    "10": 0.0656,
+    "25": -0.0041,
+    "50": 0.0045,
+    "100": -0.0179
+   },
+   "exchangeability_x4": {
+    "n_blocks": 153,
+    "n_size_classes": 25,
+    "n_movable_blocks": 139,
+    "n_movable_classes": 11,
+    "frac_genes_movable": 0.8822265974583855
+   },
+   "exchangeability_v1.0": {
+    "n_blocks": 682,
+    "n_size_classes": 8,
+    "n_movable_blocks": 681,
+    "n_movable_classes": 7,
+    "frac_genes_movable": 0.9974941829246465
+   },
+   "theta_grid": [
+    -1.676246350321477,
+    1.676246350321477,
+    201
+   ],
+   "partial_r2_raw": 0.00017840652514396763,
+   "reliability": 0.9766638566667312,
+   "partial_r2_share_reproducible": 0.0001826693226396783,
+   "partial_r2_share_boot_ci95": [
+    8.76647594880214e-05,
+    0.0003336783801418037
+   ],
+   "partial_r2_share_boot_median": 0.0001819700039866361,
+   "theta_boot_se": 0.00042796568069070203,
+   "comparators": {
+    "block_v1.0": {
+     "T": 0.002404696253919449,
+     "p_one_sided": 0.1936,
+     "p_two_sided": 0.3295,
+     "B": 9999,
+     "ci95_plan_grid": [
+      0.0,
+      0.0
+     ],
+     "ci_info": {
+      "at_edge": false,
+      "contiguous": true,
+      "empty": false
+     },
+     "ci95": [
+      -0.002765806478030453,
+      0.006956422353834167
+     ],
+     "ci_fine_info": {
+      "at_edge": false,
+      "contiguous": true,
+      "empty": false,
+      "step": 1.6762463503215003e-05
+     },
+     "null_sd": 0.0024262494952984096,
+     "null_mean": 0.0002958788652525361,
+     "k": 8,
+     "n_blocks": 682
+    },
+    "naive_ols": {
+     "T": 0.002404696253919453,
+     "se": 0.002420113757872665,
+     "t": 0.9936294300616827,
+     "p_one_sided": 0.16022338083576282,
+     "p_two_sided": 0.32044676167152564,
+     "ci95": [
+      -0.0023396773958339304,
+      0.007149069903672837
+     ]
+    },
+    "unrestricted": {
+     "T": 0.0024046962539192303,
+     "p_one_sided": 0.1184,
+     "p_two_sided": 0.2407,
+     "B": 9999,
+     "ci95_plan_grid": [
+      0.0,
+      0.0
+     ],
+     "ci_info": {
+      "at_edge": false,
+      "contiguous": true,
+      "empty": false
+     },
+     "ci95": [
+      -0.001558909105798983,
+      0.006386498594724864
+     ],
+     "ci_fine_info": {
+      "at_edge": false,
+      "contiguous": true,
+      "empty": false,
+      "step": 1.6762463503215003e-05
+     },
+     "null_sd": 0.0020414190002113206,
+     "null_mean": -6.207941081020436e-06,
+     "n_strata": 1
+    },
+    "expr_bin": {
+     "T": 0.0024046962539192303,
+     "p_one_sided": 0.0953,
+     "p_two_sided": 0.2598,
+     "B": 9999,
+     "ci95_plan_grid": [
+      0.0,
+      0.0
+     ],
+     "ci_info": {
+      "at_edge": false,
+      "contiguous": true,
+      "empty": false
+     },
+     "ci95": [
+      -0.001458334324779693,
+      0.006855847572814881
+     ],
+     "ci_fine_info": {
+      "at_edge": false,
+      "contiguous": true,
+      "empty": false,
+      "step": 1.6762463503215003e-05
+     },
+     "null_sd": 0.0021185612485709222,
+     "null_mean": -0.00035009679336118576,
+     "n_strata": 10
+    },
+    "stratified": {
+     "T": 0.0024046962539192303,
+     "p_one_sided": 0.1026,
+     "p_two_sided": 0.2811,
+     "B": 9999,
+     "ci95_plan_grid": [
+      0.0,
+      0.0
+     ],
+     "ci_info": {
+      "at_edge": false,
+      "contiguous": true,
+      "empty": false
+     },
+     "ci95": [
+      -0.001542146642295768,
+      0.007056997134853457
+     ],
+     "ci_fine_info": {
+      "at_edge": false,
+      "contiguous": true,
+      "empty": false,
+      "step": 1.6762463503215003e-05
+     },
+     "null_sd": 0.0021827176858315,
+     "null_mean": -0.00037456315223360204,
+     "n_strata": 30
+    },
+    "camera": {
+     "T": 0.002404696253919453,
+     "se": 0.010495894964098668,
+     "t": 0.2291082620533785,
+     "p_one_sided": 0.40939661992149556,
+     "p_two_sided": 0.8187932398429911,
+     "ci95": [
+      -0.018171380939253964,
+      0.02298077344709287
+     ],
+     "vif": 18.80907294620937,
+     "rho_bar": 0.003188162002543747
+    },
+    "decoy_neg_control": {
+     "similarity": {
+      "GM12878-HCT116": 0.0912,
+      "GM12878-MCF-7": 0.0846,
+      "GM12878-A549": 0.1755,
+      "GM12878-IMR-90": 0.0797,
+      "GM12878-PC-3": 0.1561,
+      "GM12878-Panc1": 0.0591,
+      "HCT116-MCF-7": -0.0013,
+      "HCT116-A549": 0.1175,
+      "HCT116-IMR-90": -0.0144,
+      "HCT116-PC-3": 0.0928,
+      "HCT116-Panc1": -0.0444,
+      "MCF-7-A549": 0.0967,
+      "MCF-7-IMR-90": -0.0114,
+      "MCF-7-PC-3": 0.0869,
+      "MCF-7-Panc1": -0.0333,
+      "A549-IMR-90": -0.1186,
+      "A549-PC-3": -0.0141,
+      "A549-Panc1": -0.155,
+      "IMR-90-PC-3": 0.1026,
+      "IMR-90-Panc1": -0.025,
+      "PC-3-Panc1": -0.1252
+     },
+     "n_neg_control": 7,
+     "T": 0.0024046962539192303,
+     "p_one_sided": 0.25,
+     "p_two_sided": 0.75,
+     "T_decoys": {
+      "HCT116-MCF-7": 0.00178,
+      "HCT116-IMR-90": -0.02588,
+      "HCT116-Panc1": -0.0143,
+      "MCF-7-IMR-90": -0.02094,
+      "MCF-7-Panc1": -0.00997,
+      "A549-PC-3": -0.00155,
+      "IMR-90-Panc1": 0.01449
+     }
+    },
+    "block_coaccess_clusters": {
+     "T": 0.002404696253919449,
+     "p_one_sided": 0.1059,
+     "p_two_sided": 0.107,
+     "B": 9999,
+     "ci95_plan_grid": [
+      0.0,
+      0.016762463503214642
+     ],
+     "ci_info": {
+      "at_edge": false,
+      "contiguous": true,
+      "empty": false
+     },
+     "ci95": [
+      -0.0030591495893367727,
+      0.02573038147743463
+     ],
+     "ci_fine_info": {
+      "at_edge": false,
+      "contiguous": true,
+      "empty": false,
+      "step": 2.514369525482077e-05
+     },
+     "null_sd": 0.0011022582839692976,
+     "null_mean": 0.0010119750933155185,
+     "k": null,
+     "n_blocks": 229,
+     "n_clusters": 229
+    }
+   }
+  },
+  "promoter_cpm": {
+   "feature": "promoter_cpm",
+   "G": 5587,
+   "design_rank": 53,
+   "sd_x": 0.7176038481925608,
+   "theta_hat": 1.78067663288332e-05,
+   "k_x4": 32,
+   "k_v1.0": 8,
+   "main_block_x4": {
+    "T": 1.7806766328832817e-05,
+    "p_one_sided": 0.547,
+    "p_two_sided": 0.9828,
+    "B": 9999,
+    "ci95_plan_grid": [
+     0.0,
+     0.0
+    ],
+    "ci_info": {
+     "at_edge": false,
+     "contiguous": true,
+     "empty": false
+    },
+    "ci95": [
+     -0.002229642446915428,
+     0.0019370018757577778
+    ],
+    "ci_fine_info": {
+     "at_edge": false,
+     "contiguous": true,
+     "empty": false,
+     "step": 6.96763264661053e-06
+    },
+    "null_sd": 0.0007695347422022529,
+    "null_mean": 0.0001011984236074968,
+    "k": 32,
+    "n_blocks": 153
+   },
+   "acf_x_resid_within_arm": {
+    "1": 0.2043,
+    "2": 0.0965,
+    "5": 0.0562,
+    "10": 0.0735,
+    "25": -0.0043,
+    "50": -0.0141,
+    "100": -0.0074
+   },
+   "exchangeability_x4": {
+    "n_blocks": 153,
+    "n_size_classes": 25,
+    "n_movable_blocks": 139,
+    "n_movable_classes": 11,
+    "frac_genes_movable": 0.8822265974583855
+   },
+   "exchangeability_v1.0": {
+    "n_blocks": 682,
+    "n_size_classes": 8,
+    "n_movable_blocks": 681,
+    "n_movable_classes": 7,
+    "frac_genes_movable": 0.9974941829246465
+   },
+   "theta_grid": [
+    -0.6967632646610762,
+    0.6967632646610762,
+    201
+   ],
+   "partial_r2_raw": 6.411336434651832e-08,
+   "reliability": 0.9766638566667312,
+   "partial_r2_share_reproducible": 6.564527181883402e-08,
+   "partial_r2_share_boot_ci95": [
+    9.918183792112845e-09,
+    3.0767556931791495e-05
+   ],
+   "partial_r2_share_boot_median": 2.5004266694330116e-06,
+   "theta_boot_se": 0.00017234810846465852,
+   "comparators": {
+    "block_v1.0": {
+     "T": 1.7806766328832817e-05,
+     "p_one_sided": 0.5412,
+     "p_two_sided": 0.9845,
+     "B": 9999,
+     "ci95_plan_grid": [
+      0.0,
+      0.0
+     ],
+     "ci_info": {
+      "at_edge": false,
+      "contiguous": true,
+      "empty": false
+     },
+     "ci95": [
+      -0.0020275811001637173,
+      0.0017279728963594566
+     ],
+     "ci_fine_info": {
+      "at_edge": false,
+      "contiguous": true,
+      "empty": false,
+      "step": 6.96763264661053e-06
+     },
+     "null_sd": 0.0009489418615615193,
+     "null_mean": 0.00013003745932949965,
+     "k": 8,
+     "n_blocks": 682
+    },
+    "naive_ols": {
+     "T": 1.78067663288332e-05,
+     "se": 0.0009454322815536852,
+     "t": 0.018834523292953653,
+     "p_one_sided": 0.4924868961046214,
+     "p_two_sided": 0.9849737922092427,
+     "ci95": [
+      -0.001835611896177498,
+      0.0018712254288351644
+     ]
+    },
+    "unrestricted": {
+     "T": 1.7806766328752813e-05,
+     "p_one_sided": 0.4901,
+     "p_two_sided": 0.9844,
+     "B": 9999,
+     "ci95_plan_grid": [
+      0.0,
+      0.0
+     ],
+     "ci_info": {
+      "at_edge": false,
+      "contiguous": true,
+      "empty": false
+     },
+     "ci95": [
+      -0.0016373936719535171,
+      0.0016582965698933496
+     ],
+     "ci_fine_info": {
+      "at_edge": false,
+      "contiguous": true,
+      "empty": false,
+      "step": 6.96763264661053e-06
+     },
+     "null_sd": 0.0008519562206832713,
+     "null_mean": 1.6873342391427036e-06,
+     "n_strata": 1
+    },
+    "expr_bin": {
+     "T": 1.7806766328752813e-05,
+     "p_one_sided": 0.5116,
+     "p_two_sided": 0.9847,
+     "B": 9999,
+     "ci95_plan_grid": [
+      0.0,
+      0.0
+     ],
+     "ci_info": {
+      "at_edge": false,
+      "contiguous": true,
+      "empty": false
+     },
+     "ci95": [
+      -0.0017419081616526777,
+      0.001651328937246739
+     ],
+     "ci_fine_info": {
+      "at_edge": false,
+      "contiguous": true,
+      "empty": false,
+      "step": 6.96763264661053e-06
+     },
+     "null_sd": 0.0008725642757579362,
+     "null_mean": 5.6365962323608576e-05,
+     "n_strata": 10
+    },
+    "stratified": {
+     "T": 1.7806766328752813e-05,
+     "p_one_sided": 0.5201,
+     "p_two_sided": 0.983,
+     "B": 9999,
+     "ci95_plan_grid": [
+      0.0,
+      0.0
+     ],
+     "ci_info": {
+      "at_edge": false,
+      "contiguous": true,
+      "empty": false
+     },
+     "ci95": [
+      -0.0019021637125247242,
+      0.0016373936719535163
+     ],
+     "ci_fine_info": {
+      "at_edge": false,
+      "contiguous": true,
+      "empty": false,
+      "step": 6.96763264661053e-06
+     },
+     "null_sd": 0.0008917334395031081,
+     "null_mean": 7.584981518245203e-05,
+     "n_strata": 30
+    },
+    "camera": {
+     "T": 1.78067663288332e-05,
+     "se": 0.004100285736806984,
+     "t": 0.004342811079966312,
+     "p_one_sided": 0.4982675527710009,
+     "p_two_sided": 0.9965351055420018,
+     "ci95": [
+      -0.008020363977870636,
+      0.0080559775105283
+     ],
+     "vif": 18.80907294620937,
+     "rho_bar": 0.003188162002543747
+    },
+    "decoy_neg_control": {
+     "similarity": {
+      "GM12878-HCT116": 0.0579,
+      "GM12878-MCF-7": 0.0197,
+      "GM12878-A549": 0.1455,
+      "GM12878-IMR-90": 0.0246,
+      "GM12878-PC-3": 0.1206,
+      "GM12878-Panc1": 0.0233,
+      "HCT116-MCF-7": -0.0493,
+      "HCT116-A549": 0.0881,
+      "HCT116-IMR-90": -0.0358,
+      "HCT116-PC-3": 0.0833,
+      "HCT116-Panc1": -0.0462,
+      "MCF-7-A549": 0.1227,
+      "MCF-7-IMR-90": 0.0072,
+      "MCF-7-PC-3": 0.1381,
+      "MCF-7-Panc1": 0.0044,
+      "A549-IMR-90": -0.1087,
+      "A549-PC-3": -0.011,
+      "A549-Panc1": -0.1353,
+      "IMR-90-PC-3": 0.1112,
+      "IMR-90-Panc1": -0.0037,
+      "PC-3-Panc1": -0.1355
+     },
+     "n_neg_control": 10,
+     "T": 1.7806766328752813e-05,
+     "p_one_sided": 0.45454545454545453,
+     "p_two_sided": 1.0,
+     "T_decoys": {
+      "GM12878-MCF-7": 0.00404,
+      "GM12878-IMR-90": -0.00447,
+      "GM12878-Panc1": 0.00088,
+      "HCT116-MCF-7": 0.00046,
+      "HCT116-IMR-90": -0.01172,
+      "HCT116-Panc1": -0.0054,
+      "MCF-7-IMR-90": -0.01177,
+      "MCF-7-Panc1": -0.00509,
+      "A549-PC-3": -0.00176,
+      "IMR-90-Panc1": 0.00981
+     }
+    },
+    "block_coaccess_clusters": {
+     "T": 1.7806766328832817e-05,
+     "p_one_sided": 0.4098,
+     "p_two_sided": 0.9687,
+     "B": 9999,
+     "ci95_plan_grid": [
+      0.0,
+      0.006967632646610822
+     ],
+     "ci_info": {
+      "at_edge": false,
+      "contiguous": true,
+      "empty": false
+     },
+     "ci95": [
+      -0.002076354528689966,
+      0.008709540808263472
+     ],
+     "ci_fine_info": {
+      "at_edge": false,
+      "contiguous": true,
+      "empty": false,
+      "step": 1.0451448969915796e-05
+     },
+     "null_sd": 0.0004226566571889897,
+     "null_mean": -9.416405073440209e-05,
+     "k": null,
+     "n_blocks": 229,
+     "n_clusters": 229
+    }
+   }
+  },
+  "distal_cpm": {
+   "feature": "distal_cpm",
+   "G": 5587,
+   "design_rank": 53,
+   "sd_x": 0.4826822400210469,
+   "theta_hat": 0.002272630412738791,
+   "k_x4": 20,
+   "k_v1.0": 5,
+   "main_block_x4": {
+    "T": 0.0022726304127387905,
+    "p_one_sided": 0.1042,
+    "p_two_sided": 0.1189,
+    "B": 9999,
+    "ci95_plan_grid": [
+     0.0,
+     0.0
+    ],
+    "ci_info": {
+     "at_edge": false,
+     "contiguous": true,
+     "empty": false
+    },
+    "ci95": [
+     -0.0010151606157679204,
+     0.004671810588891144
+    ],
+    "ci_fine_info": {
+     "at_edge": false,
+     "contiguous": true,
+     "empty": false,
+     "step": 1.0358781793550279e-05
+    },
+    "null_sd": 0.0013158130324152006,
+    "null_mean": 0.0006132656318419836,
+    "k": 20,
+    "n_blocks": 264
+   },
+   "acf_x_resid_within_arm": {
+    "1": 0.2279,
+    "2": 0.0899,
+    "5": 0.0087,
+    "10": 0.0069,
+    "25": -0.0103,
+    "50": 0.0054,
+    "100": -0.0147
+   },
+   "exchangeability_x4": {
+    "n_blocks": 264,
+    "n_size_classes": 17,
+    "n_movable_blocks": 259,
+    "n_movable_classes": 12,
+    "frac_genes_movable": 0.9745838553785574
+   },
+   "exchangeability_v1.0": {
+    "n_blocks": 1102,
+    "n_size_classes": 5,
+    "n_movable_blocks": 1102,
+    "n_movable_classes": 5,
+    "frac_genes_movable": 1.0
+   },
+   "theta_grid": [
+    -1.03587817935501,
+    1.03587817935501,
+    201
+   ],
+   "partial_r2_raw": 0.000472116944113156,
+   "reliability": 0.9766638566667312,
+   "partial_r2_share_reproducible": 0.0004833975793109106,
+   "partial_r2_share_boot_ci95": [
+    0.00031459884834550043,
+    0.0006912320494423689
+   ],
+   "partial_r2_share_boot_median": 0.0004803790038844734,
+   "theta_boot_se": 0.0002578465067119905,
+   "comparators": {
+    "block_v1.0": {
+     "T": 0.0022726304127387905,
+     "p_one_sided": 0.0725,
+     "p_two_sided": 0.1144,
+     "B": 9999,
+     "ci95_plan_grid": [
+      0.0,
+      0.0
+     ],
+     "ci_info": {
+      "at_edge": false,
+      "contiguous": true,
+      "empty": false
+     },
+     "ci95": [
+      -0.0006733208165807629,
+      0.004910062570142799
+     ],
+     "ci_fine_info": {
+      "at_edge": false,
+      "contiguous": true,
+      "empty": false,
+      "step": 1.0358781793550279e-05
+     },
+     "null_sd": 0.0014198402458268885,
+     "null_mean": 0.00020284774117376576,
+     "k": 5,
+     "n_blocks": 1102
+    },
+    "naive_ols": {
+     "T": 0.002272630412738791,
+     "se": 0.0014057922419769377,
+     "t": 1.6166189746095312,
+     "p_one_sided": 0.05300878074775007,
+     "p_two_sided": 0.10601756149550014,
+     "ci95": [
+      -0.00048327461369511047,
+      0.005028535439172692
+     ]
+    },
+    "unrestricted": {
+     "T": 0.0022726304127387393,
+     "p_one_sided": 0.0354,
+     "p_two_sided": 0.0695,
+     "B": 9999,
+     "ci95_plan_grid": [
+      0.0,
+      0.0
+     ],
+     "ci_info": {
+      "at_edge": false,
+      "contiguous": true,
+      "empty": false
+     },
+     "ci95": [
+      -0.00019681685407745356,
+      0.004723604497858896
+     ],
+     "ci_fine_info": {
+      "at_edge": false,
+      "contiguous": true,
+      "empty": false,
+      "step": 1.0358781793550279e-05
+     },
+     "null_sd": 0.001258109861175493,
+     "null_mean": 1.9394139892865584e-07,
+     "n_strata": 1
+    },
+    "expr_bin": {
+     "T": 0.0022726304127387393,
+     "p_one_sided": 0.0169,
+     "p_two_sided": 0.0978,
+     "B": 9999,
+     "ci95_plan_grid": [
+      NaN,
+      NaN
+     ],
+     "ci_info": {
+      "empty": true
+     },
+     "ci95": [
+      0.00022159161761579893,
+      0.0052559595692812
+     ],
+     "ci_fine_info": {
+      "at_edge": false,
+      "contiguous": true,
+      "empty": false,
+      "step": 2.0717563587100557e-05
+     },
+     "null_sd": 0.001290913521142687,
+     "null_mean": -0.00047682789022214094,
+     "n_strata": 10
+    },
+    "stratified": {
+     "T": 0.0022726304127387393,
+     "p_one_sided": 0.0164,
+     "p_two_sided": 0.1204,
+     "B": 9999,
+     "ci95_plan_grid": [
+      NaN,
+      NaN
+     ],
+     "ci_info": {
+      "empty": true
+     },
+     "ci95": [
+      0.00022159161761579893,
+      0.005525287895913507
+     ],
+     "ci_fine_info": {
+      "at_edge": false,
+      "contiguous": true,
+      "empty": false,
+      "step": 2.0717563587100557e-05
+     },
+     "null_sd": 0.00136029579578363,
+     "null_mean": -0.0005775374839467904,
+     "n_strata": 30
+    },
+    "camera": {
+     "T": 0.002272630412738791,
+     "se": 0.0060968405576540905,
+     "t": 0.3727554282005435,
+     "p_one_sided": 0.35467237839523974,
+     "p_two_sided": 0.7093447567904795,
+     "ci95": [
+      -0.009679572079555674,
+      0.014224832905033255
+     ],
+     "vif": 18.80907294620937,
+     "rho_bar": 0.003188162002543747
+    },
+    "decoy_neg_control": {
+     "similarity": {
+      "GM12878-HCT116": 0.1923,
+      "GM12878-MCF-7": 0.2028,
+      "GM12878-A549": 0.2707,
+      "GM12878-IMR-90": 0.1948,
+      "GM12878-PC-3": 0.2227,
+      "GM12878-Panc1": 0.2028,
+      "HCT116-MCF-7": 0.036,
+      "HCT116-A549": 0.1411,
+      "HCT116-IMR-90": 0.0015,
+      "HCT116-PC-3": 0.0628,
+      "HCT116-Panc1": 0.0343,
+      "MCF-7-A549": 0.0753,
+      "MCF-7-IMR-90": -0.0297,
+      "MCF-7-PC-3": 0.0268,
+      "MCF-7-Panc1": -0.0062,
+      "A549-IMR-90": -0.1209,
+      "A549-PC-3": -0.0447,
+      "A549-Panc1": -0.107,
+      "IMR-90-PC-3": 0.0619,
+      "IMR-90-Panc1": 0.0266,
+      "PC-3-Panc1": -0.0344
+     },
+     "n_neg_control": 9,
+     "T": 0.0022726304127387393,
+     "p_one_sided": 0.1,
+     "p_two_sided": 0.6,
+     "T_decoys": {
+      "HCT116-MCF-7": 0.00108,
+      "HCT116-IMR-90": -0.00593,
+      "HCT116-Panc1": -0.00602,
+      "MCF-7-IMR-90": -0.00489,
+      "MCF-7-PC-3": -0.00468,
+      "MCF-7-Panc1": -0.00402,
+      "A549-PC-3": 0.0007,
+      "IMR-90-Panc1": 0.0012,
+      "PC-3-Panc1": 0.0013
+     }
+    },
+    "block_coaccess_clusters": {
+     "T": 0.0022726304127387905,
+     "p_one_sided": 0.06,
+     "p_two_sided": 0.06,
+     "B": 9999,
+     "ci95_plan_grid": [
+      0.0,
+      0.010358781793549987
+     ],
+     "ci_info": {
+      "at_edge": false,
+      "contiguous": true,
+      "empty": false
+     },
+     "ci95": [
+      -0.0014243324966132162,
+      0.012466793888537515
+     ],
+     "ci_fine_info": {
+      "at_edge": false,
+      "contiguous": true,
+      "empty": false,
+      "step": 1.553817269032455e-05
+     },
+     "null_sd": 0.0007069915984575867,
+     "null_mean": 0.0011628888982630197,
+     "k": null,
+     "n_blocks": 229,
+     "n_clusters": 229
+    }
+   }
+  },
+  "combined_fc": {
+   "feature": "combined_fc",
+   "G": 5587,
+   "design_rank": 53,
+   "sd_x": 0.3700946845072466,
+   "theta_hat": -0.0006782755692080692,
+   "k_x4": 20,
+   "k_v1.0": 5,
+   "main_block_x4": {
+    "T": -0.0006782755692080691,
+    "p_one_sided": 0.5486,
+    "p_two_sided": 0.8165,
+    "B": 9999,
+    "ci95_plan_grid": [
+     0.0,
+     0.0
+    ],
+    "ci_info": {
+     "at_edge": false,
+     "contiguous": true,
+     "empty": false
+    },
+    "ci95": [
+     -0.006930658848600057,
+     0.005674223618736891
+    ],
+    "ci_fine_info": {
+     "at_edge": false,
+     "contiguous": true,
+     "empty": false,
+     "step": 1.3510056235087331e-05
+    },
+    "null_sd": 0.0029617115415368936,
+    "null_mean": -0.0002876089250758282,
+    "k": 20,
+    "n_blocks": 264
+   },
+   "acf_x_resid_within_arm": {
+    "1": 0.183,
+    "2": 0.0663,
+    "5": 0.0336,
+    "10": 0.0393,
+    "25": -0.0222,
+    "50": -0.0322,
+    "100": -0.0158
+   },
+   "exchangeability_x4": {
+    "n_blocks": 264,
+    "n_size_classes": 17,
+    "n_movable_blocks": 259,
+    "n_movable_classes": 12,
+    "frac_genes_movable": 0.9745838553785574
+   },
+   "exchangeability_v1.0": {
+    "n_blocks": 1102,
+    "n_size_classes": 5,
+    "n_movable_blocks": 1102,
+    "n_movable_classes": 5,
+    "frac_genes_movable": 1.0
+   },
+   "theta_grid": [
+    -1.3510056235087857,
+    1.3510056235087857,
+    201
+   ],
+   "partial_r2_raw": 8.663531291508753e-06,
+   "reliability": 0.9766638566667312,
+   "partial_r2_share_reproducible": 8.87053537649753e-06,
+   "partial_r2_share_boot_ci95": [
+    8.276229301379815e-08,
+    4.22510933847224e-05
+   ],
+   "partial_r2_share_boot_median": 8.743690585363136e-06,
+   "theta_boot_se": 0.0004210185791181998,
+   "comparators": {
+    "block_v1.0": {
+     "T": -0.0006782755692080691,
+     "p_one_sided": 0.5277,
+     "p_two_sided": 0.8268,
+     "B": 9999,
+     "ci95_plan_grid": [
+      0.0,
+      0.0
+     ],
+     "ci_info": {
+      "at_edge": false,
+      "contiguous": true,
+      "empty": false
+     },
+     "ci95": [
+      -0.006646947667663212,
+      0.0059174046309684696
+     ],
+     "ci_fine_info": {
+      "at_edge": false,
+      "contiguous": true,
+      "empty": false,
+      "step": 1.3510056235087331e-05
+     },
+     "null_sd": 0.003133040092474238,
+     "null_mean": -0.00041215344718170454,
+     "k": 5,
+     "n_blocks": 1102
+    },
+    "naive_ols": {
+     "T": -0.0006782755692080692,
+     "se": 0.0030979648362747087,
+     "t": -0.21894230730639702,
+     "p_one_sided": 0.5866484675873478,
+     "p_two_sided": 0.8267030648253044,
+     "ci95": [
+      -0.006751503610357703,
+      0.005394952471941564
+     ]
+    },
+    "unrestricted": {
+     "T": -0.0006782755692084813,
+     "p_one_sided": 0.665,
+     "p_two_sided": 0.6792,
+     "B": 9999,
+     "ci95_plan_grid": [
+      0.0,
+      0.0
+     ],
+     "ci_info": {
+      "at_edge": false,
+      "contiguous": true,
+      "empty": false
+     },
+     "ci95": [
+      -0.0038368559707649443,
+      0.0025669106846666866
+     ],
+     "ci_fine_info": {
+      "at_edge": false,
+      "contiguous": true,
+      "empty": false,
+      "step": 1.3510056235087331e-05
+     },
+     "null_sd": 0.0016394399451455243,
+     "null_mean": 1.101215687760015e-05,
+     "n_strata": 1
+    },
+    "expr_bin": {
+     "T": -0.0006782755692084813,
+     "p_one_sided": 0.6561,
+     "p_two_sided": 0.6744,
+     "B": 9999,
+     "ci95_plan_grid": [
+      0.0,
+      0.0
+     ],
+     "ci_info": {
+      "at_edge": false,
+      "contiguous": true,
+      "empty": false
+     },
+     "ci95": [
+      -0.0039044062519403826,
+      0.0025534006284315992
+     ],
+     "ci_fine_info": {
+      "at_edge": false,
+      "contiguous": true,
+      "empty": false,
+      "step": 1.3510056235087331e-05
+     },
+     "null_sd": 0.0016327335528132404,
+     "null_mean": -3.326510165095729e-05,
+     "n_strata": 10
+    },
+    "stratified": {
+     "T": -0.0006782755692084813,
+     "p_one_sided": 0.4954,
+     "p_two_sided": 0.8006,
+     "B": 9999,
+     "ci95_plan_grid": [
+      0.0,
+      0.0
+     ],
+     "ci_info": {
+      "at_edge": false,
+      "contiguous": true,
+      "empty": false
+     },
+     "ci95": [
+      -0.004998720806982498,
+      0.005052761031922849
+     ],
+     "ci_fine_info": {
+      "at_edge": false,
+      "contiguous": true,
+      "empty": false,
+      "step": 1.3510056235087331e-05
+     },
+     "null_sd": 0.0025650868226992276,
+     "null_mean": -0.0006971014498652532,
+     "n_strata": 30
+    },
+    "camera": {
+     "T": -0.0006782755692080692,
+     "se": 0.01343569632552839,
+     "t": -0.05048309762102297,
+     "p_one_sided": 0.5201303796889853,
+     "p_two_sided": 0.9597392406220294,
+     "ci95": [
+      -0.027017518262062987,
+      0.02566096712364685
+     ],
+     "vif": 18.80907294620937,
+     "rho_bar": 0.003188162002543747
+    },
+    "decoy_neg_control": {
+     "similarity": {
+      "GM12878-HCT116": 0.1159,
+      "GM12878-MCF-7": 0.0572,
+      "GM12878-A549": 0.1666,
+      "GM12878-IMR-90": 0.1724,
+      "GM12878-PC-3": 0.0667,
+      "GM12878-Panc1": 0.0931,
+      "HCT116-MCF-7": 0.0043,
+      "HCT116-A549": 0.0575,
+      "HCT116-IMR-90": 0.0311,
+      "HCT116-PC-3": 0.0096,
+      "HCT116-Panc1": 0.0196,
+      "MCF-7-A549": 0.0266,
+      "MCF-7-IMR-90": 0.0101,
+      "MCF-7-PC-3": 0.0038,
+      "MCF-7-Panc1": 0.0086,
+      "A549-IMR-90": -0.0331,
+      "A549-PC-3": -0.0218,
+      "A549-Panc1": -0.0211,
+      "IMR-90-PC-3": -0.0061,
+      "IMR-90-Panc1": 0.0001,
+      "PC-3-Panc1": 0.0051
+     },
+     "n_neg_control": 14,
+     "T": -0.0006782755692084813,
+     "p_one_sided": 0.4,
+     "p_two_sided": 0.8666666666666667,
+     "T_decoys": {
+      "HCT116-MCF-7": 0.00322,
+      "HCT116-IMR-90": -0.00063,
+      "HCT116-PC-3": 0.00083,
+      "HCT116-Panc1": -0.00219,
+      "MCF-7-A549": -0.0026,
+      "MCF-7-IMR-90": -0.00308,
+      "MCF-7-PC-3": -0.00152,
+      "MCF-7-Panc1": -0.00293,
+      "A549-IMR-90": -0.00278,
+      "A549-PC-3": 0.0002,
+      "A549-Panc1": -0.00303,
+      "IMR-90-PC-3": 0.001,
+      "IMR-90-Panc1": -0.00203,
+      "PC-3-Panc1": -0.00157
+     }
+    },
+    "block_coaccess_clusters": {
+     "T": -0.0006782755692080691,
+     "p_one_sided": 0.4017,
+     "p_two_sided": 0.66,
+     "B": 9999,
+     "ci95_plan_grid": [
+      0.0,
+      0.01351005623508783
+     ],
+     "ci_info": {
+      "at_edge": false,
+      "contiguous": true,
+      "empty": false
+     },
+     "ci95": [
+      -0.01002446172643517,
+      0.02061634581474403
+     ],
+     "ci_fine_info": {
+      "at_edge": false,
+      "contiguous": true,
+      "empty": false,
+      "step": 2.0265084352630997e-05
+     },
+     "null_sd": 0.0010416161236583852,
+     "null_mean": -0.0009429419214398097,
+     "k": null,
+     "n_blocks": 229,
+     "n_clusters": 229
+    }
+   }
+  }
+ },
+ "plan": "v1.3",
+ "arm_effects": true,
+ "n_arms": 41,
+ "design_rank": 53
+}

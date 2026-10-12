@@ -1,0 +1,85 @@
+{
+ "family": "H1, combined CPM feature, two matched pairs, one-sided theta > 0, Holm at FWER 0.05",
+ "B": 9999,
+ "pairs": {
+  "K562_vs_Jurkat": {
+   "theta_hat": 0.00019793010811908606,
+   "k_x4": 20,
+   "p_one_sided": 0.6447,
+   "p_two_sided": 0.8381,
+   "p_holm": 1.0,
+   "p_less": 0.3554,
+   "p_two_sided_equal_tailed": 0.7108,
+   "ci95_refined": [
+    -0.0021225348667268246,
+    0.0013670563548410057
+   ],
+   "ci95_plan_grid": [
+    0.0,
+    0.0
+   ],
+   "null_mean": 0.0004914937953033652,
+   "null_sd": 0.000798919978236306,
+   "partial_r2_raw": 1.0380075269153092e-05,
+   "reliability": 0.8633075472555913,
+   "partial_r2_share_reproducible": 1.2023612329291916e-05,
+   "partial_r2_share_boot_ci95": [
+    9.615369508436356e-08,
+    0.00023272778632930067
+   ],
+   "theta_per_sd_x": 5.5018537325771084e-05,
+   "sd_x": 0.27796952090112936,
+   "exchangeability_x4": {
+    "n_blocks": 263,
+    "n_size_classes": 20,
+    "n_movable_blocks": 255,
+    "n_movable_classes": 12,
+    "frac_genes_movable": 0.9601762114537445
+   },
+   "detection_limit_all": 0.005,
+   "detection_limit_excl_sig_theta0": 0.005,
+   "detection_limit_excl_naive_theta0": 0.005,
+   "rejects_at_holm_0.05": false
+  },
+  "RPE1_vs_HepG2": {
+   "theta_hat": -0.01733953478234985,
+   "k_x4": 28,
+   "p_one_sided": 1.0,
+   "p_two_sided": 0.0001,
+   "p_holm": 1.0,
+   "p_less": 0.0001,
+   "p_two_sided_equal_tailed": 0.0002,
+   "ci95_refined": [
+    -0.026251633485968293,
+    -0.014042312751146369
+   ],
+   "ci95_plan_grid": [
+    -0.015939061011516875,
+    -0.015939061011516875
+   ],
+   "null_mean": -0.0012141949727360701,
+   "null_sd": 0.002520082392602196,
+   "partial_r2_raw": 0.007538475449961902,
+   "reliability": 0.9784226693268965,
+   "partial_r2_share_reproducible": 0.007704722801596552,
+   "partial_r2_share_boot_ci95": [
+    0.006070687144385306,
+    0.009049987071642803
+   ],
+   "theta_per_sd_x": -0.005439321290576983,
+   "sd_x": 0.3136947651048714,
+   "exchangeability_x4": {
+    "n_blocks": 183,
+    "n_size_classes": 24,
+    "n_movable_blocks": 172,
+    "n_movable_classes": 13,
+    "frac_genes_movable": 0.910673059847274
+   },
+   "detection_limit_all": 0.02,
+   "detection_limit_excl_sig_theta0": 0.005,
+   "detection_limit_excl_naive_theta0": 0.005,
+   "rejects_at_holm_0.05": false
+  }
+ },
+ "verdict": "not supported: no matched pair shows a positive effect at 5% (Holm) under the main test"
+}

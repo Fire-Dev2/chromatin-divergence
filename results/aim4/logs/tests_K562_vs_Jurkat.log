@@ -1,0 +1,5 @@
+combined_cpm: T=0.0001979 p=0.6447 k=20 pR2/rel=0.0012%
+promoter_cpm: T=-0.0004862 p=0.9881 k=20 pR2/rel=0.0414%
+distal_cpm: T=0.001018 p=0.0212 k=20 pR2/rel=0.0920%
+combined_fc: T=-0.0002331 p=0.8124 k=20 pR2/rel=0.0009%
+tests done 26s

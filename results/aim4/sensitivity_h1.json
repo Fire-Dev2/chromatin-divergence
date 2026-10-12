@@ -1,0 +1,192 @@
+{
+ "K562_vs_Jurkat": {
+  "main (v1.3, x4, CPM)": {
+   "theta_hat": 0.00019793010811908606,
+   "p_one_sided": 0.6447,
+   "p_two_sided": 0.8381,
+   "ci95": [
+    -0.0021225348667268246,
+    0.0013670563548410057
+   ]
+  },
+  "v1.2 (no arm terms)": {
+   "theta_hat": -8.936230137368354e-05,
+   "p_one_sided": 0.1977,
+   "p_two_sided": 0.8871,
+   "ci95": [
+    -0.0029859388803106165,
+    0.005234386832351744
+   ]
+  },
+  "FC features (combined_fc)": {
+   "theta_hat": -0.0002330543249726314,
+   "p_one_sided": 0.8124,
+   "p_two_sided": 0.8497,
+   "ci95": [
+    -0.0032697501274053624,
+    0.0011959397353155793
+   ]
+  },
+  "v1.0 k rule": {
+   "theta_hat": 0.00019793010811908606,
+   "p_one_sided": 0.4478,
+   "p_two_sided": 0.808,
+   "ci95": [
+    -0.0015289446073879671,
+    0.001726808027167584
+   ]
+  },
+  "stratified null": {
+   "theta_hat": 0.00019793010811908606,
+   "p_one_sided": 0.4708,
+   "p_two_sided": 0.8071,
+   "ci95": [
+    -0.0015289446073879671,
+    0.0016908328599349286
+   ]
+  },
+  "decoy null (n = 13)": {
+   "theta_hat": 0.00019793010811908606,
+   "p_one_sided": 0.2857142857142857,
+   "p_two_sided": 1.0,
+   "ci95": null
+  },
+  "co-accessibility-cluster blocks": {
+   "theta_hat": 0.00019793010811908606,
+   "p_one_sided": 0.0943,
+   "p_two_sided": 0.7854,
+   "ci95": [
+    -0.0013130936039920174,
+    0.004550858654931239
+   ]
+  },
+  "group-mean M (v1.3)": {
+   "theta_hat": -5.267003769916689e-05,
+   "p_one_sided": 0.7735,
+   "p_two_sided": 0.9559,
+   "ci95": [
+    -0.0020685721158778363,
+    0.0008993791808164509
+   ]
+  },
+  "group-mean M (v1.2)": {
+   "theta_hat": -0.00023738171381632264,
+   "p_one_sided": 0.2403,
+   "p_two_sided": 0.766,
+   "ci95": [
+    -0.0027341127096820114,
+    0.004155131815372002
+   ]
+  },
+  "_groupmean_reliability": 0.8262076781041734,
+  "target_promoter_check": {
+   "pair": "K562_vs_Jurkat",
+   "n_knockdowns": 1414,
+   "spearman_resid": -0.017071818397625393,
+   "p_one_sided_perm": 0.7418,
+   "p_two_sided_perm": 0.5257,
+   "spearman_raw": -0.02308859604004752,
+   "covariates_partialled": [
+    "target expr_diff",
+    "target on-target lfc difference (A - B)"
+   ],
+   "mean_d": -0.005405861163521086,
+   "n_perm": 9999
+  }
+ },
+ "RPE1_vs_HepG2": {
+  "main (v1.3, x4, CPM)": {
+   "theta_hat": -0.01733953478234985,
+   "p_one_sided": 1.0,
+   "p_two_sided": 0.0001,
+   "ci95": [
+    -0.026251633485968293,
+    -0.014042312751146369
+   ]
+  },
+  "v1.2 (no arm terms)": {
+   "theta_hat": -0.01393920492802209,
+   "p_one_sided": 1.0,
+   "p_two_sided": 0.0001,
+   "ci95": [
+    -0.040724300884425614,
+    -0.018903726359659014
+   ]
+  },
+  "FC features (combined_fc)": {
+   "theta_hat": -0.0042902505535069605,
+   "p_one_sided": 0.7619,
+   "p_two_sided": 0.2672,
+   "ci95": [
+    -0.00972080069863214,
+    0.004740980193313218
+   ]
+  },
+  "v1.0 k rule": {
+   "theta_hat": -0.01733953478234985,
+   "p_one_sided": 1.0,
+   "p_two_sided": 0.0001,
+   "ci95": [
+    -0.02292036973456127,
+    -0.012241198856844961
+   ]
+  },
+  "stratified null": {
+   "theta_hat": -0.01733953478234985,
+   "p_one_sided": 1.0,
+   "p_two_sided": 0.0001,
+   "ci95": [
+    -0.022681283819388512,
+    -0.012958456602363222
+   ]
+  },
+  "decoy null (n = 6)": {
+   "theta_hat": -0.01733953478234985,
+   "p_one_sided": 1.0,
+   "p_two_sided": 0.14285714285714285,
+   "ci95": null
+  },
+  "co-accessibility-cluster blocks": {
+   "theta_hat": -0.01733953478234985,
+   "p_one_sided": 0.9588,
+   "p_two_sided": 0.0413,
+   "ci95": [
+    -0.02707249512806141,
+    0.0020003521569453633
+   ]
+  },
+  "group-mean M (v1.3)": {
+   "theta_hat": -0.018618584502679416,
+   "p_one_sided": 1.0,
+   "p_two_sided": 0.0001,
+   "ci95": [
+    -0.026715627496529972,
+    -0.0159727003747676
+   ]
+  },
+  "group-mean M (v1.2)": {
+   "theta_hat": -0.014619384229079593,
+   "p_one_sided": 1.0,
+   "p_two_sided": 0.0001,
+   "ci95": [
+    -0.04144155862994388,
+    -0.021183012084305928
+   ]
+  },
+  "_groupmean_reliability": 0.9755313317193786,
+  "target_promoter_check": {
+   "pair": "RPE1_vs_HepG2",
+   "n_knockdowns": 1424,
+   "spearman_resid": -0.05162892050136869,
+   "p_one_sided_perm": 0.9766,
+   "p_two_sided_perm": 0.0501,
+   "spearman_raw": -0.04630942283421013,
+   "covariates_partialled": [
+    "target expr_diff",
+    "target on-target lfc difference (A - B)"
+   ],
+   "mean_d": 0.02136934477586196,
+   "n_perm": 9999
+  }
+ }
+}

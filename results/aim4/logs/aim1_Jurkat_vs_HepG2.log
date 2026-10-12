@@ -1,0 +1,64 @@
+[Jurkat_vs_HepG2] 5,587 genes, 1,482/2,392 knockdowns kept (322 few cells, 542 target not expressed, 469 weak repression)
+[Jurkat_vs_HepG2] full-data M done 70s
+[Jurkat_vs_HepG2] split 1/20: r = 0.952  (79s)
+[Jurkat_vs_HepG2] split 2/20: r = 0.955  (88s)
+[Jurkat_vs_HepG2] split 3/20: r = 0.955  (97s)
+[Jurkat_vs_HepG2] split 4/20: r = 0.957  (106s)
+[Jurkat_vs_HepG2] split 5/20: r = 0.951  (114s)
+[Jurkat_vs_HepG2] split 6/20: r = 0.955  (124s)
+[Jurkat_vs_HepG2] split 7/20: r = 0.954  (136s)
+[Jurkat_vs_HepG2] split 8/20: r = 0.955  (147s)
+[Jurkat_vs_HepG2] split 9/20: r = 0.954  (157s)
+[Jurkat_vs_HepG2] split 10/20: r = 0.956  (166s)
+[Jurkat_vs_HepG2] split 11/20: r = 0.953  (176s)
+[Jurkat_vs_HepG2] split 12/20: r = 0.955  (185s)
+[Jurkat_vs_HepG2] split 13/20: r = 0.955  (195s)
+[Jurkat_vs_HepG2] split 14/20: r = 0.952  (205s)
+[Jurkat_vs_HepG2] split 15/20: r = 0.955  (216s)
+[Jurkat_vs_HepG2] split 16/20: r = 0.954  (227s)
+[Jurkat_vs_HepG2] split 17/20: r = 0.953  (238s)
+[Jurkat_vs_HepG2] split 18/20: r = 0.955  (251s)
+[Jurkat_vs_HepG2] split 19/20: r = 0.954  (264s)
+[Jurkat_vs_HepG2] split 20/20: r = 0.954  (277s)
+{
+ "pair": "Jurkat_vs_HepG2",
+ "A": "Jurkat",
+ "B": "HepG2",
+ "n_genes": 5587,
+ "n_kd_total": 2392,
+ "n_kd_kept": 1482,
+ "split_r": [
+  0.9515,
+  0.9554,
+  0.9547,
+  0.9575,
+  0.9508,
+  0.955,
+  0.9538,
+  0.9554,
+  0.9541,
+  0.9558,
+  0.9529,
+  0.9547,
+  0.9552,
+  0.9522,
+  0.9554,
+  0.9537,
+  0.9532,
+  0.955,
+  0.9536,
+  0.9541
+ ],
+ "split_r_median": 0.9543920275164777,
+ "reliability": 0.9766638566667312,
+ "generic_share_median_A": 0.03117898483379535,
+ "generic_share_median_B": 0.04237262815126305,
+ "M_mean": -0.017202447969726885,
+ "M_sd": 0.05353945985172145,
+ "K_fake": 50,
+ "K_fake_halves": 10,
+ "seed": 34855728,
+ "generic": "global",
+ "n_kd_groups": null,
+ "seconds": 283.2
+}

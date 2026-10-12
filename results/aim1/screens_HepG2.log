@@ -1,0 +1,5 @@
+  HepG2: 4,000/145,473 cells      1s
+  HepG2: 44,000/145,473 cells      3s
+  HepG2: 84,000/145,473 cells      5s
+  HepG2: 124,000/145,473 cells      7s
+HepG2 done in 9s: 142,813 kept cells, 4,926 controls, 2,393 knockdowns, 9,624 genes

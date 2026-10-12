@@ -1,0 +1,86 @@
+{
+ "K562_vs_Jurkat": {
+  "pair": "K562_vs_Jurkat",
+  "n_knockdowns": 1414,
+  "spearman_resid": -0.017071818397625393,
+  "p_one_sided_perm": 0.7418,
+  "p_two_sided_perm": 0.5257,
+  "spearman_raw": -0.02308859604004752,
+  "covariates_partialled": [
+   "target expr_diff",
+   "target on-target lfc difference (A - B)"
+  ],
+  "mean_d": -0.005405861163521086,
+  "n_perm": 9999
+ },
+ "RPE1_vs_HepG2": {
+  "pair": "RPE1_vs_HepG2",
+  "n_knockdowns": 1424,
+  "spearman_resid": -0.05162892050136869,
+  "p_one_sided_perm": 0.9766,
+  "p_two_sided_perm": 0.0501,
+  "spearman_raw": -0.04630942283421013,
+  "covariates_partialled": [
+   "target expr_diff",
+   "target on-target lfc difference (A - B)"
+  ],
+  "mean_d": 0.02136934477586196,
+  "n_perm": 9999
+ },
+ "RPE1_vs_K562": {
+  "pair": "RPE1_vs_K562",
+  "n_knockdowns": 1314,
+  "spearman_resid": 0.0005679322835383461,
+  "p_one_sided_perm": 0.4932,
+  "p_two_sided_perm": 0.9824,
+  "spearman_raw": -0.01213126725614742,
+  "covariates_partialled": [
+   "target expr_diff",
+   "target on-target lfc difference (A - B)"
+  ],
+  "mean_d": 0.04763789270304417,
+  "n_perm": 9999
+ },
+ "K562_vs_HepG2": {
+  "pair": "K562_vs_HepG2",
+  "n_knockdowns": 1389,
+  "spearman_resid": -0.01848618739157596,
+  "p_one_sided_perm": 0.753,
+  "p_two_sided_perm": 0.4966,
+  "spearman_raw": -0.023754096106288234,
+  "covariates_partialled": [
+   "target expr_diff",
+   "target on-target lfc difference (A - B)"
+  ],
+  "mean_d": -0.027263510592109002,
+  "n_perm": 9999
+ },
+ "Jurkat_vs_RPE1": {
+  "pair": "Jurkat_vs_RPE1",
+  "n_knockdowns": 1413,
+  "spearman_resid": -0.05204028201565861,
+  "p_one_sided_perm": 0.9776,
+  "p_two_sided_perm": 0.0452,
+  "spearman_raw": -0.05890652314669905,
+  "covariates_partialled": [
+   "target expr_diff",
+   "target on-target lfc difference (A - B)"
+  ],
+  "mean_d": -0.040462021251346944,
+  "n_perm": 9999
+ },
+ "Jurkat_vs_HepG2": {
+  "pair": "Jurkat_vs_HepG2",
+  "n_knockdowns": 1482,
+  "spearman_resid": -0.11057533607131277,
+  "p_one_sided_perm": 0.9999,
+  "p_two_sided_perm": 0.0002,
+  "spearman_raw": -0.12654840756011382,
+  "covariates_partialled": [
+   "target expr_diff",
+   "target on-target lfc difference (A - B)"
+  ],
+  "mean_d": -0.01720227532527744,
+  "n_perm": 9999
+ }
+}

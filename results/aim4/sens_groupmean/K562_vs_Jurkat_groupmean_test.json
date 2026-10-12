@@ -1,0 +1,230 @@
+{
+ "v1.3": {
+  "feature": "combined_cpm",
+  "G": 5675,
+  "design_rank": 53,
+  "sd_x": 0.27796952090112936,
+  "theta_hat": -5.267003769916689e-05,
+  "k_x4": 20,
+  "k_v1.0": 5,
+  "main_block_x4": {
+   "T": -5.267003769916665e-05,
+   "p_one_sided": 0.7735,
+   "p_two_sided": 0.9559,
+   "B": 9999,
+   "ci95_plan_grid": [
+    0.0,
+    0.0
+   ],
+   "ci_info": {
+    "at_edge": false,
+    "contiguous": true,
+    "empty": false
+   },
+   "ci95": [
+    -0.0020685721158778363,
+    0.0008993791808164509
+   ],
+   "ci_fine_info": {
+    "at_edge": false,
+    "contiguous": true,
+    "empty": false,
+    "step": 1.7987583616329433e-05
+   },
+   "null_sd": 0.0006760868262345809,
+   "null_mean": 0.0004610268059610341,
+   "k": 20,
+   "n_blocks": 263
+  },
+  "acf_x_resid_within_arm": {
+   "1": 0.2726,
+   "2": 0.0913,
+   "5": 0.0166,
+   "10": 0.0283,
+   "25": -0.0116,
+   "50": -0.0201,
+   "100": -0.032
+  },
+  "exchangeability_x4": {
+   "n_blocks": 263,
+   "n_size_classes": 20,
+   "n_movable_blocks": 255,
+   "n_movable_classes": 12,
+   "frac_genes_movable": 0.9601762114537445
+  },
+  "exchangeability_v1.0": {
+   "n_blocks": 1116,
+   "n_size_classes": 5,
+   "n_movable_blocks": 1116,
+   "n_movable_classes": 5,
+   "frac_genes_movable": 1.0
+  },
+  "theta_grid": [
+   -1.7987583616329086,
+   1.7987583616329086,
+   201
+  ],
+  "partial_r2_raw": 1.0249177243059124e-06,
+  "reliability": 0.8262076781041734,
+  "partial_r2_share_reproducible": 1.240508593018285e-06,
+  "comparators": {
+   "block_v1.0": {
+    "T": -5.267003769916665e-05,
+    "p_one_sided": 0.5653,
+    "p_two_sided": 0.9381,
+    "B": 9999,
+    "ci95_plan_grid": [
+     0.0,
+     0.0
+    ],
+    "ci_info": {
+     "at_edge": false,
+     "contiguous": true,
+     "empty": false
+    },
+    "ci95": [
+     -0.0014929694401553083,
+     0.0012591308531430291
+    ],
+    "ci_fine_info": {
+     "at_edge": false,
+     "contiguous": true,
+     "empty": false,
+     "step": 1.7987583616329433e-05
+    },
+    "null_sd": 0.0006898584466352138,
+    "null_mean": 6.106585065282732e-05,
+    "k": 5,
+    "n_blocks": 1116
+   },
+   "naive_ols": {
+    "T": -5.267003769916689e-05,
+    "se": 0.0006939243259053676,
+    "t": -0.07590170243772323,
+    "p_one_sided": 0.5302499982046597,
+    "p_two_sided": 0.9395000035906806,
+    "ci95": [
+     -0.001413029648364942,
+     0.0013076895729666083
+    ]
+   }
+  }
+ },
+ "v1.2": {
+  "feature": "combined_cpm",
+  "G": 5675,
+  "design_rank": 13,
+  "sd_x": 0.27796952090112936,
+  "theta_hat": -0.00023738171381632264,
+  "k_x4": 100,
+  "k_v1.0": 50,
+  "main_block_x4": {
+   "T": -0.0002373817138163221,
+   "p_one_sided": 0.2403,
+   "p_two_sided": 0.766,
+   "B": 9999,
+   "ci95_plan_grid": [
+    0.0,
+    0.0
+   ],
+   "ci_info": {
+    "at_edge": false,
+    "contiguous": true,
+    "empty": false
+   },
+   "ci95": [
+    -0.0027341127096820114,
+    0.004155131815372002
+   ],
+   "ci_fine_info": {
+    "at_edge": false,
+    "contiguous": true,
+    "empty": false,
+    "step": 1.7987583616329433e-05
+   },
+   "null_sd": 0.000287476735483387,
+   "null_mean": -0.0004510298000378916,
+   "k": 100,
+   "n_blocks": 50
+  },
+  "acf_x_resid_within_arm": {
+   "1": 0.3465,
+   "2": 0.1824,
+   "5": 0.1145,
+   "10": 0.1272,
+   "25": 0.0896,
+   "50": 0.0889,
+   "100": 0.0617
+  },
+  "exchangeability_x4": {
+   "n_blocks": 50,
+   "n_size_classes": 39,
+   "n_movable_blocks": 15,
+   "n_movable_classes": 4,
+   "frac_genes_movable": 0.2858149779735683
+  },
+  "exchangeability_v1.0": {
+   "n_blocks": 98,
+   "n_size_classes": 31,
+   "n_movable_blocks": 75,
+   "n_movable_classes": 8,
+   "frac_genes_movable": 0.7194713656387666
+  },
+  "theta_grid": [
+   -1.7987583616329086,
+   1.7987583616329086,
+   201
+  ],
+  "partial_r2_raw": 2.2950191366255577e-05,
+  "reliability": 0.8262076781041734,
+  "partial_r2_share_reproducible": 2.7777751253676772e-05,
+  "comparators": {
+   "block_v1.0": {
+    "T": -0.0002373817138163221,
+    "p_one_sided": 0.4303,
+    "p_two_sided": 0.6945,
+    "B": 9999,
+    "ci95_plan_grid": [
+     0.0,
+     0.0
+    ],
+    "ci_info": {
+     "at_edge": false,
+     "contiguous": true,
+     "empty": false
+    },
+    "ci95": [
+     -0.0014569942729226494,
+     0.0016548576927022697
+    ],
+    "ci_fine_info": {
+     "at_edge": false,
+     "contiguous": true,
+     "empty": false,
+     "step": 1.7987583616329433e-05
+    },
+    "null_sd": 0.0004798889904566147,
+    "null_mean": -0.00031902986757864583,
+    "k": 50,
+    "n_blocks": 98
+   },
+   "naive_ols": {
+    "T": -0.00023738171381632264,
+    "se": 0.0006585709113853344,
+    "t": -0.360449740054536,
+    "p_one_sided": 0.6407378581775623,
+    "p_two_sided": 0.7185242836448753,
+    "ci95": [
+     -0.00152843301694461,
+     0.0010536695893119646
+    ]
+   }
+  }
+ },
+ "pair": "K562_vs_Jurkat_groupmean",
+ "A": "K562",
+ "B": "Jurkat",
+ "reliability": 0.8262076781041734,
+ "n_genes": 5675,
+ "n_knockdowns": 1414
+}
