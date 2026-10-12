@@ -1,0 +1,10 @@
+# sample sheet for scripts/atac_pipeline.py sheet (paths relative to repo root; comma-separate multiple runs)
+sample	rep	r1	r2
+jurkat_GSE273644	rep1	data/atac_fastq/jurkat_GSE273644/SRR30058502_1.fastq.gz	data/atac_fastq/jurkat_GSE273644/SRR30058502_2.fastq.gz
+jurkat_GSE273644	rep2	data/atac_fastq/jurkat_GSE273644/SRR30058500_1.fastq.gz	data/atac_fastq/jurkat_GSE273644/SRR30058500_2.fastq.gz
+jurkat_GSE273644	rep3	data/atac_fastq/jurkat_GSE273644/SRR30058498_1.fastq.gz	data/atac_fastq/jurkat_GSE273644/SRR30058498_2.fastq.gz
+k562_ENCSR868FGK	rep1	data/atac_fastq/k562_ENCSR868FGK/rep1_R1.fastq.gz	data/atac_fastq/k562_ENCSR868FGK/rep1_R2.fastq.gz
+k562_ENCSR868FGK	rep2	data/atac_fastq/k562_ENCSR868FGK/rep2_R1.fastq.gz	data/atac_fastq/k562_ENCSR868FGK/rep2_R2.fastq.gz
+k562_ENCSR868FGK	rep3	data/atac_fastq/k562_ENCSR868FGK/rep3_R1.fastq.gz	data/atac_fastq/k562_ENCSR868FGK/rep3_R2.fastq.gz
+rpe1_4DNES48BA2C8	rep1	data/atac_fastq/rpe1_4DNES48BA2C8/4DNFIDNZZ2A9.fastq.gz	data/atac_fastq/rpe1_4DNES48BA2C8/4DNFI14DT5NE.fastq.gz
+rpe1_4DNES48BA2C8	rep2	data/atac_fastq/rpe1_4DNES48BA2C8/4DNFIWGX7K9Y.fastq.gz	data/atac_fastq/rpe1_4DNES48BA2C8/4DNFIY8ZSQC1.fastq.gz
