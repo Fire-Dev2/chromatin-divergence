@@ -1,0 +1,126 @@
+[RPE1_vs_K562_groupmean] 5,262 genes, 1,314/2,055 knockdowns kept (210 few cells, 510 target not expressed, 360 weak repression)
+[RPE1_vs_K562_groupmean] knockdown groups: {'other': 1038, 'spliceosome': 84, 'cytosolic_ribosome': 72, 'mitochondrial_ribosome': 61, 'proteasome': 32, 'nuclear_pore': 16, 'mediator': 7, 'rna_pol_ii': 4}
+[RPE1_vs_K562_groupmean] full-data M done 51s
+[RPE1_vs_K562_groupmean] split 1/20: r = 0.988  (58s)
+[RPE1_vs_K562_groupmean] split 2/20: r = 0.989  (64s)
+[RPE1_vs_K562_groupmean] split 3/20: r = 0.989  (70s)
+[RPE1_vs_K562_groupmean] split 4/20: r = 0.989  (77s)
+[RPE1_vs_K562_groupmean] split 5/20: r = 0.989  (84s)
+[RPE1_vs_K562_groupmean] split 6/20: r = 0.989  (91s)
+[RPE1_vs_K562_groupmean] split 7/20: r = 0.989  (98s)
+[RPE1_vs_K562_groupmean] split 8/20: r = 0.989  (104s)
+[RPE1_vs_K562_groupmean] split 9/20: r = 0.989  (112s)
+[RPE1_vs_K562_groupmean] split 10/20: r = 0.989  (119s)
+[RPE1_vs_K562_groupmean] split 11/20: r = 0.989  (125s)
+[RPE1_vs_K562_groupmean] split 12/20: r = 0.988  (131s)
+[RPE1_vs_K562_groupmean] split 13/20: r = 0.988  (139s)
+[RPE1_vs_K562_groupmean] split 14/20: r = 0.989  (145s)
+[RPE1_vs_K562_groupmean] split 15/20: r = 0.989  (152s)
+[RPE1_vs_K562_groupmean] split 16/20: r = 0.989  (159s)
+[RPE1_vs_K562_groupmean] split 17/20: r = 0.989  (165s)
+[RPE1_vs_K562_groupmean] split 18/20: r = 0.989  (172s)
+[RPE1_vs_K562_groupmean] split 19/20: r = 0.989  (179s)
+[RPE1_vs_K562_groupmean] split 20/20: r = 0.989  (185s)
+{
+ "pair": "RPE1_vs_K562_groupmean",
+ "A": "RPE1",
+ "B": "K562",
+ "n_genes": 5262,
+ "n_kd_total": 2055,
+ "n_kd_kept": 1314,
+ "split_r": [
+  0.9881,
+  0.9886,
+  0.9889,
+  0.9894,
+  0.989,
+  0.9886,
+  0.9888,
+  0.9891,
+  0.9886,
+  0.9885,
+  0.9891,
+  0.9878,
+  0.9879,
+  0.9892,
+  0.989,
+  0.9887,
+  0.9886,
+  0.9892,
+  0.9888,
+  0.9885
+ ],
+ "split_r_median": 0.9887465687406081,
+ "reliability": 0.9943414452920876,
+ "generic_share_median_A": 0.13014783749797598,
+ "generic_share_median_B": 0.02716950165093507,
+ "M_mean": 0.041017259071896524,
+ "M_sd": 0.08516000503090287,
+ "K_fake": 50,
+ "K_fake_halves": 10,
+ "seed": 27989955,
+ "generic": "group",
+ "n_kd_groups": {
+  "other": 1038,
+  "spliceosome": 84,
+  "cytosolic_ribosome": 72,
+  "mitochondrial_ribosome": 61,
+  "proteasome": 32,
+  "nuclear_pore": 16,
+  "mediator": 7,
+  "rna_pol_ii": 4
+ },
+ "seconds": 188.0
+}
+{
+ "pair": "RPE1_vs_K562_groupmean",
+ "n_p53_targets": 25,
+ "mean_M_p53": 0.10019076100970549,
+ "null_mean": 0.04275062018470422,
+ "null_sd": 0.016965000277867348,
+ "z": 3.385802527804144,
+ "p_one_sided": 0.001998001998001998,
+ "passed": true,
+ "top_p53_targets": [
+  [
+   "MDM2",
+   0.4869
+  ],
+  [
+   "GADD45A",
+   0.3226
+  ],
+  [
+   "ZMAT3",
+   0.3046
+  ],
+  [
+   "RPS27L",
+   0.1435
+  ],
+  [
+   "TRIAP1",
+   0.1285
+  ],
+  [
+   "ISCU",
+   0.1216
+  ],
+  [
+   "SAC3D1",
+   0.1064
+  ],
+  [
+   "BLOC1S2",
+   0.0961
+  ],
+  [
+   "FBXO22",
+   0.0808
+  ],
+  [
+   "DUSP14",
+   0.08
+  ]
+ ]
+}

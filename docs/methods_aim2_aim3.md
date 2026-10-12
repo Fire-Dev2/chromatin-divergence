@@ -104,7 +104,7 @@ coverage exactly: it asks whether the true θ is rejected.
 
 Partial R² = (RSS_C − RSS_{C,x}) / RSS_C = T²·|r_x|² / |r_M|². It is divided by
 the Aim 1 reliability so it reads as a share of reproducible variance. Its
-bootstrap over knockdowns belongs to the pipeline, not this module.
+bootstrap over knockdowns is in `cdtest.aim2` (§6.3).
 
 ### 2.6 Sensitivity nulls
 
@@ -366,3 +366,125 @@ selection criterion were committed before the run
   exchanged once k approaches the arm length.
 - Details, MC SEs and the k chosen per design: `results/aim3/k_rule_selection.md`.
 
+
+---
+
+## 6. The real-data pipeline (`cdtest.covariates`, `cdtest.aim2`, `cdtest.planted`)
+
+Run on the development pair RPE1 − K562 only, before tag `pipeline-v1.0`.
+Scripts: `scripts/run_aim1_dev.sh`, `scripts/run_aim2_dev.py`,
+`scripts/run_planted_dev.py`, `scripts/report_dev.py`; figures
+`cdtest.plot_dev`. Results: `results/aim2/RPE1_vs_K562_test.{json,md}`,
+`results/aim3/planted_RPE1_vs_K562.{csv,md}`.
+
+### 6.1 Covariates (plan §4; `cdtest.covariates`)
+
+For the pair's kept genes, in the order of `gene_outcome.tsv`:
+
+| column | definition |
+|---|---|
+| log2_meanA / log2_meanB | log2 mean normalized (CP-median) expression over the line's kept control cells (`ctrl_norm.npy`) |
+| log2_varA / log2_varB | log2 variance (ddof = 1) of the same values **[choice: ddof 1]** |
+| expr_diff | log2_meanA − log2_meanB |
+| cn_diff | relative log2 copy number at the TSS, A − B, from `data/annot/gene_cn_log2.tsv`; RPE1 = column `RPE1` (karyotype track, +log2(3/2) on 10q21.2–qter), not `RPE1_depmap` |
+| cpg_oe | `cpg_oe_tss500` (GENCODE v50 table) |
+
+f(C) = intercept + `ns(log2_meanA, df 4)` + `ns(log2_meanB, df 4)` + the
+other five linear: 14 columns, rank 13 (expr_diff is collinear with the
+splines' linear parts; the orthonormal basis handles it). Kept genes all pass
+the expression filter, so every variance is positive; non-finite covariates
+raise an error rather than being imputed.
+
+Genome order and blocks use `chrom`, `tss1` and `arm` (blocks never cross a
+chromosome arm, labels `chrom + p/q`).
+
+### 6.2 Test and CI
+
+- Main test: `crt.block_permutation_test` with k = `choose_k(rule="x4")` on the
+  x residuals in genome order within arms; B = 9,999. Sensitivity: the same with
+  `rule="v1.0"`.
+- **CI resolution [choice].** The plan's 201-point grid spans
+  ±max(4|θ̂|, 0.5/SD(x)). On the development pair SD(x) ≈ 0.3 and θ̂ ≈ −0.02, so
+  the grid step (≈ 0.017) is as large as θ̂ and the accepted set is one or two
+  grid points. The plan-grid interval is reported as specified
+  (`ci95_plan_grid`). Alongside it, `ci95` applies the identical acceptance rule
+  (each one-sided p > 0.025, the same B = 9,999 draws) on 2,001 points between one
+  plan step below and above the plan-grid interval (inside the plan's span).
+  No parameter of the plan is changed; only the grid resolution.
+- Plan B = 1,999 per CI grid point: the closed-form inversion uses the same
+  9,999 draws for every θ₀ (§2.4).
+- **Exchangeability diagnostic.** `aim2.block_exchangeability` reports how many
+  blocks share their size with at least one other block (only those can move,
+  plan §5 step 5) and the share of genes in them. On the development pair at
+  k = 100 only 21 of 49 blocks (41% of genes) are movable; the rest keep their
+  real x in every permutation, so the null distribution is centred near the
+  observed association instead of 0. The test stays valid but loses power. This
+  is a consequence of the frozen rules (x4, cap 100, equal-size classes) on real
+  gene density; it is reported, not changed.
+
+### 6.3 Partial R² and its bootstrap (approximation)
+
+Partial R² = T²|r_x|²/|r_M|², divided by the Aim 1 reliability. The plan asks
+for 500 bootstrap resamples over knockdowns, recomputing reliability in each.
+The full version would rerun the generic-mean subtraction and the 50 fake
+screens per resample (≈ 4 min each). **Approximation used:**
+
+1. `aim1.run_pair(..., save_half_terms=...)` stores, for each of the 20 random
+   half-splits and both halves, the per-(knockdown, gene) term
+   D = (β̃²_A − s̃²_A) − (β̃²_B − s̃²_B) (`data/aim1_cache/<pair>_halfD.npy`).
+   The full-data terms are in `terms.npz`.
+2. Each resample draws multinomial weights over the kept knockdowns. M_b is the
+   weighted mean of the full-data D (on-target entries excluded); each half's M is
+   the weighted mean of its stored D; reliability_b = Spearman–Brown of the median
+   split r over the 20 splits.
+3. partial R²_b / reliability_b gives the percentile 95% interval.
+
+β̃ and s̃² are held at their full-data values: the generic mean and the
+fake-screen noise are not recomputed per resample. Unweighted, step 2
+reproduces the stored split r's exactly (checked). The interval reflects
+knockdown sampling only, not gene-level dependence. Bootstrap reliabilities are
+lower than the full-data value (duplicated knockdowns), which biases the
+share slightly upward.
+
+### 6.4 Comparators on real data
+
+- Naive OLS, unrestricted, expression-bin (10 bins of expr_diff), stratified
+  (10 bins × CN loss/neutral/gain at ±0.2): as in §2.6–2.7, on raw x.
+- CAMERA: ρ̄ = mean off-diagonal Pearson correlation between the pair's genes
+  over control cells, computed per line on the normalized counts (no log, the
+  scale on which pseudobulk means are formed) and averaged over the two lines
+  **[choice]**; the log2(x+1) version is reported too. n = number of genes.
+- Decoy negative control: decoy-line pairs (7 decoys, 21 pairs, first minus second
+  in `aim2.DECOY_LINES` order) with |similarity| < 0.05.
+- Co-accessibility clusters (secondary blocks): genes clustered on
+  [z(promoter), z(distal)] across the 11 lines (pooled z as in the combined
+  feature) **[choice]**, average linkage, 1 − Pearson, cut at 0.5.
+
+### 6.5 Naive analysis (Aim 1 step 7)
+
+OLS of M on 1 + expr_diff + x, genes independent: coefficient, SE, partial R²
+and t-test p, for promoter, distal, combined (CPM) and combined (FC).
+`results/aim1/naive_<pair>.json`.
+
+### 6.6 Planted signal on real M (plan §6; `cdtest.planted`)
+
+- Decoys: the 21 decoy-pair combined-CPM differences; negative-control set =
+  |similarity| < 0.05 (similarity per plan §5). If fewer than 5 pass, the 5 with
+  the lowest |similarity| are used and this is stated (not needed on the
+  development pair: 6 pass).
+- Replicate: random decoy from the set, random sign s; v = s·x_decoy is the
+  tested feature. θ ≥ 0 is set so that
+  θ²|r_v|² / (θ²|r_v|² + RSS(M ~ f(C) + v)) equals the level (raw partial R²,
+  not divided by reliability; reliability 0.996 makes the difference
+  negligible) **[choice]**. M' = M + θ·v. k is chosen from v's residuals.
+- Every test is applied to v with B = 999: block x4, block v1.0, naive OLS,
+  CAMERA, unrestricted, expression-bin, stratified. Coverage is exact inversion
+  at the true θ (`TestResult.covers`).
+- The truth assumed is θ_true = θ planted. The decoy may itself be associated with
+  the real M (θ₀ ≠ 0); the random sign cancels θ₀ on average but not per
+  replicate, so level 0 is not a clean null. θ₀ is stored per replicate.
+- Only 2 × (number of decoys) distinct datasets exist; replicates within one
+  differ only in permutation draws. MC SEs are reported binomial (as the plan)
+  and cluster-robust over (decoy, sign) configurations.
+- Detection limit: the smallest level with rejection rate ≥ 0.8 at nominal 5%
+  for the main test (also reported at matched FPR and for v1.0).

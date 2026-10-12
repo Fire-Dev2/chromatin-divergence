@@ -65,14 +65,35 @@ def log_ratio(kd_mean: np.ndarray, ctrl_mean: np.ndarray) -> np.ndarray:
     return np.log2(kd_mean + EPS) - np.log2(ctrl_mean + EPS)
 
 
-def generic_subtract(beta: np.ndarray, mask: np.ndarray) -> np.ndarray:
-    """Subtract each gene's mean over knockdowns, ignoring masked (on-target) entries."""
+def generic_subtract(beta: np.ndarray, mask: np.ndarray, groups: np.ndarray | None = None) -> np.ndarray:
+    """Subtract each gene's mean over knockdowns, ignoring masked (on-target) entries.
+
+    ``groups`` (length P labels): group-mean variant (plan §2 item 6) -- the mean is taken
+    within each preset knockdown group instead of over all kept knockdowns.
+    """
     b = np.where(mask, np.nan, beta)
-    return b - np.nanmean(b, axis=0, keepdims=True)
+    if groups is None:
+        return b - np.nanmean(b, axis=0, keepdims=True)
+    out = np.empty_like(b)
+    groups = np.asarray(groups)
+    for gname in np.unique(groups):
+        r = groups == gname
+        out[r] = b[r] - np.nanmean(b[r], axis=0, keepdims=True)
+    return out
+
+
+def knockdown_groups(kept: pd.DataFrame, path: Path | None = None) -> np.ndarray:
+    """Preset group of each kept knockdown (data/annot/knockdown_groups.tsv; HGNC groups,
+    CORUM tiebreak). Matched on the target's Ensembl id, then on gene name; else 'other'."""
+    t = pd.read_csv(path or ROOT / "data/annot/knockdown_groups.tsv", sep="\t")
+    by_id = dict(zip(t.ensembl_id, t.group))
+    by_name = dict(zip(t.gene_name, t.group))
+    return np.array([by_id.get(i, by_name.get(n, "other")) for i, n in zip(kept.target_id, kept.target)])
 
 
 def fake_screen_s2(ctrl: np.ndarray, n_kd: np.ndarray, mask: np.ndarray, rng: np.random.Generator,
-                   k: int = K_FAKE, cols: np.ndarray | None = None) -> np.ndarray:
+                   k: int = K_FAKE, cols: np.ndarray | None = None,
+                   groups: np.ndarray | None = None) -> np.ndarray:
     """Noise variance s~^2 for every (p, g): K fake screens drawn from control cells."""
     nc = ctrl.shape[0]
     C = np.asarray(ctrl if cols is None else ctrl[:, cols], dtype=np.float32)
@@ -88,16 +109,16 @@ def fake_screen_s2(ctrl: np.ndarray, n_kd: np.ndarray, mask: np.ndarray, rng: np
         sub = np.asarray(ind @ C, dtype=np.float64)
         kd_mean = sub / n_kd[:, None]
         pc_mean = (total[None, :] - sub) / (nc - n_kd[:, None])
-        bt = generic_subtract(log_ratio(kd_mean, pc_mean), mask)
+        bt = generic_subtract(log_ratio(kd_mean, pc_mean), mask, groups)
         acc += np.nan_to_num(bt) ** 2
     return acc / k
 
 
-def line_terms(sums_kd, n_kd, ctrl_sum, n_ctrl, ctrl_cells, mask, rng, k=K_FAKE):
+def line_terms(sums_kd, n_kd, ctrl_sum, n_ctrl, ctrl_cells, mask, rng, k=K_FAKE, groups=None):
     """Return beta (raw), beta~ and s~^2 for one line on the kept knockdowns/genes."""
     beta = log_ratio(sums_kd / n_kd[:, None], (ctrl_sum / n_ctrl)[None, :])
-    bt = generic_subtract(beta, mask)
-    s2 = fake_screen_s2(ctrl_cells, n_kd, mask, rng, k=k)
+    bt = generic_subtract(beta, mask, groups)
+    s2 = fake_screen_s2(ctrl_cells, n_kd, mask, rng, k=k, groups=groups)
     return beta, bt, s2
 
 
@@ -155,9 +176,18 @@ def select(A: Line, B: Line):
 
 
 def run_pair(a: str, b: str, tag: str | None = None, k: int = K_FAKE, n_splits: int | None = None,
-             k_half: int = 10) -> dict:
+             k_half: int = 10, generic: str = "global", save_half_terms: Path | str | None = None) -> dict:
+    """Aim 1 outcome for A = a, B = b.
+
+    generic: "global" (plan §2 item 3, primary) or "group" (plan §2 item 6 sensitivity: the
+    generic mean is taken within preset knockdown groups, in the real and every fake screen).
+    save_half_terms: optional .npy path; stores D[s, h, p, g] = (b~A^2 - s~A^2) - (b~B^2 - s~B^2)
+    for half h of split s (NaN on-target), used by the knockdown bootstrap of reliability.
+    """
+    if generic not in ("global", "group"):
+        raise ValueError(generic)
     t0 = time.time()
-    tag = tag or f"{a}_vs_{b}"
+    tag = tag or (f"{a}_vs_{b}" if generic == "global" else f"{a}_vs_{b}_groupmean")
     out = OUT / tag
     out.mkdir(parents=True, exist_ok=True)
     A, B = load_line(a), load_line(b)
@@ -176,19 +206,28 @@ def run_pair(a: str, b: str, tag: str | None = None, k: int = K_FAKE, n_splits: 
           f"({(~kd.cells_ok).sum()} few cells, {(~kd.target_expr_ok).sum()} target not expressed, "
           f"{(~kd.repressed).sum()} weak repression)", flush=True)
 
+    groups = knockdown_groups(kept) if generic == "group" else None
+    if groups is not None:
+        kept = kept.assign(kd_group=groups)
+        print(f"[{tag}] knockdown groups: {pd.Series(groups).value_counts().to_dict()}", flush=True)
     seed = screens.MASTER_SEED + 7919 * (sum(map(ord, a)) + 3 * sum(map(ord, b)))
     rng = np.random.default_rng(seed)
     ctrlA = np.asarray(A.ctrl[:, colsA]); ctrlB = np.asarray(B.ctrl[:, colsB])
     betaA, btA, s2A = line_terms(A.sums[rA][:, colsA], kept.nA.values.astype(float), A.sums[0, colsA],
-                                 A.groups.n_cells[0], ctrlA, mask, rng, k)
+                                 A.groups.n_cells[0], ctrlA, mask, rng, k, groups)
     betaB, btB, s2B = line_terms(B.sums[rB][:, colsB], kept.nB.values.astype(float), B.sums[0, colsB],
-                                 B.groups.n_cells[0], ctrlB, mask, rng, k)
+                                 B.groups.n_cells[0], ctrlB, mask, rng, k, groups)
     M, U, rawA, rawB = m_from_terms(btA, s2A, btB, s2B, mask)
     print(f"[{tag}] full-data M done {time.time()-t0:.0f}s", flush=True)
 
     # reliability over random halves
     S = A.sums_a.shape[0] if n_splits is None else n_splits
     halves = []
+    Dh = None
+    if save_half_terms is not None:
+        Path(save_half_terms).parent.mkdir(parents=True, exist_ok=True)
+        Dh = np.lib.format.open_memmap(save_half_terms, mode="w+", dtype=np.float32,
+                                       shape=(S, 2, len(kept), len(genes)))
     for s in range(S):
         ms = []
         for side in (1, 0):
@@ -205,11 +244,17 @@ def run_pair(a: str, b: str, tag: str | None = None, k: int = K_FAKE, n_splits: 
                     s_c, n_c = tot[0] - sa[0], nt[0] - na[0]
                     cmask = L.halves_ctrl[s] == 0
                 n_kd = np.maximum(n_kd, 1)
-                terms.append(line_terms(s_kd, n_kd, s_c, n_c, ctrl[cmask], mask, rng, k_half))
+                terms.append(line_terms(s_kd, n_kd, s_c, n_c, ctrl[cmask], mask, rng, k_half, groups))
             ms.append(m_from_terms(terms[0][1], terms[0][2], terms[1][1], terms[1][2], mask)[0])
+            if Dh is not None:
+                Dh[s, 1 - side] = np.where(mask, np.nan, (terms[0][1] ** 2 - terms[0][2])
+                                           - (terms[1][1] ** 2 - terms[1][2]))
         r = np.corrcoef(ms[0], ms[1])[0, 1]
         halves.append(r)
         print(f"[{tag}] split {s+1}/{S}: r = {r:.3f}  ({time.time()-t0:.0f}s)", flush=True)
+    if Dh is not None:
+        Dh.flush()
+        del Dh
     r_med = float(np.median(halves))
     rel = 2 * r_med / (1 + r_med)
 
@@ -220,13 +265,15 @@ def run_pair(a: str, b: str, tag: str | None = None, k: int = K_FAKE, n_splits: 
     gs.to_csv(out / "gene_outcome.tsv", sep="\t", index=False)
     np.savez_compressed(out / "terms.npz", btA=btA.astype(np.float32), btB=btB.astype(np.float32),
                         s2A=s2A.astype(np.float32), s2B=s2B.astype(np.float32), mask=mask,
-                        targets=kept.target.values, genes=np.array(genes))
+                        targets=kept.target.values, genes=np.array(genes),
+                        kd_group=(groups if groups is not None else np.array(["all"] * len(kept))))
     summ = dict(pair=tag, A=a, B=b, n_genes=len(genes), n_kd_total=len(kd), n_kd_kept=len(kept),
                 split_r=[round(x, 4) for x in halves], split_r_median=r_med, reliability=rel,
                 generic_share_median_A=float(np.nanmedian(gs.generic_shareA)),
                 generic_share_median_B=float(np.nanmedian(gs.generic_shareB)),
                 M_mean=float(np.nanmean(M)), M_sd=float(np.nanstd(M)),
-                K_fake=k, K_fake_halves=k_half, seed=seed, seconds=round(time.time() - t0, 1))
+                K_fake=k, K_fake_halves=k_half, seed=seed, generic=generic,
+                n_kd_groups=(pd.Series(groups).value_counts().to_dict() if groups is not None else None), seconds=round(time.time() - t0, 1))
     (out / "summary.json").write_text(json.dumps(summ, indent=1))
     print(json.dumps(summ, indent=1), flush=True)
     return summ
@@ -266,6 +313,7 @@ def p53_gate(tag: str = "RPE1_vs_K562", n_sets: int = 1000, seed: int = screens.
 if __name__ == "__main__":
     import sys
     a, b = (sys.argv[1:3] if len(sys.argv) >= 3 else ("RPE1", "K562"))
-    run_pair(a, b)
+    gen = sys.argv[3] if len(sys.argv) >= 4 else "global"
+    run_pair(a, b, generic=gen)
     if (a, b) == ("RPE1", "K562"):
         p53_gate()

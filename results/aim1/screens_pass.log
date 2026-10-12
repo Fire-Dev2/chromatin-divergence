@@ -1,0 +1,17 @@
+  K562: 4,000/310,385 cells      1s
+  K562: 44,000/310,385 cells      5s
+  K562: 84,000/310,385 cells      9s
+  K562: 124,000/310,385 cells     14s
+  K562: 164,000/310,385 cells     24s
+  K562: 204,000/310,385 cells     35s
+  K562: 244,000/310,385 cells     47s
+  K562: 284,000/310,385 cells     58s
+K562 done in 68s: 302,187 kept cells, 10,584 controls, 2,057 knockdowns, 8,563 genes
+  RPE1: 4,000/247,914 cells      5s
+  RPE1: 44,000/247,914 cells     21s
+  RPE1: 84,000/247,914 cells     34s
+  RPE1: 124,000/247,914 cells    131s
+  RPE1: 164,000/247,914 cells    136s
+  RPE1: 204,000/247,914 cells    140s
+  RPE1: 244,000/247,914 cells    144s
+RPE1 done in 145s: 242,296 kept cells, 11,370 controls, 2,393 knockdowns, 8,749 genes

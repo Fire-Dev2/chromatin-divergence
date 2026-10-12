@@ -36,5 +36,7 @@
  "K_fake": 50,
  "K_fake_halves": 10,
  "seed": 27989955,
- "seconds": 230.8
+ "generic": "global",
+ "n_kd_groups": null,
+ "seconds": 188.3
 }

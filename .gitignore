@@ -13,3 +13,7 @@ results/aim3/*.log
 .pytest_cache/
 results/aim3/_parts/
 results/aim3/_parts_krule/
+
+# large Aim 1 intermediates (regenerate with cdtest.screens / cdtest.aim1)
+results/aim1/pseudobulk/
+results/aim1/*/terms.npz

@@ -32,7 +32,12 @@ SCREEN_FILES = {
     "RPE1": ROOT / "data/perturbseq/rpe1_raw_singlecell_01.h5ad",
     "Jurkat": ROOT / "data/perturbseq/GSE264667_jurkat_raw_singlecell_01.h5ad",
     "HepG2": ROOT / "data/perturbseq/GSE264667_hepg2_raw_singlecell_01.h5ad",
+    # same-line baseline (plan §0): Replogle 2022 K562 genome-wide screen, same obs fields
+    "K562gw": ROOT / "data/perturbseq/K562_gwps_raw_singlecell_01.h5ad",
 }
+#: screens whose knockdown set is restricted to another screen's targets (shared knockdowns
+#: only), so the per-split sums stay small: K562gw has ~9,900 targets.
+RESTRICT_TO = {"K562gw": "K562"}
 OUT = ROOT / "results/aim1/pseudobulk"
 CONTROL = "non-targeting"
 MASTER_SEED = 20261011
@@ -71,8 +76,13 @@ def line_seed(line: str) -> int:
     return MASTER_SEED + sum(ord(c) for c in line)
 
 
-def run(line: str, n_splits: int = N_SPLITS, chunk: int = CHUNK) -> Path:
+def run(line: str, n_splits: int = N_SPLITS, chunk: int = CHUNK, targets=None) -> Path:
+    """Streaming pass. ``targets``: optional set of target names; knockdown cells of other
+    targets are not aggregated (controls always are). Defaults to RESTRICT_TO[line]'s groups."""
     path = SCREEN_FILES[line]
+    if targets is None and line in RESTRICT_TO:
+        ref = pd.read_csv(OUT / RESTRICT_TO[line] / "groups.tsv", sep="\t")
+        targets = set(ref.group[ref.group != CONTROL])
     out = OUT / line
     out.mkdir(parents=True, exist_ok=True)
     t0 = time.time()
@@ -86,7 +96,12 @@ def run(line: str, n_splits: int = N_SPLITS, chunk: int = CHUNK) -> Path:
     med_umi = float(np.median(obs.loc[keep & is_ctrl, "UMI_count"].astype(float)))
     scale = (med_umi / obs["UMI_count"].astype(float).values).astype(np.float32)
 
-    targets = np.array(sorted(set(obs.loc[keep & ~is_ctrl, "gene"])))
+    found = set(obs.loc[keep & ~is_ctrl, "gene"])
+    n_targets_all = len(found)
+    if targets is not None:
+        found &= set(targets)
+        keep &= is_ctrl | obs["gene"].isin(found).values
+    targets = np.array(sorted(found))
     groups = np.concatenate([[CONTROL], targets])          # row 0 = controls
     gidx = pd.Series(np.arange(len(groups)), index=groups)
     cell_group = np.full(n_cells, -1)
@@ -139,7 +154,8 @@ def run(line: str, n_splits: int = N_SPLITS, chunk: int = CHUNK) -> Path:
     meta = obs.assign(kept=keep, group_index=cell_group)
     meta.to_parquet(out / "cells.parquet")
     pd.Series({"line": line, "n_cells": n_cells, "n_kept": int(keep.sum()), "n_ctrl_kept": len(ctrl_rows),
-               "n_targets": len(targets), "n_genes": n_genes, "median_ctrl_umi": med_umi,
+               "n_targets": len(targets), "n_targets_in_screen": n_targets_all,
+               "restricted_to": RESTRICT_TO.get(line), "n_genes": n_genes, "median_ctrl_umi": med_umi,
                "mito_cut_pct": float(mito_cut), "n_splits": n_splits, "seed": line_seed(line),
                "seconds": round(time.time() - t0, 1)}).to_json(out / "summary.json", indent=1)
     print(f"{line} done in {time.time()-t0:.0f}s: {keep.sum():,} kept cells, {len(ctrl_rows):,} controls, "
