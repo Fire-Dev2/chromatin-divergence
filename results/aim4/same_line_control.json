@@ -1,0 +1,44 @@
+{
+ "K562_vs_Jurkat": {
+  "theta_hat": 0.0007362555826452281,
+  "k": 20,
+  "p_two_sided": 0.0448,
+  "p_one_sided": 0.0298,
+  "partial_r2_share": 0.0009309502716294358
+ },
+ "RPE1_vs_HepG2": {
+  "theta_hat": -0.0009316826138213737,
+  "k": 20,
+  "p_two_sided": 0.0194,
+  "p_one_sided": 0.9822,
+  "partial_r2_share": 0.0013453717197256785
+ },
+ "RPE1_vs_K562": {
+  "theta_hat": -0.0013482210980906208,
+  "k": 20,
+  "p_two_sided": 0.0017,
+  "p_one_sided": 0.9984,
+  "partial_r2_share": 0.0029708146963233527
+ },
+ "K562_vs_HepG2": {
+  "theta_hat": 0.000556569336344802,
+  "k": 20,
+  "p_two_sided": 0.1685,
+  "p_one_sided": 0.094,
+  "partial_r2_share": 0.0004227051779460781
+ },
+ "Jurkat_vs_RPE1": {
+  "theta_hat": 0.0005528103729033325,
+  "k": 20,
+  "p_two_sided": 0.1224,
+  "p_one_sided": 0.1028,
+  "partial_r2_share": 0.0005191265603852014
+ },
+ "Jurkat_vs_HepG2": {
+  "theta_hat": -0.0002761811472169793,
+  "k": 20,
+  "p_two_sided": 0.3979,
+  "p_one_sided": 0.7904,
+  "partial_r2_share": 0.00013945921351467334
+ }
+}
