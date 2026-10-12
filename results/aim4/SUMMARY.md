@@ -47,7 +47,7 @@ Detection limit = smallest planted partial R² recovered with 80% power at nomin
 | The generic response accounts for most of the raw difference | no | Median generic share 2–13% per line in every pair. |
 | Naive tests find an effect; the main test does not | no (one borderline mixed pair) | Naive and main agree in sign and significance in 5 of 6 pairs; K562 − HepG2 (mixed): permutation-free naive tests p₂ 0.008–0.022 vs main 0.055. The naive step-7 estimate is not larger than the main one. |
 | No effect under any test, with adequate power | yes, for K562 − Jurkat | θ̂ ≈ 0 under every test and sensitivity; planted detection limit 0.5% partial R²; pR²/rel upper bound 0.023%. |
-| Cross-line numbers sit near the same-line baseline | partly, for K562 − Jurkat | K562 − Jurkat reproducible variance of M is 3.6× the same-line baseline (other pairs 43–154×); reliability 0.86. |
+| Cross-line numbers sit near the same-line baseline | partly, for K562 − Jurkat | K562 − Jurkat reproducible variance of M is 3.6× the same-line baseline (other pairs 43–153×); reliability 0.86. |
 | The two matched pairs disagree | YES — lead | K562 − Jurkat null; RPE1 − HepG2 significantly negative (opposite to H1). What differs: RPE1 − HepG2 still diverges at p53 targets (z 3.3) and every RPE1-containing pair shows the same promoter-driven negative association, while the three pairs without RPE1 do not. |
 | Signal in distal accessibility only (secondary) | no (weak hint only) | Distal θ̂ weakly positive in the pairs without RPE1 (K562 − Jurkat one-sided p 0.021) but H2's non-overlap criterion fails in both matched pairs. |
 

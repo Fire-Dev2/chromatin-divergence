@@ -19,10 +19,10 @@ Same-line baseline (K562 essential − K562 genome-wide; `results/aim1/same_line
 Reproducible variance of M (SD² × reliability) relative to the same-line baseline (0.0095² × 0.72 = 6.5e-5):
 
 - K562_vs_Jurkat: 2.37e-04 (3.6× baseline)
-- RPE1_vs_HepG2: 3.75e-03 (57.8× baseline)
-- RPE1_vs_K562: 1.00e-02 (154.3× baseline)
-- K562_vs_HepG2: 3.50e-03 (53.9× baseline)
-- Jurkat_vs_RPE1: 9.22e-03 (141.9× baseline)
-- Jurkat_vs_HepG2: 2.80e-03 (43.1× baseline)
+- RPE1_vs_HepG2: 3.75e-03 (57.2× baseline)
+- RPE1_vs_K562: 1.00e-02 (152.8× baseline)
+- K562_vs_HepG2: 3.50e-03 (53.4× baseline)
+- Jurkat_vs_RPE1: 9.22e-03 (140.6× baseline)
+- Jurkat_vs_HepG2: 2.80e-03 (42.7× baseline)
 
 Notes: K562 − Jurkat has the smallest and least reliable M (SD 0.017, reliability 0.86), about 4× the same-line baseline in reproducible variance; the other pairs are 40–150×. The generic share is below 13% in every line (largest in RPE1, 12–13%).
