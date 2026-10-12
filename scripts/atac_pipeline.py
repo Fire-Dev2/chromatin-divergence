@@ -270,7 +270,7 @@ def postprocess_macs(np_in: str, out_gz: str, cs: Path):
     """ENCODE macs2(): sort by p desc, rename, fix summit, cap 300k, clip to chrom sizes."""
     sh(f"sort -k 8gr,8gr {np_in} "
        f"| awk 'BEGIN{{OFS=\"\\t\"}}{{$4=\"Peak_\"NR; if ($2<0) $2=0; if ($3<0) $3=0; if ($10==-1) $10=$2+int(($3-$2+1)/2.0); print $0}}' "
-       f"| head -n {CAP_NUM_PEAK} "
+       f"| awk 'NR<={CAP_NUM_PEAK}' "
        f"| awk 'BEGIN{{OFS=\"\\t\"}} NR==FNR {{s[$1]=$2; next}} ($1 in s) && $3<=s[$1] && $2<$3' {cs} - "
        f"| gzip -nc > {out_gz}")
 
@@ -354,10 +354,17 @@ def run_pool(sample: str, reps: list[str], threads: int = 10):
             f"--shift -75 --extsize 150 --nomodel --keep-dup all --call-summits --tempdir {tmp} "
             f"> {pd_}/macs3.pr2.log 2>&1",
         ]
-        procs = [subprocess.Popen(["bash", "-o", "pipefail", "-c", c]) for c in cmds]
-        for c, pr in zip(cmds, procs):
-            if pr.wait() != 0:
-                raise RuntimeError("macs3 failed: " + c)
+        # MACS3 needs ~35 bytes RAM per tag; run the three calls concurrently only when the
+        # pooled data are small enough (<= 250M tags), else one after another.
+        n_tags = sum(json.loads((sd / r / f"{r}.tagalign_counts.json").read_text())["tagalign_reads"] for r in reps)
+        if n_tags <= 250_000_000:
+            procs = [subprocess.Popen(["bash", "-o", "pipefail", "-c", c]) for c in cmds]
+            for c, pr in zip(cmds, procs):
+                if pr.wait() != 0:
+                    raise RuntimeError("macs3 failed: " + c)
+        else:
+            for c in cmds:
+                sh(c)
         for n in ("pooled", "pr1", "pr2"):
             postprocess_macs(f"{tmp}/{n}_peaks.narrowPeak", f"{pd_}/{n}.pval0.01.300K.narrowPeak.gz", cs)
         for f in tmp.glob("*_summits.bed"):

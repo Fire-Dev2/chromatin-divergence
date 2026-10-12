@@ -1,0 +1,27 @@
+{
+ "sample": "k562_ENCSR868FGK",
+ "encode_bw": "data/atac/K562__ENCFF102ARJ.bigWig",
+ "encode_peaks": "data/atac/K562__ENCFF948AFM.bed.gz",
+ "n_peaks_encode_idr": 181340,
+ "n_peaks_local_idr": 150128,
+ "union_peaks_summit250": {
+  "n": 95342,
+  "pearson": 0.8400498258238869,
+  "spearman": 0.9010673335845966
+ },
+ "tss1kb_all_genes": {
+  "n": 53476,
+  "pearson": 0.9724974844536017,
+  "spearman": 0.9673992260246801
+ },
+ "tss1kb_protein_coding": {
+  "n": 19685,
+  "pearson": 0.9799450559047855,
+  "spearman": 0.9863519832568838
+ },
+ "jaccard_bp": 0.690503,
+ "frac_encode_idr_recovered": 0.8258299327230616,
+ "frac_local_idr_in_encode": 0.9547985718853246,
+ "frac_encode_idr_in_local_pooled300k": 0.9760615418550789,
+ "pass_spearman_tss_ge_0.9": true
+}
