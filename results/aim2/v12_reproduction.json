@@ -1,0 +1,9 @@
+{
+ "aim2_json_max_abs_diff": 0.0,
+ "aim2_json_mismatches": [],
+ "aim2_null_max_abs_diff": 0.0,
+ "planted_replicates_max_abs_diff": 0.0,
+ "planted_replicates_nonnumeric_identical": true,
+ "planted_summary_max_abs_diff": 9.8879238130678e-17,
+ "reproduced": true
+}

@@ -45,7 +45,7 @@ def test_covariates_values(fake_pb):
 def test_covariate_design(fake_pb):
     pb, genes, annot, cn = fake_pb
     C = cov.build_covariates("RPE1", "K562", genes, pb_dir=pb, annot=annot, cn=cn)
-    Z = cov.design(C)
+    Z = cov.design(C, arm_effects=False)   # plan v1.2 design
     # intercept + 2 x ns(df 4) + 5 linear
     assert Z.shape == (60, 1 + 4 + 4 + 5)
     # expr_diff lies in the span of the two splines (linear part) -> rank one less

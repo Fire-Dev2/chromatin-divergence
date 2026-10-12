@@ -14,6 +14,10 @@ f(C) = intercept + natural cubic spline (df 4) on log2_meanA and on log2_meanB +
 other column linear. expr_diff is an exact linear combination of the two spline bases'
 linear parts, so the design is rank-deficient by construction; crt works with an
 orthonormal basis of the column space, so this is harmless (docs/methods_aim2_aim3.md §2.1).
+
+Plan v1.3 (default, ``arm_effects=True``): f(C) also gets chromosome-arm fixed effects, one
+indicator per arm (label chrom + p/q from genes_gencode_v50.tsv) present among the genes, the
+first arm in genome order dropped as reference. ``arm_effects=False`` is plan v1.2 exactly.
 """
 from __future__ import annotations
 
@@ -76,9 +80,46 @@ def build_covariates(a: str, b: str, gene_ids=None, tag: str | None = None, pb_d
     return C[COLUMNS]
 
 
-def design(C: pd.DataFrame) -> np.ndarray:
-    """f(C): intercept + ns(df=4) on each line's log2 mean expression + other columns linear."""
-    return crt.build_design(C[COLUMNS], SPLINE_COLS, df=SPLINE_DF)
+#: plan version of the default design
+ARM_EFFECTS_DEFAULT = True
+
+
+def arm_indicators(arm) -> tuple[np.ndarray, list]:
+    """One 0/1 column per chromosome arm present, the first arm in genome order dropped.
+
+    Returns (matrix (G, n_arms - 1), list of the kept arm labels; the reference is excluded).
+    """
+    arm = np.asarray(arm).astype(str)
+    labels = sorted(set(arm), key=_arm_key)
+    keep = labels[1:]
+    if not keep:
+        return np.zeros((arm.size, 0)), []
+    return np.column_stack([(arm == a).astype(float) for a in keep]), keep
+
+
+def _arm_key(a: str):
+    c = a[3:-1] if a.startswith("chr") else a[:-1]
+    n = int(c) if c.isdigit() else {"X": 23, "Y": 24}.get(c, 25)
+    return (n, a[-1])
+
+
+def design(C: pd.DataFrame, arm_effects: bool = ARM_EFFECTS_DEFAULT, arm=None,
+           annot: pd.DataFrame | None = None) -> np.ndarray:
+    """f(C): intercept + ns(df=4) on each line's log2 mean expression + other columns linear
+    (plan v1.2), plus chromosome-arm indicators when ``arm_effects`` (plan v1.3, default).
+
+    ``arm`` (labels chrom + p/q, aligned with C's rows) defaults to :func:`genome_info` of C's
+    index (gene ids); ``annot`` is passed to it.
+    """
+    Z = crt.build_design(C[COLUMNS], SPLINE_COLS, df=SPLINE_DF)
+    if not arm_effects:
+        return Z
+    if arm is None:
+        arm = genome_info(C.index, annot).arm.to_numpy()
+    A, _ = arm_indicators(arm)
+    if len(A) != len(Z):
+        raise ValueError("arm labels are not aligned with C")
+    return np.column_stack([Z, A])
 
 
 def genome_info(gene_ids, annot: pd.DataFrame | None = None) -> pd.DataFrame:

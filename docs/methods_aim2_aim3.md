@@ -488,3 +488,46 @@ and t-test p, for promoter, distal, combined (CPM) and combined (FC).
   and cluster-robust over (decoy, sign) configurations.
 - Detection limit: the smallest level with rejection rate ≥ 0.8 at nominal 5%
   for the main test (also reported at matched FPR and for v1.0).
+
+
+### 6.7 Plan v1.3: chromosome-arm fixed effects in C (`covariates.design(arm_effects=True)`)
+
+- **Design.** `covariates.design(C, arm_effects=True)` (the default from v1.3)
+  appends to the v1.2 f(C) one 0/1 indicator per chromosome arm present among the
+  pair's genes (label `chrom + arm` from `genes_gencode_v50.tsv`, as in
+  `genome_info`); the first arm in genome order (chr1p) is the dropped reference.
+  On RPE1 − K562: 41 arms, 54 columns, rank 53. `arm_effects=False` returns the
+  v1.2 design unchanged.
+- **Where it enters.** Everything uses the orthonormal basis Q of this design, built
+  once in `aim2.load_pair(arm_effects=...)`: the model M ~ f(C) + x; the x residuals
+  that choose k (x4 and v1.0) and that the block permutation moves; every
+  comparator (naive OLS, unrestricted, expression-bin, stratified, CAMERA,
+  co-accessibility blocks, decoy test); the decoy similarities defining the
+  negative-control set; the partial R² and its bootstrap; and, in
+  `planted.run(arm_effects=...)`, the decoy set, k per decoy, the θ calibration and
+  every test. The naive Aim 1 step-7 analysis (M ~ 1 + expr_diff + x) does not use
+  f(C) and is unchanged.
+- **Files.** v1.3 results carry the suffix `_v13`
+  (`results/aim2/RPE1_vs_K562_test_v13.{json,md}`, `_null_v13.npz`;
+  `results/aim3/planted_RPE1_vs_K562_v13{.csv,.md,_info.json,_replicates.parquet,_excl.csv}`;
+  `figures/*_v13.png`); the v1.2 files are untouched and remain the v1.2
+  sensitivity analysis. Scripts `run_aim2_dev_v13.py`, `run_planted_dev_v13.py`,
+  `report_dev_v13.py`.
+- **v1.2 reproduction.** `scripts/verify_v12_repro.py` reruns both analyses with
+  `arm_effects=False` and compares them with the frozen files: the Aim 2 JSON and
+  null draws and the planted replicates are identical (max |Δ| = 0;
+  `results/aim2/v12_reproduction.json`). `tests/test_arm_effects.py` checks this on
+  the main test and the design algebra (reference arm dropped, zero arm means of
+  residuals, decoy similarity under the v1.3 design).
+- **Decoy θ₀ screen (planted benchmark) [choice].** Each negative-control decoy's own
+  association with the real M is tested with the main test (x4 rule, k from the
+  decoy's residuals, B = 9,999, two-sided) and naive OLS
+  (`planted.decoy_theta0_tests`). The level-0 FPR and detection limit are reported
+  for all configurations and excluding decoys with two-sided main-test p ≤ 0.05
+  (both signs dropped); the naive-OLS criterion is given as a second sensitivity.
+- **Development-pair effect of v1.3.** Combined CPM: k x4 100 → 20, v1.0 50 → 5;
+  genes in movable blocks 41% → 96%; x-residual ACF at lag 1/5/10/25/50/100 =
+  0.23/0.05/0.01/0.01/−0.05/0.03 (v1.2 0.38/0.23/0.19/0.17/0.05/0.03); null mean of
+  T* −0.0184 → −0.0026; θ̂ −0.0224 in both. Planted benchmark: detection limit 1%
+  (unchanged), level-0 FPR 0.12 (all) / 0.00 (excluding the two decoys with
+  significant θ₀).

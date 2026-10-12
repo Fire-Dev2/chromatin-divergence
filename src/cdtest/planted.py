@@ -23,6 +23,7 @@ import numpy as np
 import pandas as pd
 
 from . import aim2, crt, screens
+from . import covariates as cov
 
 ROOT = screens.ROOT
 LEVELS = (0.0, 0.0025, 0.005, 0.01, 0.02)
@@ -76,11 +77,36 @@ def _one(args):
     return row
 
 
+def decoy_theta0_tests(P: dict, D: np.ndarray, labels, idx, B: int = 9999) -> dict:
+    """Each used decoy's own association with the real M (theta_0): main block test (x4 rule,
+    k from the decoy's residuals, B draws) and naive OLS, both two-sided. Used to report the
+    level-0 FPR also without configurations whose decoy is itself associated with M."""
+    gen = P["gen"]
+    chrom, pos, arm = gen.chrom.to_numpy(), gen.pos.to_numpy(), gen.arm.to_numpy()
+    order = crt.genome_order(chrom, pos)
+    out = {}
+    for j in idx:
+        v = D[:, j]
+        prep = crt.prepare(P["M"], v, Q=P["Q"])
+        k = crt.choose_k(prep.r_x[order], arm[order], rule="x4")
+        r = crt.block_permutation_test(P["M"], v, chrom=chrom, pos=pos, arm=arm, k=k, B=B,
+                                       rng=aim2.job_seed("theta0", P["tag"], labels[j]), prep=prep, order=order)
+        n = crt.naive_ols_test(P["M"], v, prep=prep)
+        out[labels[j]] = {"theta0": prep.theta_hat, "k_x4": int(k), "p_block_x4_two_sided": float(r.p_two_sided),
+                          "p_naive_two_sided": float(n["p_two_sided"]), "B": B}
+    return out
+
+
 def run(a: str = "RPE1", b: str = "K562", reps: int = 500, B: int = 999, n_jobs: int = 10,
-        rho_bar: float | None = None, out_dir: Path = ROOT / "results/aim3") -> pd.DataFrame:
+        rho_bar: float | None = None, out_dir: Path = ROOT / "results/aim3",
+        arm_effects: bool = cov.ARM_EFFECTS_DEFAULT, suffix: str | None = None,
+        theta0_B: int = 9999) -> pd.DataFrame:
+    """Writes planted_<tag><suffix>_replicates.parquet and _info.json; suffix defaults to
+    aim2.plan_suffix(arm_effects) ('_v13' under plan v1.3, '' = the v1.2 files)."""
     from joblib import Parallel, delayed
-    P = aim2.load_pair(a, b)
+    P = aim2.load_pair(a, b, arm_effects=arm_effects)
     tag = P["tag"]
+    suffix = aim2.plan_suffix(arm_effects) if suffix is None else suffix
     if rho_bar is None:
         rho_bar = float(np.mean([aim2.rho_bar_controls(ln, P["genes"]) for ln in (a, b)]))
     D, labels, sim, ok, rule = select_decoys(P)
@@ -107,12 +133,16 @@ def run(a: str = "RPE1", b: str = "K562", reps: int = 500, B: int = 999, n_jobs:
     df = pd.concat([pd.DataFrame(meta), pd.DataFrame(rows)], axis=1)
     df["B"] = B
     out_dir.mkdir(parents=True, exist_ok=True)
-    df.to_parquet(out_dir / f"planted_{tag}_replicates.parquet", index=False)
+    df.to_parquet(out_dir / f"planted_{tag}{suffix}_replicates.parquet", index=False)
     info = {"pair": tag, "decoy_rule": rule, "n_decoys_total": len(labels), "n_decoys_used": int(ok.sum()),
             "decoys_used": [labels[j] for j in idx], "similarity": dict(zip(labels, np.round(sim, 4).tolist())),
             "k_by_decoy": {labels[j]: {"x4": ks[j][0], "v1.0": ks[j][1]} for j in idx},
             "rho_bar": rho_bar, "reps_per_level": reps, "B": B, "levels": list(LEVELS)}
-    (out_dir / f"planted_{tag}_info.json").write_text(json.dumps(info, indent=1))
+    if arm_effects:
+        info["plan"] = "v1.3"
+        info["arm_effects"] = True
+        info["theta0_tests"] = decoy_theta0_tests(P, D, labels, idx, B=theta0_B)
+    (out_dir / f"planted_{tag}{suffix}_info.json").write_text(json.dumps(info, indent=1))
     return df
 
 
@@ -158,6 +188,11 @@ def summarize(df: pd.DataFrame, tests=TESTS) -> pd.DataFrame:
             row["power_matched"], row["power_matched_se"] = _rate(p <= thr)
             rows.append(row)
     return pd.DataFrame(rows)
+
+
+def theta0_significant(info: dict, col: str = "p_block_x4_two_sided", alpha: float = 0.05) -> list:
+    """Decoys whose own theta_0 in the real M is significantly nonzero (two-sided, both signs)."""
+    return sorted(d for d, r in info.get("theta0_tests", {}).items() if r[col] <= alpha)
 
 
 def detection_limit(summ: pd.DataFrame, test: str = "block_x4", col: str = "rej05", power: float = 0.8):

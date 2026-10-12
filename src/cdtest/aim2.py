@@ -42,19 +42,28 @@ def job_seed(*keys) -> np.random.Generator:
 
 
 # --------------------------------------------------------------------------- data
-def load_pair(a: str, b: str, tag: str | None = None) -> dict:
+def plan_suffix(arm_effects: bool) -> str:
+    """File suffix of a result: '_v13' for plan v1.3 (arm effects), '' for v1.2 files."""
+    return "_v13" if arm_effects else ""
+
+
+def load_pair(a: str, b: str, tag: str | None = None, arm_effects: bool = cov.ARM_EFFECTS_DEFAULT) -> dict:
+    """Everything one pair's tests need. ``arm_effects`` True = plan v1.3 f(C) (arm indicators
+    in the model and in the residualisation of x, hence in every test, comparator, decoy
+    similarity and k choice that uses Q); False = plan v1.2."""
     tag = tag or f"{a}_vs_{b}"
     gs = pd.read_csv(AIM1 / tag / "gene_outcome.tsv", sep="\t")
     genes = gs.gene_id.tolist()
     C = cov.build_covariates(a, b, genes, tag)
-    Z = cov.design(C)
     gen = cov.genome_info(genes)
+    Z = cov.design(C, arm_effects=arm_effects, arm=gen.arm.to_numpy())
     X = {}
     for label, kind, signal in FEATURES:
         X[label] = features.pair_feature(a, b, kind, signal=signal).reindex(genes).to_numpy(float)
         if not np.isfinite(X[label]).all():
             raise ValueError(f"{label}: missing feature values")
     return dict(a=a, b=b, tag=tag, genes=genes, M=gs.M.to_numpy(float), gs=gs, C=C, Z=Z, gen=gen, X=X,
+                arm_effects=bool(arm_effects),
                 Q=crt.orthonormal_basis(Z), summary=json.loads((AIM1 / tag / "summary.json").read_text()))
 
 
@@ -283,9 +292,13 @@ def test_feature(P: dict, label: str, B: int = 9999, rho_bar: float = 0.0, decoy
 
 
 def run(a: str = "RPE1", b: str = "K562", B: int = 9999, n_boot: int = 500,
-        out_dir: Path = ROOT / "results/aim2") -> dict:
-    P = load_pair(a, b)
+        out_dir: Path = ROOT / "results/aim2", arm_effects: bool = cov.ARM_EFFECTS_DEFAULT,
+        suffix: str | None = None) -> dict:
+    """Writes <tag>_test<suffix>.json and <tag>_null<suffix>.npz; suffix defaults to
+    plan_suffix(arm_effects) so v1.3 results never overwrite the v1.2 files."""
+    P = load_pair(a, b, arm_effects=arm_effects)
     tag = P["tag"]
+    suffix = plan_suffix(arm_effects) if suffix is None else suffix
     rho = {ln: rho_bar_controls(ln, P["genes"]) for ln in (a, b)}
     rho_log = {ln: rho_bar_controls(ln, P["genes"], log=True) for ln in (a, b)}
     rho_bar = float(np.mean(list(rho.values())))
@@ -298,6 +311,11 @@ def run(a: str = "RPE1", b: str = "K562", B: int = 9999, n_boot: int = 500,
            "rho_bar_controls": rho, "rho_bar_controls_log2p1": rho_log, "rho_bar_used": rho_bar,
            "acf_M_resid_within_arm_diagnostic": _acf_M(P),
            "covariates": cov.COLUMNS, "design_columns": int(P["Z"].shape[1]), "features": {}}
+    if arm_effects:
+        res["plan"] = "v1.3"
+        res["arm_effects"] = True
+        res["n_arms"] = int(P["gen"].arm.nunique())
+        res["design_rank"] = int(P["Q"].shape[1])
     nulls = {}
     for label, kind, signal in FEATURES:
         dec = decoy_matrix(P["genes"], kind, signal)
@@ -307,8 +325,8 @@ def run(a: str = "RPE1", b: str = "K562", B: int = 9999, n_boot: int = 500,
         print(f"{label}: T={r['theta_hat']:.4g} p={r['main_block_x4']['p_one_sided']:.4g} "
               f"k={r['k_x4']} pR2/rel={r['partial_r2_share_reproducible']:.4%}", flush=True)
     out_dir.mkdir(parents=True, exist_ok=True)
-    (out_dir / f"{tag}_test.json").write_text(json.dumps(res, indent=1, default=_json_default))
-    np.savez_compressed(out_dir / f"{tag}_null.npz", **nulls)
+    (out_dir / f"{tag}_test{suffix}.json").write_text(json.dumps(res, indent=1, default=_json_default))
+    np.savez_compressed(out_dir / f"{tag}_null{suffix}.npz", **nulls)
     return res
 
 

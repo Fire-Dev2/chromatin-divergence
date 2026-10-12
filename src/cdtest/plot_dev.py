@@ -54,9 +54,9 @@ def fig_m_distribution(tag: str = "RPE1_vs_K562"):
     plt.close(fig)
 
 
-def fig_dev_null(tag: str = "RPE1_vs_K562"):
-    res = json.loads((ROOT / f"results/aim2/{tag}_test.json").read_text())
-    nulls = np.load(ROOT / f"results/aim2/{tag}_null.npz")
+def fig_dev_null(tag: str = "RPE1_vs_K562", suffix: str = ""):
+    res = json.loads((ROOT / f"results/aim2/{tag}_test{suffix}.json").read_text())
+    nulls = np.load(ROOT / f"results/aim2/{tag}_null{suffix}.npz")
     labels = list(res["features"])
     fig, axes = plt.subplots(1, len(labels), figsize=(4 * len(labels), 3.6))
     for ax, lab in zip(axes, labels):
@@ -74,15 +74,16 @@ def fig_dev_null(tag: str = "RPE1_vs_K562"):
                 transform=ax.transAxes, fontsize=7, va="top")
         ax.set_title(f"{lab}\none-sided p={m['p_one_sided']:.4f}; two-sided p={m['p_two_sided']:.4f}", fontsize=9)
         ax.set_xlabel("T* (OLS coefficient on x | f(C))")
-        ax.legend(frameon=False, fontsize=7)
-    fig.suptitle(f"Aim 2, development pair {tag.replace('_vs_', ' - ')} (mixed pair, descriptive)", fontsize=10)
+        ax.legend(frameon=False, fontsize=7, loc="upper right")
+    plan = " plan v1.3 (arm effects in C)" if suffix == "_v13" else ""
+    fig.suptitle(f"Aim 2, development pair {tag.replace('_vs_', ' - ')} (mixed pair, descriptive){plan}", fontsize=10)
     fig.tight_layout()
-    fig.savefig(FIG / "aim2_dev_pair_null.png", dpi=150)
+    fig.savefig(FIG / f"aim2_dev_pair_null{suffix}.png", dpi=150)
     plt.close(fig)
 
 
-def fig_planted(tag: str = "RPE1_vs_K562"):
-    s = pd.read_csv(ROOT / f"results/aim3/planted_{tag}.csv")
+def fig_planted(tag: str = "RPE1_vs_K562", suffix: str = ""):
+    s = pd.read_csv(ROOT / f"results/aim3/planted_{tag}{suffix}.csv")
     fig, ax = plt.subplots(1, 2, figsize=(11, 4))
     styles = {"block_x4": ("k", "-", 2.2), "block_v1.0": ("0.4", "--", 1.6)}
     for t, g in s.groupby("test", sort=False):
@@ -100,9 +101,10 @@ def fig_planted(tag: str = "RPE1_vs_K562"):
     ax[0].set_ylabel("rejection rate at nominal 5% (level 0 = FPR)")
     ax[1].set_ylabel("power at matched 5% FPR")
     ax[0].legend(frameon=False, fontsize=7)
-    ax[0].set_title(f"Planted signal on real M ({tag.replace('_vs_', ' - ')}); bars = 95% cluster MC", fontsize=9)
+    plan = ", plan v1.3" if suffix == "_v13" else ""
+    ax[0].set_title(f"Planted signal on real M ({tag.replace('_vs_', ' - ')}{plan}); bars = 95% cluster MC", fontsize=9)
     fig.tight_layout()
-    fig.savefig(FIG / "aim3_planted_power.png", dpi=150)
+    fig.savefig(FIG / f"aim3_planted_power{suffix}.png", dpi=150)
     plt.close(fig)
 
 
@@ -115,3 +117,6 @@ if __name__ == "__main__":
         fig_dev_null()
     if "planted" in which:
         fig_planted()
+    if "v13" in which:
+        fig_dev_null(suffix="_v13")
+        fig_planted(suffix="_v13")
