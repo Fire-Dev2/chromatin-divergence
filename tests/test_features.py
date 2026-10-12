@@ -110,6 +110,68 @@ def test_load_config_priority(tmp_path):
     cfg.write_text("line\tpriority\trole\tfc_bigwig\tpeaks\tcn_line\tnote\n"
                    "L\t1\tt\tmissing.bw\tmissing.bed\tL\t\nL\t2\tt\ta.bw\ta.bed\tL\t\n"
                    "J\t1\tt\tnope.bw\tnope.bed\tJ\t\n")
-    sel, sk = F.load_config(cfg, root=tmp_path)
+    sel, sk = F.load_config(cfg, root=tmp_path, signal="fc")
     assert sel.line.tolist() == ["L"] and sel.fc_bigwig.iloc[0] == "a.bw"
     assert [s["line"] for s in sk] == ["J"]
+    # no insertions column -> nothing usable for cpm
+    sel, sk = F.load_config(cfg, root=tmp_path, signal="cpm")
+    assert sel.empty and {s["line"] for s in sk} == {"L", "J"}
+
+
+def test_load_config_signal_dependent(tmp_path):
+    (tmp_path / "p.bed").write_text("")
+    (tmp_path / "f.bw").write_text("")
+    (tmp_path / "L__rep1.npz").write_text("")
+    (tmp_path / "L__rep2.npz").write_text("")
+    cfg = tmp_path / "c.tsv"
+    cfg.write_text("line\tpriority\trole\tinsertions\tfc_bigwig\tpeaks\tcn_line\tnote\n"
+                   "L\t1\tt\tL__rep*.npz\tnofc.bw\tp.bed\tL\t\n"
+                   "L\t2\tt\tnone__rep*.npz\tf.bw\tp.bed\tL\t\n")
+    sel, _ = F.load_config(cfg, root=tmp_path, signal="cpm")
+    assert sel.priority.tolist() == [1]
+    assert [f.name for f in F.insertion_files(sel.insertions.iloc[0], tmp_path)] == ["L__rep1.npz", "L__rep2.npz"]
+    sel, _ = F.load_config(cfg, root=tmp_path, signal="fc")
+    assert sel.priority.tolist() == [2]
+    with pytest.raises(ValueError):
+        F.load_config(cfg, root=tmp_path, signal="xx")
+
+
+def test_output_paths():
+    c, f = F.output_paths("cpm"), F.output_paths("fc")
+    assert c["gene_features"].name == "gene_features.parquet" and f["gene_features"].name == "gene_features_fc.parquet"
+    assert c["build_info"].name == "build_info.json" and f["build_info"].name == "build_info_fc.json"
+    assert f["region_raw"].name == "region_signal_raw_fc.parquet"
+
+
+def test_count_in_intervals_half_open():
+    pos = np.array([5, 10, 10, 19, 20, 30], dtype=np.int32)
+    # [10,20) holds 10,10,19 ; [0,5) none ; [5,6) one ; [20,31) holds 20,30 ; [100,200) none
+    got = F.count_in_intervals(pos, [10, 0, 5, 20, 100], [20, 5, 6, 31, 200])
+    assert got.tolist() == [3, 0, 1, 2, 0]
+
+
+def _write_ins(path, d):
+    np.savez_compressed(path, **{k: np.asarray(v, dtype=np.int32) for k, v in d.items()})
+
+
+def test_count_insertions_and_cpm_pooling(tmp_path):
+    r1, r2 = tmp_path / "L__rep1.npz", tmp_path / "L__rep2.npz"
+    _write_ins(r1, {"chr1": [100, 150, 900], "chr2": [10], "chrY": [1, 2, 3]})  # chrY ignored
+    _write_ins(r2, {"chr1": [120, 2000], "chrX": [5, 6, 7, 8, 9, 10]})
+    regs = (["chr1", "chr2", "chrX", "chr3"], [100, 0, 0, 0], [200, 100, 8, 10])
+    prom = (["chr1"], [0], [1000])
+    (c1, c2), tot = F.count_insertions(r1, [regs, prom])
+    assert tot == 4 and c1.tolist() == [2, 1, 0, 0] and c2.tolist() == [3]
+    m1 = tmp_path / "M__rep1.npz"
+    _write_ins(m1, {"chr1": [120, 2000], "chrX": [5, 6, 7, 8, 9, 10]})
+    res = F.cpm_matrices({"L": [r1, r2], "M": [m1]}, [regs, prom], procs=1)
+    assert res["totals"] == {"L": 12, "M": 8}
+    # pooled: chr1 [100,200) = 2 + 1 = 3 of 12 insertions
+    assert res["cpm"][0]["L"].tolist() == pytest.approx([3 / 12 * 1e6, 1 / 12 * 1e6, 3 / 12 * 1e6, 0])
+    assert res["cpm"][1]["M"].tolist() == pytest.approx([1 / 8 * 1e6])
+    rep = res["rep_cpm"][1]
+    assert list(rep.columns) == ["L__rep1", "L__rep2", "M__rep1"]
+    assert res["rep_totals"] == {"L__rep1": 4, "L__rep2": 8, "M__rep1": 8}
+    with pytest.raises(ValueError):
+        F.cpm_matrices({"L": [r1], "M": [r1]}, [prom], procs=1)
+    assert rep["L__rep1"].iloc[0] == pytest.approx(3 / 4 * 1e6)

@@ -1,4 +1,9 @@
-[features] lines (10): ['K562', 'RPE1', 'HepG2', 'GM12878', 'HCT116', 'MCF-7', 'A549', 'IMR-90', 'PC-3', 'Panc1']; skipped: ['Jurkat']
-[features] union regions: 338,483 ({'n_windows': 1932956, 'n_merged': 340993, 'n_blacklisted': 2510})
-[features] region signal done
-[features] genes 54,710 x lines 10; written to /Users/tharunnambi/chromatin-divergence/data/features
+[features:cpm] lines (11): ['K562', 'RPE1', 'Jurkat', 'HepG2', 'GM12878', 'HCT116', 'MCF-7', 'A549', 'IMR-90', 'PC-3', 'Panc1']; skipped: []
+[features:cpm] union regions: 324,842 ({'n_windows': 1959312, 'n_merged': 327145, 'n_blacklisted': 2303})
+[features:cpm] raw signal done
+[features:cpm] genes 54,710 x lines 11; written to /Users/tharunnambi/chromatin-divergence/data/features
+[features:fc] lines (11): ['K562', 'RPE1', 'Jurkat', 'HepG2', 'GM12878', 'HCT116', 'MCF-7', 'A549', 'IMR-90', 'PC-3', 'Panc1']; skipped: []
+[features:fc] union regions: 324,842 ({'n_windows': 1959312, 'n_merged': 327145, 'n_blacklisted': 2303})
+[features:fc] raw signal done
+[features:fc] genes 54,710 x lines 11; written to /Users/tharunnambi/chromatin-divergence/data/features
+python -m cdtest.features --signal both --procs 10  227.61s user 31.57s system 321% cpu 1:20.68 total

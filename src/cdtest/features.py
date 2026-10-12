@@ -5,11 +5,20 @@ Pipeline (all coordinates 0-based half-open, chr1-22 + chrX only):
 1. **Union regions.** For every configured line, take its IDR (or conservative) peaks, build the
    window ``[summit - 250, summit + 250)``, pool all lines, merge overlapping / book-ended windows,
    and drop merged regions that overlap the ENCODE blacklist v2.
-2. **Region signal.** Mean fold-change bigWig signal over each region per line (uncovered bases
-   count as 0), ``log2(x + 1)``, quantile normalisation across lines, then subtract the line's
-   log2 relative copy number over the region -> ``s_r``.
+2. **Region signal.** Two versions (``signal=``):
+
+   * ``"cpm"`` (primary, plan amendment v1.2): Tn5 insertions in each region per million total
+     insertions of the line (chr1-22,X); replicates of a line are pooled (counts and totals summed).
+     Insertion positions are 0-based; an insertion at p counts for ``[start, end)`` iff
+     ``start <= p < end`` (``np.searchsorted`` on the sorted per-chrom arrays).
+   * ``"fc"`` (sensitivity, the v1.0 track): mean fold-change bigWig signal over the region
+     (uncovered bases count as 0).
+
+   Then ``log2(x + 1)``, quantile normalisation across lines, then subtract the line's log2
+   relative copy number over the region -> ``s_r``.
 3. **Promoter feature.** Same scheme on the TSS +/-1 kb window ``[tss0 - 1000, tss0 + 1000)``
-   computed directly from the bigWig; the quantile normalisation uses the promoter matrix itself.
+   computed directly from the insertions / bigWig; quantile normalisation uses the promoter matrix
+   itself.
 4. **Distal feature.** ``log2(1 + sum_r 2**s_r * exp(-d_r / 25 kb))`` over union regions whose
    centre lies 2.5-100 kb (inclusive) from the TSS; ``d_r`` = |centre - tss0|.
 5. **Combined.** ``0.5 * z(promoter) + 0.5 * z(distal)``; z uses one mean and SD pooled over all
@@ -17,7 +26,10 @@ Pipeline (all coordinates 0-based half-open, chr1-22 + chrX only):
 6. ``pair_feature(A, B, kind)`` = feature_A - feature_B per gene.
 
 Lines and input files come from ``config/feature_lines.tsv`` so the build is re-runnable when the
-local Jurkat / RPE1 outputs appear. CLI: ``python -m cdtest.features [--config ...] [--procs 6]``.
+local Jurkat / RPE1 outputs appear.
+CLI: ``python -m cdtest.features [--signal cpm|fc|both] [--config ...] [--procs 6]``.
+Outputs: cpm -> ``gene_features.parquet``, ``region_signal(_raw).parquet``, ``build_info.json``,
+``promoter_cpm_replicates.parquet``; fc -> the same names with suffix ``_fc``.
 """
 from __future__ import annotations
 
@@ -42,6 +54,22 @@ REGION_SIGNAL = OUT_DIR / "region_signal.parquet"
 REGION_RAW = OUT_DIR / "region_signal_raw.parquet"
 GENE_FEATURES = OUT_DIR / "gene_features.parquet"
 BUILD_INFO = OUT_DIR / "build_info.json"
+PROMOTER_REPS = OUT_DIR / "promoter_cpm_replicates.parquet"
+SIGNALS = ("cpm", "fc")
+DEFAULT_SIGNAL = "cpm"
+
+
+def output_paths(signal: str = DEFAULT_SIGNAL, out_dir: Path | str = OUT_DIR) -> dict:
+    """File paths of one signal version (cpm = primary, no suffix; fc = suffix '_fc')."""
+    if signal not in SIGNALS:
+        raise ValueError(f"signal must be one of {SIGNALS}")
+    out_dir = Path(out_dir)
+    sfx = "" if signal == "cpm" else f"_{signal}"
+    return dict(gene_features=out_dir / f"gene_features{sfx}.parquet",
+                region_signal=out_dir / f"region_signal{sfx}.parquet",
+                region_raw=out_dir / f"region_signal_raw{sfx}.parquet",
+                build_info=out_dir / f"build_info{sfx}.json",
+                promoter_reps=out_dir / "promoter_cpm_replicates.parquet")
 
 CHROMS = annot.CHROMS
 SUMMIT_HALF = 250          # bp each side of the summit
@@ -54,27 +82,49 @@ KINDS = ("promoter", "distal", "combined")
 
 
 # --------------------------------------------------------------------------- config
-def load_config(path: Path | str = CONFIG_TSV, root: Path = ROOT) -> tuple[pd.DataFrame, list[dict]]:
-    """Resolve the line config: per line, the lowest-priority row whose files exist.
+def insertion_files(pattern: str, root: Path = ROOT) -> list[Path]:
+    """Sorted replicate insertion files matching a glob relative to root ('' -> none)."""
+    if not pattern:
+        return []
+    return sorted(Path(root).glob(pattern))
+
+
+def load_config(path: Path | str = CONFIG_TSV, root: Path = ROOT,
+                signal: str = DEFAULT_SIGNAL) -> tuple[pd.DataFrame, list[dict]]:
+    """Resolve the line config: per line, the lowest-priority row whose files for `signal` exist
+    (cpm: insertions glob non-empty + peaks; fc: fc_bigwig + peaks).
 
     Returns (selected rows in config order, list of skipped lines with reason)."""
+    if signal not in SIGNALS:
+        raise ValueError(f"signal must be one of {SIGNALS}")
     cfg = pd.read_csv(path, sep="\t", comment="#", dtype=str, keep_default_na=False)
     cfg["priority"] = cfg.priority.astype(int)
+    if "insertions" not in cfg.columns:
+        cfg["insertions"] = ""
     order = list(dict.fromkeys(cfg.line))
     chosen, skipped = [], []
+
+    def usable(r) -> bool:
+        if not (root / r.peaks).exists():
+            return False
+        if signal == "cpm":
+            return len(insertion_files(r.insertions, root)) > 0
+        return (root / r.fc_bigwig).exists()
+
     for line in order:
         rows = cfg[cfg.line == line].sort_values("priority")
         hit = None
         for _, r in rows.iterrows():
-            if (root / r.fc_bigwig).exists() and (root / r.peaks).exists():
+            if usable(r):
                 hit = r
                 break
         if hit is None:
-            skipped.append(dict(line=line, reason="no candidate row with existing files",
-                                candidates=[f"{r.fc_bigwig} | {r.peaks}" for _, r in rows.iterrows()]))
+            col = "insertions" if signal == "cpm" else "fc_bigwig"
+            skipped.append(dict(line=line, reason=f"no candidate row with existing files (signal={signal})",
+                                candidates=[f"{r[col]} | {r.peaks}" for _, r in rows.iterrows()]))
         else:
             chosen.append(hit)
-    sel = pd.DataFrame(chosen).reset_index(drop=True)
+    sel = pd.DataFrame(chosen, columns=cfg.columns).reset_index(drop=True)
     if sel.line.duplicated().any():
         raise ValueError("duplicate line after selection")
     return sel, skipped
@@ -180,6 +230,74 @@ def signal_matrix(paths: dict, chrom, start, end, procs: int = 6) -> pd.DataFram
     return pd.DataFrame(dict(zip(lines, res)))
 
 
+def count_in_intervals(pos: np.ndarray, start, end) -> np.ndarray:
+    """Number of sorted positions p with start <= p < end, per interval (np.searchsorted)."""
+    pos = np.asarray(pos)
+    return (np.searchsorted(pos, np.asarray(end), side="left")
+            - np.searchsorted(pos, np.asarray(start), side="left")).astype(np.int64)
+
+
+def count_insertions(path: Path | str, interval_sets: list[tuple]) -> tuple[list[np.ndarray], int]:
+    """Insertion counts of one replicate file over several interval sets.
+
+    path: npz with one sorted 0-based int array per chrom (only CHROMS are used; read lazily).
+    interval_sets: list of (chrom, start, end) arrays. Returns (counts per set, total insertions on
+    CHROMS)."""
+    sets = [(np.asarray(c).astype(str), np.asarray(s, np.int64), np.asarray(e, np.int64))
+            for c, s, e in interval_sets]
+    out = [np.zeros(len(c), dtype=np.int64) for c, _, _ in sets]
+    total = 0
+    with np.load(path) as z:
+        keys = set(z.files)
+        for chrom in CHROMS:
+            if chrom not in keys:
+                continue
+            pos = z[chrom]
+            total += int(len(pos))
+            for k, (c, s, e) in enumerate(sets):
+                m = np.flatnonzero(c == chrom)
+                if len(m):
+                    out[k][m] = count_in_intervals(pos, s[m], e[m])
+    return out, total
+
+
+def _count_job(args):
+    return count_insertions(*args)
+
+
+def cpm_matrices(ins: dict, interval_sets: list[tuple], procs: int = 6) -> dict:
+    """Pooled-replicate insertion CPM per line for each interval set.
+
+    ins maps line -> list of replicate files. Counts and totals are summed over replicates, then
+    CPM = count / total * 1e6. Returns dict(cpm=[DataFrame per set], rep_cpm=[DataFrame per set with
+    columns = replicate file stem, e.g. 'K562__rep1'], totals={line: n}, rep_totals={col: n})."""
+    jobs, keys = [], []
+    for ln, files in ins.items():
+        for f in files:
+            jobs.append((str(f), interval_sets))
+            keys.append((ln, Path(f).stem))
+    if len({k for _, k in keys}) != len(keys):
+        raise ValueError("replicate file stems must be unique across lines")
+    if procs <= 1:
+        res = [_count_job(j) for j in jobs]
+    else:
+        with ProcessPoolExecutor(max_workers=min(procs, len(jobs))) as ex:
+            res = list(ex.map(_count_job, jobs))
+    nset = len(interval_sets)
+    pooled = {ln: [0] * nset for ln in ins}
+    totals = {ln: 0 for ln in ins}
+    rep_cpm = [dict() for _ in range(nset)]
+    rep_totals = {}
+    for (ln, col), (cnts, tot) in zip(keys, res):
+        totals[ln] += tot
+        rep_totals[col] = tot
+        for k in range(nset):
+            pooled[ln][k] = pooled[ln][k] + cnts[k]
+            rep_cpm[k][col] = cnts[k] / tot * 1e6
+    cpm = [pd.DataFrame({ln: pooled[ln][k] / totals[ln] * 1e6 for ln in ins}) for k in range(nset)]
+    return dict(cpm=cpm, rep_cpm=[pd.DataFrame(d) for d in rep_cpm], totals=totals, rep_totals=rep_totals)
+
+
 def quantile_normalize(x: pd.DataFrame | np.ndarray) -> np.ndarray:
     """Quantile normalisation across columns. Reference distribution = mean of the sorted columns;
     ties get the mean reference value of their tied ranks (via average ranks + interpolation)."""
@@ -278,14 +396,17 @@ def _md5(p: Path, chunk=1 << 22) -> str:
     return h.hexdigest()
 
 
-def build(config: Path | str = CONFIG_TSV, out_dir: Path = OUT_DIR, procs: int = 6, md5: bool = True) -> dict:
+def build(config: Path | str = CONFIG_TSV, out_dir: Path = OUT_DIR, procs: int = 6, md5: bool = True,
+          signal: str = DEFAULT_SIGNAL) -> dict:
+    """Build one signal version ('cpm' primary, 'fc' sensitivity) of all features."""
     out_dir = Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
-    sel, skipped = load_config(config)
+    paths = output_paths(signal, out_dir)
+    sel, skipped = load_config(config, signal=signal)
     lines = list(sel.line)
-    bw = {r.line: ROOT / r.fc_bigwig for _, r in sel.iterrows()}
     cn_lines = {r.line: r.cn_line for _, r in sel.iterrows()}
-    print(f"[features] lines ({len(lines)}): {lines}; skipped: {[s['line'] for s in skipped]}", flush=True)
+    print(f"[features:{signal}] lines ({len(lines)}): {lines}; skipped: {[s['line'] for s in skipped]}",
+          flush=True)
 
     # 1. regions
     summits = []
@@ -296,24 +417,39 @@ def build(config: Path | str = CONFIG_TSV, out_dir: Path = OUT_DIR, procs: int =
         summits.append(sm)
     sizes = annot.chrom_sizes()
     regions, rinfo = union_regions(summits, annot.load_blacklist(), sizes)
-    print(f"[features] union regions: {len(regions):,} ({rinfo})", flush=True)
+    print(f"[features:{signal}] union regions: {len(regions):,} ({rinfo})", flush=True)
 
-    lookup = annot.CNLookup()
-    # 2. region signal
-    raw = signal_matrix(bw, regions.chrom.values, regions.start.values, regions.end.values, procs)
-    cn_r = cn_matrix(cn_lines, regions.chrom.values, regions.start.values, regions.end.values, lookup)
-    s = normalize_signal(raw, cn_r)
-    pd.concat([regions, raw.astype(np.float32)], axis=1).to_parquet(out_dir / REGION_RAW.name, index=False)
-    pd.concat([regions, s.astype(np.float32)], axis=1).to_parquet(out_dir / REGION_SIGNAL.name, index=False)
-    print("[features] region signal done", flush=True)
-
-    # 3. promoter
     genes = annot.load_genes()
     genes = genes[genes.chrom.isin(CHROMS)].reset_index(drop=True)
     ps = np.maximum(genes.tss0.values - PROMOTER_HALF, 0)
     pe = np.minimum(genes.tss0.values + PROMOTER_HALF, genes.chrom.map(sizes).values)
-    praw = signal_matrix(bw, genes.chrom.values, ps, pe, procs)
-    cn_p = cn_matrix(cn_lines, genes.chrom.values, ps, pe, lookup)
+    rset = (regions.chrom.values, regions.start.values, regions.end.values)
+    pset = (genes.chrom.values, ps, pe)
+
+    # 2./3. raw signal over regions and promoters
+    totals = rep_totals = None
+    if signal == "cpm":
+        ins = {r.line: insertion_files(r.insertions) for _, r in sel.iterrows()}
+        res = cpm_matrices(ins, [rset, pset], procs)
+        raw, praw = res["cpm"]
+        totals, rep_totals = res["totals"], res["rep_totals"]
+        rep = res["rep_cpm"][1].astype(np.float32)
+        rep.insert(0, "gene_id", genes.gene_id.values)
+        rep.to_parquet(paths["promoter_reps"], index=False)
+    else:
+        bw = {r.line: ROOT / r.fc_bigwig for _, r in sel.iterrows()}
+        raw = signal_matrix(bw, *rset, procs)
+        praw = signal_matrix(bw, *pset, procs)
+    raw, praw = raw[lines], praw[lines]
+    print(f"[features:{signal}] raw signal done", flush=True)
+
+    lookup = annot.CNLookup()
+    cn_r = cn_matrix(cn_lines, *rset, lookup)
+    s = normalize_signal(raw, cn_r)
+    pd.concat([regions, raw.astype(np.float32)], axis=1).to_parquet(paths["region_raw"], index=False)
+    pd.concat([regions, s.astype(np.float32)], axis=1).to_parquet(paths["region_signal"], index=False)
+
+    cn_p = cn_matrix(cn_lines, *pset, lookup)
     prom = normalize_signal(praw, cn_p).values
 
     # 4. distal
@@ -330,22 +466,35 @@ def build(config: Path | str = CONFIG_TSV, out_dir: Path = OUT_DIR, procs: int =
         "gene_name": np.repeat(genes.gene_name.values, L),
         "line": np.tile(lines, G),
         "promoter": prom.ravel(), "distal": dist.ravel(), "combined": comb.ravel(),
-        "promoter_raw_fc": praw.values.ravel(), "promoter_cn_log2": cn_p[lines].values.ravel(),
+        "promoter_raw": praw.values.ravel(), "promoter_cn_log2": cn_p[lines].values.ravel(),
         "n_distal_regions": np.repeat(n_distal, L),
     })
     gf["line"] = pd.Categorical(gf.line, categories=lines)
-    gf.to_parquet(out_dir / GENE_FEATURES.name, index=False)
+    gf.to_parquet(paths["gene_features"], index=False)
+
+    def line_info(r):
+        d = dict(line=r.line, role=r.role, priority=int(r.priority), peaks=r.peaks, cn_line=r.cn_line,
+                 cn_note=("CN=0 (line absent from DepMap 24Q4)" if r.cn_line in ("GM12878", "IMR90")
+                          else "RPE1 karyotype track (+log2(3/2) 10q21.2-qter)" if r.cn_line == "RPE1"
+                          else "none" if r.cn_line == "none" else "DepMap 24Q4 segments"),
+                 n_summits=n_peaks[r.line], md5_peaks=_md5(ROOT / r.peaks) if md5 else None)
+        if signal == "cpm":
+            files = insertion_files(r.insertions)
+            d.update(insertions=[str(f.relative_to(ROOT)) for f in files],
+                     n_insertions_total=int(totals[r.line]),
+                     n_insertions_rep={f.stem: int(rep_totals[f.stem]) for f in files},
+                     md5_insertions={f.stem: _md5(f) for f in files} if md5 else None)
+        else:
+            d.update(fc_bigwig=r.fc_bigwig, md5_fc_bigwig=_md5(ROOT / r.fc_bigwig) if md5 else None)
+        return d
 
     info = dict(
         built=_dt.datetime.now().isoformat(timespec="seconds"),
+        signal=signal,
+        signal_desc=("Tn5 insertion counts per million insertions (chr1-22,X), replicates pooled"
+                     if signal == "cpm" else "mean MACS2 fold-change bigWig signal"),
         config=str(Path(config).resolve().relative_to(ROOT)) if Path(config).resolve().is_relative_to(ROOT) else str(config),
-        lines=[dict(line=r.line, role=r.role, priority=int(r.priority), fc_bigwig=r.fc_bigwig, peaks=r.peaks,
-                    cn_line=r.cn_line, cn_note=("CN=0 (line absent from DepMap 24Q4)" if r.cn_line in ("GM12878", "IMR90")
-                                                else "RPE1 karyotype track (+log2(3/2) 10q21.2-qter)" if r.cn_line == "RPE1"
-                                                else "none" if r.cn_line == "none" else "DepMap 24Q4 segments"),
-                    n_summits=n_peaks[r.line],
-                    md5_fc_bigwig=_md5(ROOT / r.fc_bigwig) if md5 else None,
-                    md5_peaks=_md5(ROOT / r.peaks) if md5 else None) for _, r in sel.iterrows()],
+        lines=[line_info(r) for _, r in sel.iterrows()],
         skipped_lines=skipped,
         n_lines=L, n_regions=int(len(regions)), region_info=rinfo,
         n_genes=int(G), n_gene_region_pairs=int(len(gi)),
@@ -355,10 +504,12 @@ def build(config: Path | str = CONFIG_TSV, out_dir: Path = OUT_DIR, procs: int =
                     chroms="chr1-22,chrX", blacklist=str(annot.BLACKLIST_PATH.relative_to(ROOT)),
                     cn_fill="nearest segment for DepMap gaps (annot.CNLookup)"),
         z_pooled=zinfo,
+        outputs={k: str(v.relative_to(ROOT)) if v.resolve().is_relative_to(ROOT) else str(v)
+                 for k, v in paths.items() if signal == "cpm" or k != "promoter_reps"},
     )
-    with open(out_dir / BUILD_INFO.name, "w") as fh:
+    with open(paths["build_info"], "w") as fh:
         json.dump(info, fh, indent=2)
-    print(f"[features] genes {G:,} x lines {L}; written to {out_dir}", flush=True)
+    print(f"[features:{signal}] genes {G:,} x lines {L}; written to {out_dir}", flush=True)
     return info
 
 
@@ -366,28 +517,30 @@ def build(config: Path | str = CONFIG_TSV, out_dir: Path = OUT_DIR, procs: int =
 _CACHE: dict = {}
 
 
-def load_gene_features(path: Path | str = GENE_FEATURES) -> pd.DataFrame:
-    path = Path(path)
+def load_gene_features(path: Path | str | None = None, signal: str = DEFAULT_SIGNAL) -> pd.DataFrame:
+    """Long gene-feature table of one signal version (cpm primary; fc sensitivity)."""
+    path = Path(path) if path is not None else output_paths(signal)["gene_features"]
     key = (str(path), path.stat().st_mtime)
     if key not in _CACHE:
-        _CACHE.clear()
         _CACHE[key] = pd.read_parquet(path)
     return _CACHE[key]
 
 
-def feature_matrix(kind: str = "promoter", features: pd.DataFrame | None = None) -> pd.DataFrame:
+def feature_matrix(kind: str = "promoter", features: pd.DataFrame | None = None,
+                   signal: str = DEFAULT_SIGNAL) -> pd.DataFrame:
     """genes x lines matrix of one feature kind."""
     if kind not in KINDS:
         raise ValueError(f"kind must be one of {KINDS}")
-    f = load_gene_features() if features is None else features
+    f = load_gene_features(signal=signal) if features is None else features
     m = f.pivot(index="gene_id", columns="line", values=kind)
     m.columns = [str(c) for c in m.columns]
     return m
 
 
-def pair_feature(lineA: str, lineB: str, kind: str = "combined", features: pd.DataFrame | None = None) -> pd.Series:
+def pair_feature(lineA: str, lineB: str, kind: str = "combined", features: pd.DataFrame | None = None,
+                 signal: str = DEFAULT_SIGNAL) -> pd.Series:
     """x_g = feature_A - feature_B for every gene (index gene_id)."""
-    m = feature_matrix(kind, features)
+    m = feature_matrix(kind, features, signal)
     for ln in (lineA, lineB):
         if ln not in m.columns:
             raise KeyError(f"line {ln!r} not in features (have {list(m.columns)})")
@@ -399,9 +552,11 @@ def main(argv=None):
     ap.add_argument("--config", default=str(CONFIG_TSV))
     ap.add_argument("--out", default=str(OUT_DIR))
     ap.add_argument("--procs", type=int, default=6)
+    ap.add_argument("--signal", choices=[*SIGNALS, "both"], default=DEFAULT_SIGNAL)
     ap.add_argument("--no-md5", action="store_true")
     a = ap.parse_args(argv)
-    build(a.config, Path(a.out), a.procs, md5=not a.no_md5)
+    for sig in (SIGNALS if a.signal == "both" else (a.signal,)):
+        build(a.config, Path(a.out), a.procs, md5=not a.no_md5, signal=sig)
 
 
 if __name__ == "__main__":

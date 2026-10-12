@@ -1,19 +1,21 @@
-# Line configuration for cdtest.features (ANALYSIS_PLAN.md section 3).
-# One row per candidate input set. For each `line`, the row with the LOWEST `priority` whose
-# fc_bigwig AND peaks files both exist is used; a line with no usable row is skipped and recorded in
-# data/features/build_info.json. So: when the local Jurkat / RPE1 pipeline outputs appear, just rerun.
-# Paths are relative to the repo root. peaks: ENCODE narrowPeak(.gz) or bigBed (.bb) narrowPeak.
+# Line configuration for cdtest.features (ANALYSIS_PLAN.md section 3; signal per plan amendment v1.2).
+# One row per candidate input set. For each `line`, the row with the LOWEST `priority` whose files for the
+# requested signal all exist is used (signal=cpm: `insertions` glob matches >= 1 file AND peaks exist;
+# signal=fc: fc_bigwig AND peaks exist). A line with no usable row is skipped and recorded in build_info.
+# Paths are relative to the repo root. peaks: narrowPeak(.gz) or bigBed (.bb) narrowPeak.
+# insertions: glob of per-replicate Tn5 insertion arrays (data/atac_ins/<Line>__rep<k>.npz; 0-based int32,
+#   sorted, one array per chrom chr1-22,X). Replicates are pooled per line (counts summed).
 # cn_line: column name in data/annot/cn_segments_log2.tsv (annot.CN_LINES); "none" = no CN correction.
-line	priority	role	fc_bigwig	peaks	cn_line	note
-K562	1	target	data/atac/K562__ENCFF102ARJ.bigWig	data/atac/K562__ENCFF948AFM.bed.gz	K562	ENCODE pooled FC + IDR thresholded peaks
-RPE1	1	target	data/atac_local/rpe1_4DNES48BA2C8/rpe1_4DNES48BA2C8.fc.bigWig	data/atac_local/rpe1_4DNES48BA2C8/rpe1_4DNES48BA2C8.idr.narrowPeak.gz	RPE1	local ENCODE-equivalent pipeline (preferred when present)
-RPE1	2	target_provisional	data/atac/RPE1__4DNFIS4IDZNE.bw	data/atac/RPE1__4DNFI4H1MT8U.bb	RPE1	4DN FC bigWig + conservative peaks bigBed (provisional)
-Jurkat	1	target	data/atac_local/jurkat_GSE273644/jurkat_GSE273644.fc.bigWig	data/atac_local/jurkat_GSE273644/jurkat_GSE273644.idr.narrowPeak.gz	Jurkat	local pipeline on GSE273644 (not yet available)
-HepG2	1	target	data/atac/HepG2__ENCFF645OHB.bigWig	data/atac/HepG2__ENCFF935GLR.bed.gz	HepG2	ENCODE
-GM12878	1	decoy	data/atac/GM12878__ENCFF603BJO.bigWig	data/atac/GM12878__ENCFF429WTW.bed.gz	GM12878	ENCODE; not in DepMap 24Q4 -> CN track is all 0
-HCT116	1	decoy	data/atac/HCT116__ENCFF259PSA.bigWig	data/atac/HCT116__ENCFF054UBO.bed.gz	HCT116	ENCODE
-MCF-7	1	decoy	data/atac/MCF-7__ENCFF782BVX.bigWig	data/atac/MCF-7__ENCFF882OVP.bed.gz	MCF7	ENCODE
-A549	1	decoy	data/atac/A549__ENCFF872SDF.bigWig	data/atac/A549__ENCFF964AUZ.bed.gz	A549	ENCODE
-IMR-90	1	decoy	data/atac/IMR-90__ENCFF282RNO.bigWig	data/atac/IMR-90__ENCFF114GDS.bed.gz	IMR90	ENCODE; not in DepMap 24Q4 -> CN track is all 0
-PC-3	1	decoy	data/atac/PC-3__ENCFF124ZQJ.bigWig	data/atac/PC-3__ENCFF369VMF.bed.gz	PC3	ENCODE
-Panc1	1	decoy	data/atac/Panc1__ENCFF757YRZ.bigWig	data/atac/Panc1__ENCFF481ELM.bed.gz	PANC1	ENCODE
+line	priority	role	insertions	fc_bigwig	peaks	cn_line	note
+K562	1	target	data/atac_ins/K562__rep*.npz	data/atac/K562__ENCFF102ARJ.bigWig	data/atac/K562__ENCFF948AFM.bed.gz	K562	ENCODE filtered BAMs (3 reps) -> insertions; ENCODE pooled FC; IDR thresholded peaks
+RPE1	1	target	data/atac_ins/RPE1__rep*.npz	data/atac_local/rpe1_4DNES48BA2C8/rpe1_4DNES48BA2C8.fc.bigWig	data/atac_local/rpe1_4DNES48BA2C8/rpe1_4DNES48BA2C8.idr.narrowPeak.gz	RPE1	local pipeline on 4DNES48BA2C8 (2 reps, first 60M pairs each): tagAlign insertions, FC, IDR peaks
+RPE1	2	target_provisional	data/atac_ins/RPE1__rep*.npz	data/atac/RPE1__4DNFIS4IDZNE.bw	data/atac/RPE1__4DNFI4H1MT8U.bb	RPE1	fallback only (4DN FC bigWig + conservative-peaks bigBed); unused while priority 1 exists
+Jurkat	1	target	data/atac_ins/Jurkat__rep*.npz	data/atac_local/jurkat_GSE273644/jurkat_GSE273644.fc.bigWig	data/atac_local/jurkat_GSE273644/jurkat_GSE273644.idr.narrowPeak.gz	Jurkat	local pipeline on GSE273644 (3 reps): tagAlign insertions, FC, IDR peaks
+HepG2	1	target	data/atac_ins/HepG2__rep*.npz	data/atac/HepG2__ENCFF645OHB.bigWig	data/atac/HepG2__ENCFF935GLR.bed.gz	HepG2	ENCODE
+GM12878	1	decoy	data/atac_ins/GM12878__rep*.npz	data/atac/GM12878__ENCFF603BJO.bigWig	data/atac/GM12878__ENCFF429WTW.bed.gz	GM12878	ENCODE; not in DepMap 24Q4 -> CN track is all 0
+HCT116	1	decoy	data/atac_ins/HCT116__rep*.npz	data/atac/HCT116__ENCFF259PSA.bigWig	data/atac/HCT116__ENCFF054UBO.bed.gz	HCT116	ENCODE
+MCF-7	1	decoy	data/atac_ins/MCF-7__rep*.npz	data/atac/MCF-7__ENCFF782BVX.bigWig	data/atac/MCF-7__ENCFF882OVP.bed.gz	MCF7	ENCODE
+A549	1	decoy	data/atac_ins/A549__rep*.npz	data/atac/A549__ENCFF872SDF.bigWig	data/atac/A549__ENCFF964AUZ.bed.gz	A549	ENCODE
+IMR-90	1	decoy	data/atac_ins/IMR-90__rep*.npz	data/atac/IMR-90__ENCFF282RNO.bigWig	data/atac/IMR-90__ENCFF114GDS.bed.gz	IMR90	ENCODE; not in DepMap 24Q4 -> CN track is all 0
+PC-3	1	decoy	data/atac_ins/PC-3__rep*.npz	data/atac/PC-3__ENCFF124ZQJ.bigWig	data/atac/PC-3__ENCFF369VMF.bed.gz	PC3	ENCODE
+Panc1	1	decoy	data/atac_ins/Panc1__rep*.npz	data/atac/Panc1__ENCFF757YRZ.bigWig	data/atac/Panc1__ENCFF481ELM.bed.gz	PANC1	ENCODE
