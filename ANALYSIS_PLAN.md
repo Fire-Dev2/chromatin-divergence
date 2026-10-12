@@ -241,3 +241,27 @@ The text above (v1.0) is unchanged. Where they differ, this section replaces
 - **Benchmark report.** The planted-signal benchmark on real M (§6) reports the
   main test under both rules.
 - Tagged `plan-v1.1`.
+
+---
+
+## v1.3 amendment (2026-10-12) — chromosome-arm terms in C
+
+**Change.** The covariate set C (§4) gains one indicator per chromosome arm (arm fixed
+effects; one arm dropped as reference). They enter both the effect model
+M ~ f(C) + x and the residualisation of x before block permutation (§5). Everything
+else is unchanged, including the v1.1 block-size rule (4× v1.0 k, bounded [5, 100]).
+
+**Reason (found on the development pair RPE1–K562; matched pairs untouched).**
+About 19.5% of the residualised combined-feature variance lies between chromosome arms.
+Raw residual ACF at lags 1/5/10/25/50/100 = 0.38/0.22/0.18/0.15/0.05/0.05; after
+removing arm means, 0.23/0.05/0.02/0.02/−0.04/0.01. This arm-scale component is
+most plausibly residual copy-number error (K562 aneuploidy; RPE1 karyotype-only CN),
+which also drives response divergence, so it confounds x and M. Without arm terms the
+x4 rule's k hits the cap of 100 and only 41% of genes lie in blocks that can be exchanged,
+so the null sits near the observed statistic and power collapses.
+
+**Cost.** Any genuine arm-scale chromatin effect is removed with the CN artefact.
+
+**Sensitivity.** v1.2 (no arm terms) is reported for every primary result.
+
+**Approval.** Author approved in chat, 2026-10-12: "approve v1.3".
