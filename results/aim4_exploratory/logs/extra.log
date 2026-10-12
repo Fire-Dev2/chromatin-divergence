@@ -1,0 +1,23 @@
+[RPE1_vs_K562] partner_fc_hybrid: theta=-0.017249 p2=0.0001 ci=[-0.023775087246214695, -0.012852526321779845]
+[RPE1_vs_K562] both_fc_hybrid: theta=-0.007153 p2=0.0291 ci=[-0.01591460904832738, -0.0001153232539733845]
+[RPE1_vs_K562] rpe1_cpm_shared_with_fc: theta=0.0073872 p2=0.3877 ci=[-0.011693945235088599, 0.025064155657459522]
+[RPE1_vs_K562] rpe1_cpm_specific_part: theta=-0.015373 p2=0.0121 ci=[-0.02108665504755727, -0.0016608508934773808]
+[Jurkat_vs_RPE1] partner_fc_hybrid: theta=-0.014613 p2=0.0038 ci=[-0.021309123572002157, -0.0033277879585710095]
+[Jurkat_vs_RPE1] both_fc_hybrid: theta=-0.005858 p2=0.1476 ci=[-0.01312644594000872, 0.003010200008798994]
+[Jurkat_vs_RPE1] rpe1_cpm_shared_with_fc: theta=0.00821 p2=0.24 ci=[-0.006819431124597208, 0.023551643574639833]
+[Jurkat_vs_RPE1] rpe1_cpm_specific_part: theta=-0.010814 p2=0.0075 ci=[-0.021832155730806824, -0.002790208243623294]
+[RPE1_vs_HepG2] partner_fc_hybrid: theta=-0.0096388 p2=0.0009 ci=[-0.014548443758465006, -0.004142698314565967]
+[RPE1_vs_HepG2] both_fc_hybrid: theta=-0.002655 p2=0.3179 ci=[-0.006761394627790032, 0.0037299701357983994]
+[RPE1_vs_HepG2] rpe1_cpm_shared_with_fc: theta=0.0080866 p2=0.1528 ci=[-0.003410278653978152, 0.021365601205646283]
+[RPE1_vs_HepG2] rpe1_cpm_specific_part: theta=-0.011334 p2=0.0002 ci=[-0.015390369764542498, -0.004287924646316891]
+[K562_vs_Jurkat] primary: theta=0.00019793 p2=0.8381
+[K562_vs_Jurkat] side_K562_alone: theta=-0.00048047 p2=0.496
+[K562_vs_Jurkat] side_Jurkat_alone: theta=0.00051972 p2=0.7598
+[K562_vs_HepG2] primary: theta=0.0070518 p2=0.0551
+[K562_vs_HepG2] side_K562_alone: theta=6.1184e-05 p2=0.9553
+[K562_vs_HepG2] side_HepG2_alone: theta=0.0022144 p2=0.2577
+[Jurkat_vs_HepG2] primary: theta=0.0024047 p2=0.2443
+[Jurkat_vs_HepG2] side_Jurkat_alone: theta=-0.0021174 p2=0.2868
+[Jurkat_vs_HepG2] side_HepG2_alone: theta=0.0035037 p2=0.2178
+TSS enrichment: {'A549': 15.48, 'GM12878': 15.69, 'HCT116': 25.1, 'HepG2': 14.34, 'IMR-90': 23.39, 'Jurkat': 25.2, 'K562': 13.74, 'MCF-7': 28.29, 'PC-3': 17.95, 'Panc1': 15.84, 'RPE1': 10.61}
+extra done 38s

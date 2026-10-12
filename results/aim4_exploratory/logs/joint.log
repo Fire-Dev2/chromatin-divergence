@@ -1,0 +1,6 @@
+RPE1_vs_K562 {'coef_RPE1': -0.029342328243102952, 'coef_K562': -0.019097526359890843, 'corr_resid_oriented': -0.8069041480725053}
+Jurkat_vs_RPE1 {'coef_Jurkat': -0.020450809699844575, 'coef_RPE1': -0.027074994896188663, 'corr_resid_oriented': -0.8350951477440226}
+RPE1_vs_HepG2 {'coef_RPE1': -0.02095782892958211, 'coef_HepG2': -0.014259923890534206, 'corr_resid_oriented': -0.7946134510516389}
+K562_vs_Jurkat {'coef_K562': -0.00012143210626359746, 'coef_Jurkat': 0.0004227334577390392, 'corr_resid_oriented': -0.8236262247890912}
+K562_vs_HepG2 {'coef_K562': 0.006571671298332848, 'coef_HepG2': 0.008130950364414058, 'corr_resid_oriented': -0.8490490305709893}
+Jurkat_vs_HepG2 {'coef_Jurkat': 0.001402360846797213, 'coef_HepG2': 0.004725295170342804, 'corr_resid_oriented': -0.8055393898361877}
