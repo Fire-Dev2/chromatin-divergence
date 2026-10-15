@@ -628,7 +628,7 @@ def fig4():
         return OI["vermillion"] if ("fc" in key or "cpm" in key) else "#555555"
     axes = diag_panel(fig, g[2], DIAG_ROWS, colour_of)
     letter(axes[0], "C", dx=-128, dy=22)
-    ptitle(axes[0], "EXPLORATORY (post hoc): RPE1 diagnostic, selected variants (manuscript Table 6)", dy=24,
+    ptitle(axes[0], "EXPLORATORY (post hoc): RPE1 diagnostic, selected variants", dy=24,
            color=OI["vermillion"], weight="bold")
     fig.legend(handles=[Line2D([], [], color="k", marker="o", ls="", ms=4, label="two-sided p ≤ 0.05"),
                         Line2D([], [], color="k", marker="o", ls="", ms=4, mfc="white", label="p > 0.05"),
