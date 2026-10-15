@@ -5,9 +5,16 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "cdtest"
 version = "0.1.0"
-description = "Feature-randomization test (Aim 2) and synthetic benchmark (Aim 3) for chromatin-divergence"
+description = "Dependence-aware feature-randomization test for relating gene-level features to perturbation responses"
+license = {text = "MIT"}
+readme = "README.md"
 requires-python = ">=3.10"
 dependencies = ["numpy", "scipy", "pandas", "statsmodels", "joblib", "matplotlib", "pyarrow"]
+
+[project.optional-dependencies]
+# needed for the real-data pipeline (Perturb-seq h5ad, ATAC bigWig, genome FASTA)
+full = ["h5py", "pyBigWig", "pyfaidx"]
+test = ["pytest"]
 
 [tool.setuptools.packages.find]
 where = ["src"]

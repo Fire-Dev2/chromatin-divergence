@@ -124,7 +124,7 @@ Regenerate it with `python -m cdtest.k_rule_sim run`.
   structure. In the worst simulated cell it doubles the 5% FPR. This is a
   pre-specified Aim 3 finding to report, together with the 4k / oracle
   contrast.
-- If a change is made, it needs a dated entry in log/RESEARCH_LOG.md, with the
+- If a change is made, it needs a dated plan amendment in ANALYSIS_PLAN.md, with the
   original and changed analyses both reported. Candidates are a larger k
   multiplier, or a lower autocorrelation threshold such as 0.01.
 - How large the inflation is depends on the simulated module sizes and

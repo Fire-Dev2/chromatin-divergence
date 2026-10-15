@@ -17,3 +17,10 @@ results/aim3/_parts_krule/
 # large Aim 1 intermediates (regenerate with cdtest.screens / cdtest.aim1)
 results/aim1/pseudobulk/
 results/aim1/*/terms.npz
+
+# private email drafts (kept local)
+outreach/
+*.egg-info/
+
+# manuscript drafts (kept local; submitted separately)
+manuscript/

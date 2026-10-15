@@ -57,7 +57,7 @@ IDR_THRESH = 0.05
 CHR_REGEX = r"^chr[0-9XY]+$"      # ENCODE regex_bfilt_peak_chr_name 'chr[\dXY]+'
 MITO = "chrM"
 
-GATE = {  # log/RESEARCH_LOG.md 'Jurkat ATAC selection'
+GATE = {  # Jurkat ATAC QC gate (docs/atac_local_pipeline.md)
     "tss_enrichment_min": 5.0, "nrf_min": 0.8, "pbc1_min": 0.7,
     "nondup_nonmito_fragments_merged_min": 25_000_000, "idr_peaks_min": 70_000,
 }

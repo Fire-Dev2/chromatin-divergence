@@ -2,7 +2,7 @@
 # RPE1 (4DN 4DNES48BA2C8): first 60M read pairs per replicate, same as the K562 validation
 # subsampling (head of file). Then the standard local pipeline, then insertion arrays.
 set -euo pipefail
-cd /Users/tharunnambi/chromatin-divergence
+cd "$(dirname "$0")/.."
 unset PYTHONPATH; source env/venv/bin/activate
 F=data/atac_fastq/rpe1_4DNES48BA2C8
 S=$F/sub60M; mkdir -p $S

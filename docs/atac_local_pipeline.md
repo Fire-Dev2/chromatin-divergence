@@ -4,7 +4,7 @@ Code: `scripts/atac_pipeline.py` (driver), `src/cdtest/atac.py` (TSS enrichment,
 bigWig means; tests in `tests/test_atac.py`), `scripts/atac_validate_encode.py` (comparison with
 ENCODE), `scripts/atac_samples.tsv` (sample sheet). Outputs go to `data/atac_local/<sample>/`
 (git-ignored). Status: **provisional** stand-in for the ENCODE ATAC pipeline v1.9.1 run on OSC
-(log/RESEARCH_LOG.md, "Compute route change"); the OSC rerun stays confirmatory.
+(a deviation from the analysis plan); the OSC rerun stays confirmatory.
 
 ## Environment
 
@@ -128,7 +128,7 @@ based) runs ~1.12× ENCODE's ATAqC value on the same library, so thresholds such
 not materially easier to pass. Lower peak-union Pearson (0.84) mainly reflects weak peaks
 present in only one set (depth and multimapping differences); promoter signal agrees closely.
 
-## Jurkat GSE273644 (primary) — QC gate (log/RESEARCH_LOG.md, "Jurkat ATAC selection")
+## Jurkat GSE273644 (primary) — QC gate
 
 3 replicates, 2×42 bp, all reads (40.1M / 31.4M / 34.8M pairs). Results:
 `results/atac_local/jurkat_GSE273644.qc.json`.
@@ -148,8 +148,8 @@ present in only one set (depth and multimapping differences); promoter signal ag
 | Pooled naive-overlap peaks | | | 183,045 | — | |
 
 Strict reading of the gate: FAIL on one criterion (rep1 NRF 0.789 < 0.8); every other
-criterion passes with a wide margin. The decision on this borderline value is recorded in
-log/RESEARCH_LOG.md ("Jurkat ATAC (GSE273644, local pipeline)").
+criterion passes with a wide margin. All three replicates were kept; this is reported as a
+deviation from the analysis plan.
 
 Outputs: `data/atac_local/jurkat_GSE273644/jurkat_GSE273644.{fc.bigWig,idr.narrowPeak.gz,overlap.narrowPeak.gz,pooled.pval0.01.300K.bfilt.narrowPeak.gz}`,
 `qc.json`; filtered BAMs kept (5.0 GB total).

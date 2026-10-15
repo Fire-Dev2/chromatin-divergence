@@ -77,8 +77,9 @@ def test_decoy_similarity_uses_v13_design():
 V12 = aim2.ROOT / "results/aim2/RPE1_vs_K562_test.json"
 
 
-@pytest.mark.skipif(not V12.exists() or not (aim2.AIM1 / "RPE1_vs_K562/gene_outcome.tsv").exists(),
-                    reason="development-pair results not present")
+@pytest.mark.skipif(not V12.exists() or not (aim2.AIM1 / "RPE1_vs_K562/gene_outcome.tsv").exists()
+                    or not (aim2.ROOT / "results/aim1/pseudobulk/RPE1/genes.tsv").exists(),
+                    reason="development-pair results not present (regenerate with cdtest.aim1)")
 def test_v12_reproduced_on_dev_pair():
     """arm_effects=False reproduces the frozen v1.2 numbers (theta-hat, k, partial R2, main p)."""
     old = json.loads(V12.read_text())

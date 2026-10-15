@@ -5,7 +5,7 @@
 # full-length reads (no 50-bp trim), local pipeline with --threads 8 (shared machine), pool,
 # insertion arrays data/atac_ins/JurkatCRISPRi__repK.npz. FASTQs deleted at the end.
 set -euo pipefail
-cd /Users/tharunnambi/chromatin-divergence
+cd "$(dirname "$0")/.."
 unset PYTHONPATH; source env/venv/bin/activate
 SAMPLE=jurkat_GSE302221
 F=data/atac_fastq/$SAMPLE; S=$F/sub40M; mkdir -p $S

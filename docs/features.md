@@ -29,8 +29,8 @@ values a little**, so the whole build is re-run whenever a line is added or repl
 | sensitivity (v1.0 track) | `"fc"` | mean MACS2 fold-change bigWig value | `gene_features_fc.parquet`, `region_signal_fc.parquet`, `region_signal_raw_fc.parquet`, `build_info_fc.json` |
 
 Why: the fold-change track's local background compresses strong promoters, so promoter FC
-was *negatively* rank-correlated with expression among expressed genes (see
-`log/RESEARCH_LOG.md`, "Signal-track decision"). Insertion CPM fixes the sign.
+was *negatively* rank-correlated with expression among expressed genes (plan amendment
+v1.2). Insertion CPM fixes the sign.
 
 Everything after the raw signal (log, quantile normalisation, CN, distal weighting, z) is
 identical between the versions, and both use the same union regions.
