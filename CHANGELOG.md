@@ -9,7 +9,8 @@ All notable changes to cdtest. Versions follow [semantic versioning](https://sem
   confirmatory analysis (gene annotation, copy number, gene-level accessibility features for the
   4 screened and 7 decoy lines, control-cell expression moments; ~10 MB, gene subset), with
   `MANIFEST.tsv` md5 sums. `scripts/reproduce_from_intermediates.py` recomputes Table 2 and
-  Figures 3–4 from them in under a minute and compares every number with the committed results
+  Figures 3–4 (except Figure 4C and the 4DN rows of 4B, drawn from committed results) from them in
+  under a minute and compares every number with the committed results
   (`results_repro/COMPARISON.md`). `cdtest.intermediates.install()` puts the files in place.
 - `scripts/fetch_control_moments.py`: control-cell expression moments read from the public h5ad
   files over HTTP range requests (~4 GB instead of ~95 GB).

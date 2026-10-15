@@ -15,9 +15,11 @@ authors:
   - family-names: Soni
     given-names: Naman
     affiliation: "The Ohio State University"
+    email: soni.168@osu.edu
   - family-names: Sriram
     given-names: Tejas
     affiliation: "Columbus State Community College"
+    email: tsriram@student.cscc.edu
 keywords:
   - Perturb-seq
   - CRISPR interference

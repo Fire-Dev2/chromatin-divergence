@@ -117,7 +117,9 @@ python scripts/reproduce_from_intermediates.py
 and seven decoy lines, and control-cell expression moments for the covariates; the outcome
 vectors M are in `results/aim1/<pair>/`. The script recomputes the main test in all six pairs,
 Holm p, the pooled contrasts and the same-line control with the frozen code and seeds, writes
-Table 2 (`results_repro/table2.md`) and Figures 3–4 (`results_repro/figures/`), and compares
+Table 2 (`results_repro/table2.md`) and Figures 3–4 (`results_repro/figures/`; Figure 3 and Figure 4A–B are
+recomputed, while the exploratory Figure 4C and the 4DN fold-change rows of Figure 4B need the raw RPE1
+data and are drawn from the committed result files), and compares
 every number with the committed results (`results_repro/COMPARISON.md`). The same files are
 deposited in GigaDB together with this release.
 
