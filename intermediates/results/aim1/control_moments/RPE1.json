@@ -1,0 +1,11 @@
+{
+ "line": "RPE1",
+ "source": "https://ndownloader.figshare.com/files/35775606",
+ "n_cells": 247914,
+ "n_genes": 8749,
+ "n_ctrl_kept": 11370,
+ "median_ctrl_umi": 11871.0,
+ "mito_cut_pct": 0.09464232712984083,
+ "bytes_downloaded": 459064032,
+ "seconds": 633.4
+}

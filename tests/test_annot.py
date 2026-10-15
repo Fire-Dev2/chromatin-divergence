@@ -8,7 +8,10 @@ import pytest
 
 from cdtest import annot as A
 
-pytestmark = pytest.mark.skipif(not A.GENES_TSV.exists(), reason="annotation tables not built")
+from cdtest import intermediates  # noqa: E402
+
+pytestmark = pytest.mark.skipif(not A.GENES_TSV.exists() or intermediates.is_deposited("data/annot/genes_gencode_v50.tsv"),
+                                reason="full annotation tables not built (the deposited intermediates hold a gene subset)")
 
 
 @pytest.fixture(scope="module")

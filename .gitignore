@@ -1,5 +1,5 @@
-data/
-env/
+/data/
+/env/
 *.h5ad
 *.h5
 *.bigWig
@@ -24,3 +24,9 @@ outreach/
 
 # manuscript drafts (kept local; submitted separately)
 manuscript/
+
+# working copies of the deposited intermediates (the tracked copy is in intermediates/)
+results/aim1/control_moments/
+# outputs of scripts/reproduce_from_intermediates.py and scripts/export_intermediates.py
+results_repro/
+dist/

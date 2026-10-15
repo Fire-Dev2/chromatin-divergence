@@ -1,0 +1,11 @@
+{
+ "line": "HepG2",
+ "source": "https://ftp.ncbi.nlm.nih.gov/geo/series/GSE264nnn/GSE264667/suppl/GSE264667_hepg2_raw_singlecell_01.h5ad",
+ "n_cells": 145473,
+ "n_genes": 9624,
+ "n_ctrl_kept": 4926,
+ "median_ctrl_umi": 16062.5,
+ "mito_cut_pct": 0.1527077704668045,
+ "bytes_downloaded": 217306477,
+ "seconds": 312.8
+}

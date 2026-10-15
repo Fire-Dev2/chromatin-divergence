@@ -1,0 +1,11 @@
+{
+ "line": "K562gw",
+ "source": "https://ndownloader.figshare.com/files/35775507",
+ "n_cells": 1989578,
+ "n_genes": 8248,
+ "n_ctrl_kept": 74574,
+ "median_ctrl_umi": 11602.5,
+ "mito_cut_pct": 0.18387648761272418,
+ "bytes_downloaded": 2747196092,
+ "seconds": 3034.1
+}

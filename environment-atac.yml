@@ -1,0 +1,24 @@
+# Command-line tools of the local ATAC-seq pipeline (scripts/atac_pipeline.py; docs/atac_local_pipeline.md).
+# Minimum versions; the versions of the published run (Homebrew / pip on macOS) are in the comments.
+#   conda env create -f environment-atac.yml && conda activate cdtest-atac
+#   pip install -e ".[full]"        # cdtest itself, with pyBigWig/h5py/pyfaidx
+# IDR 2.0.3 needs numpy < 1.24 or the two numpy.int -> int edits described in docs/atac_local_pipeline.md;
+# it is installed in its own environment (env/idr-venv) in the published run.
+name: cdtest-atac
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - python=3.11
+  - fastp>=0.23        # published run: 1.4.0 (Homebrew)
+  - bowtie2>=2.5       # published run: 2.5.5 (Homebrew)
+  - samtools>=1.19     # published run: 1.24 (Homebrew)
+  - bedtools>=2.31     # published run: 2.31.1
+  - macs3>=3.0         # published run: 3.0.5 (pip)
+  - idr=2.0.4.2        # published run: 2.0.3 with two numpy.int edits (same numerics)
+  - ucsc-bedgraphtobigwig
+  - pybigwig
+  - numpy
+  - pandas
+  - scipy
+  - pip

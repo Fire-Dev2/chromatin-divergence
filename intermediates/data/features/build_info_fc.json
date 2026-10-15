@@ -1,0 +1,174 @@
+{
+  "built": "2026-10-12T05:12:41",
+  "signal": "fc",
+  "signal_desc": "mean MACS2 fold-change bigWig signal",
+  "config": "config/feature_lines.tsv",
+  "lines": [
+    {
+      "line": "K562",
+      "role": "target",
+      "priority": 1,
+      "peaks": "data/atac/K562__ENCFF948AFM.bed.gz",
+      "cn_line": "K562",
+      "cn_note": "DepMap 24Q4 segments",
+      "n_summits": 181336,
+      "md5_peaks": "76bc2c332fd638d7cb45490d5404e352",
+      "fc_bigwig": "data/atac/K562__ENCFF102ARJ.bigWig",
+      "md5_fc_bigwig": "55f5a2e4590784a960b785a31ed4b85a"
+    },
+    {
+      "line": "RPE1",
+      "role": "target",
+      "priority": 1,
+      "peaks": "data/atac_local/rpe1_4DNES48BA2C8/rpe1_4DNES48BA2C8.idr.narrowPeak.gz",
+      "cn_line": "RPE1",
+      "cn_note": "RPE1 karyotype track (+log2(3/2) 10q21.2-qter)",
+      "n_summits": 193378,
+      "md5_peaks": "a8cedb2e74efd0414d8c6f6a03f9539d",
+      "fc_bigwig": "data/atac_local/rpe1_4DNES48BA2C8/rpe1_4DNES48BA2C8.fc.bigWig",
+      "md5_fc_bigwig": "72c5b936fdd11a2fcbb0d40441dce259"
+    },
+    {
+      "line": "Jurkat",
+      "role": "target",
+      "priority": 1,
+      "peaks": "data/atac_local/jurkat_GSE273644/jurkat_GSE273644.idr.narrowPeak.gz",
+      "cn_line": "Jurkat",
+      "cn_note": "DepMap 24Q4 segments",
+      "n_summits": 110326,
+      "md5_peaks": "f82e8a541b65a1aa67b0dc02f9fc797b",
+      "fc_bigwig": "data/atac_local/jurkat_GSE273644/jurkat_GSE273644.fc.bigWig",
+      "md5_fc_bigwig": "864e39349345677cadf2e646e1f88424"
+    },
+    {
+      "line": "HepG2",
+      "role": "target",
+      "priority": 1,
+      "peaks": "data/atac/HepG2__ENCFF935GLR.bed.gz",
+      "cn_line": "HepG2",
+      "cn_note": "DepMap 24Q4 segments",
+      "n_summits": 208885,
+      "md5_peaks": "cee3d8461e11c43cdf60bbd0934ba2b2",
+      "fc_bigwig": "data/atac/HepG2__ENCFF645OHB.bigWig",
+      "md5_fc_bigwig": "db283be676775d914aed67e9806dd7c2"
+    },
+    {
+      "line": "GM12878",
+      "role": "decoy",
+      "priority": 1,
+      "peaks": "data/atac/GM12878__ENCFF429WTW.bed.gz",
+      "cn_line": "GM12878",
+      "cn_note": "CN=0 (line absent from DepMap 24Q4)",
+      "n_summits": 207873,
+      "md5_peaks": "1f6a3d57b339fd07b5cfdd035f6773b6",
+      "fc_bigwig": "data/atac/GM12878__ENCFF603BJO.bigWig",
+      "md5_fc_bigwig": "7729f7175175ba9a0fd08222b1800b7b"
+    },
+    {
+      "line": "HCT116",
+      "role": "decoy",
+      "priority": 1,
+      "peaks": "data/atac/HCT116__ENCFF054UBO.bed.gz",
+      "cn_line": "HCT116",
+      "cn_note": "DepMap 24Q4 segments",
+      "n_summits": 169178,
+      "md5_peaks": "8852784d2b05a67cc6a17f6ad3515b4e",
+      "fc_bigwig": "data/atac/HCT116__ENCFF259PSA.bigWig",
+      "md5_fc_bigwig": "ad633cf625c848b3093fa125c4ee331e"
+    },
+    {
+      "line": "MCF-7",
+      "role": "decoy",
+      "priority": 1,
+      "peaks": "data/atac/MCF-7__ENCFF882OVP.bed.gz",
+      "cn_line": "MCF7",
+      "cn_note": "DepMap 24Q4 segments",
+      "n_summits": 173570,
+      "md5_peaks": "8dc109d9411a1de362040f307199e55c",
+      "fc_bigwig": "data/atac/MCF-7__ENCFF782BVX.bigWig",
+      "md5_fc_bigwig": "fc2a8a3cd4fd5bb1d620fde494ff59c1"
+    },
+    {
+      "line": "A549",
+      "role": "decoy",
+      "priority": 1,
+      "peaks": "data/atac/A549__ENCFF964AUZ.bed.gz",
+      "cn_line": "A549",
+      "cn_note": "DepMap 24Q4 segments",
+      "n_summits": 208895,
+      "md5_peaks": "c331f5f51e1fc7f01c26f58f9c5a0b50",
+      "fc_bigwig": "data/atac/A549__ENCFF872SDF.bigWig",
+      "md5_fc_bigwig": "25c187e57740bfa543743a66386ffdbf"
+    },
+    {
+      "line": "IMR-90",
+      "role": "decoy",
+      "priority": 1,
+      "peaks": "data/atac/IMR-90__ENCFF114GDS.bed.gz",
+      "cn_line": "IMR90",
+      "cn_note": "CN=0 (line absent from DepMap 24Q4)",
+      "n_summits": 174980,
+      "md5_peaks": "36ef7cf62efd7d8f7f625281677c5a7e",
+      "fc_bigwig": "data/atac/IMR-90__ENCFF282RNO.bigWig",
+      "md5_fc_bigwig": "2357c7ad34b5d457355d9785fd856d38"
+    },
+    {
+      "line": "PC-3",
+      "role": "decoy",
+      "priority": 1,
+      "peaks": "data/atac/PC-3__ENCFF369VMF.bed.gz",
+      "cn_line": "PC3",
+      "cn_note": "DepMap 24Q4 segments",
+      "n_summits": 193312,
+      "md5_peaks": "1a8fed94db2a414cd061acbe555dabd1",
+      "fc_bigwig": "data/atac/PC-3__ENCFF124ZQJ.bigWig",
+      "md5_fc_bigwig": "68a71b72addea9dc3f516f29e64d7d88"
+    },
+    {
+      "line": "Panc1",
+      "role": "decoy",
+      "priority": 1,
+      "peaks": "data/atac/Panc1__ENCFF481ELM.bed.gz",
+      "cn_line": "PANC1",
+      "cn_note": "DepMap 24Q4 segments",
+      "n_summits": 137579,
+      "md5_peaks": "c2e049f63e6e20c615ff7df2f65cf72c",
+      "fc_bigwig": "data/atac/Panc1__ENCFF757YRZ.bigWig",
+      "md5_fc_bigwig": "38cf4baba6ff1992f85fa9826aa10008"
+    }
+  ],
+  "skipped_lines": [],
+  "n_lines": 11,
+  "n_regions": 324842,
+  "region_info": {
+    "n_windows": 1959312,
+    "n_merged": 327145,
+    "n_blacklisted": 2303
+  },
+  "n_genes": 54710,
+  "n_gene_region_pairs": 1543028,
+  "n_genes_no_distal_region": 788,
+  "params": {
+    "summit_half": 250,
+    "promoter_half": 1000,
+    "distal_min": 2500,
+    "distal_max": 100000,
+    "distal_scale": 25000,
+    "pseudocount": 1.0,
+    "chroms": "chr1-22,chrX",
+    "blacklist": "data/annot/blacklist/hg38-blacklist.v2.bed.gz",
+    "cn_fill": "nearest segment for DepMap gaps (annot.CNLookup)"
+  },
+  "z_pooled": {
+    "promoter_mean": 1.198720210612584,
+    "promoter_sd": 0.8441685969913112,
+    "distal_mean": 3.8436946919515456,
+    "distal_sd": 1.146509074715684
+  },
+  "outputs": {
+    "gene_features": "data/features/gene_features_fc.parquet",
+    "region_signal": "data/features/region_signal_fc.parquet",
+    "region_raw": "data/features/region_signal_raw_fc.parquet",
+    "build_info": "data/features/build_info_fc.json"
+  }
+}

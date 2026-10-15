@@ -3,13 +3,33 @@ requires = ["setuptools>=61"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "cdtest"
-version = "0.1.0"
+# distribution name on PyPI ("cdtest" is taken there by an unrelated project); the import name is cdtest
+name = "cdtest-perturb"
+version = "0.2.0"
 description = "Dependence-aware feature-randomization test for relating gene-level features to perturbation responses"
 license = {text = "MIT"}
 readme = "README.md"
 requires-python = ">=3.10"
+authors = [
+  {name = "Tharun Nambi", email = "tharun.nambi@osumc.edu"},
+  {name = "Naman Soni"},
+  {name = "Tejas Sriram"},
+]
+keywords = ["Perturb-seq", "CRISPRi", "chromatin accessibility", "ATAC-seq", "permutation test",
+            "conditional randomization test"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Topic :: Scientific/Engineering :: Bio-Informatics",
+  "Intended Audience :: Science/Research",
+]
 dependencies = ["numpy", "scipy", "pandas", "statsmodels", "joblib", "matplotlib", "pyarrow"]
+
+[project.urls]
+Homepage = "https://github.com/Fire-Dev2/chromatin-divergence"
+Documentation = "https://github.com/Fire-Dev2/chromatin-divergence/blob/main/docs/api.md"
+Changelog = "https://github.com/Fire-Dev2/chromatin-divergence/blob/main/CHANGELOG.md"
 
 [project.optional-dependencies]
 # needed for the real-data pipeline (Perturb-seq h5ad, ATAC bigWig, genome FASTA)

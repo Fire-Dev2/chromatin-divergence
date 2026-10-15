@@ -19,6 +19,7 @@ is absent.
 from __future__ import annotations
 
 import json
+import os
 import re
 import sys
 from pathlib import Path
@@ -38,7 +39,10 @@ sys.path.insert(0, str(ROOT / "src"))
 from cdtest.aim4 import PAIRS as _PAIRS  # noqa: E402
 
 RES = ROOT / "results"
-OUT = ROOT / "figures/final"
+OUT = Path(os.environ.get("CDTEST_FIG_OUT", ROOT / "figures/final"))
+#: optional directory of recomputed result files that take precedence over results/ (same relative
+#: paths); set by scripts/reproduce_from_intermediates.py
+OVERLAY = Path(os.environ["CDTEST_RESULTS_OVERLAY"]) if os.environ.get("CDTEST_RESULTS_OVERLAY") else None
 
 # ----------------------------------------------------------------------------------------- style
 FONT = "Arial"
@@ -69,6 +73,8 @@ RPE1_PAIRS = ("RPE1_vs_K562", "Jurkat_vs_RPE1", "RPE1_vs_HepG2")
 
 
 def jl(p):
+    if OVERLAY is not None and p.startswith("results/") and (OVERLAY / p[len("results/"):]).exists():
+        return json.loads((OVERLAY / p[len("results/"):]).read_text())
     return json.loads((ROOT / p).read_text())
 
 
@@ -102,7 +108,7 @@ def save(fig, name):
     fig.savefig(OUT / f"{name}.pdf", metadata={"CreationDate": None, "ModDate": None})
     fig.savefig(OUT / f"{name}.png", dpi=300)
     plt.close(fig)
-    print(f"wrote figures/final/{name}.pdf/.png", flush=True)
+    print(f"wrote {OUT / name}.pdf/.png", flush=True)
 
 
 def role_legend(ax, loc="lower right", extra=()):

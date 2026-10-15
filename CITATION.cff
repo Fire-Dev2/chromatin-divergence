@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+message: "If you use cdtest, please cite the software (and the GigaByte Technical Release, once published)."
+title: "cdtest: a dependence-aware feature-randomization test for gene-level features and perturbation responses"
+type: software
+version: 0.2.0
+date-released: "2026-10-15"
+license: MIT
+repository-code: "https://github.com/Fire-Dev2/chromatin-divergence"
+authors:
+  - family-names: Nambi
+    given-names: Tharun
+    affiliation: "Pelotonia Institute for Immuno-Oncology, The Ohio State University Wexner Medical Center"
+    orcid: "https://orcid.org/0009-0001-1177-6635"
+    email: tharun.nambi@osumc.edu
+  - family-names: Soni
+    given-names: Naman
+    affiliation: "The Ohio State University"
+  - family-names: Sriram
+    given-names: Tejas
+    affiliation: "Columbus State Community College"
+keywords:
+  - Perturb-seq
+  - CRISPR interference
+  - chromatin accessibility
+  - ATAC-seq
+  - permutation test
+  - conditional randomization test

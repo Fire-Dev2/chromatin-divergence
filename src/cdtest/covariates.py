@@ -41,9 +41,21 @@ SPLINE_COLS = ("log2_meanA", "log2_meanB")
 SPLINE_DF = 4
 
 
+#: deposited per-line control moments (scripts/fetch_control_moments.py); used when the
+#: pseudobulk control matrix is absent, e.g. when reproducing from the deposited intermediates.
+MOMENTS = AIM1 / "control_moments"
+
+
 def control_moments(line: str, gene_ids, pb_dir: Path = PB) -> pd.DataFrame:
-    """Mean and variance (ddof 1) of normalized expression over the line's kept control cells."""
+    """Mean and variance (ddof 1) of normalized expression over the line's kept control cells.
+
+    Reads results/aim1/pseudobulk/<line>/ctrl_norm.npy when present; otherwise the same two
+    numbers per gene from results/aim1/control_moments/<line>.tsv.gz."""
     d = Path(pb_dir) / line
+    if not (d / "ctrl_norm.npy").exists() and (MOMENTS / f"{line}.tsv.gz").exists():
+        m = pd.read_csv(MOMENTS / f"{line}.tsv.gz", sep="\t", index_col="gene_id")
+        m = m[~m.index.duplicated()]
+        return m.loc[list(gene_ids), ["mean", "var"]].set_axis(list(gene_ids))
     genes = pd.read_csv(d / "genes.tsv", sep="\t", index_col=0)
     pos = pd.Series(np.arange(len(genes)), index=genes.gene_id.values)
     cols = pos.loc[list(gene_ids)].to_numpy()

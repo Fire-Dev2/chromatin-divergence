@@ -1,0 +1,11 @@
+{
+ "line": "Jurkat",
+ "source": "https://ftp.ncbi.nlm.nih.gov/geo/series/GSE264nnn/GSE264667/suppl/GSE264667_jurkat_raw_singlecell_01.h5ad",
+ "n_cells": 262956,
+ "n_genes": 8882,
+ "n_ctrl_kept": 11892,
+ "median_ctrl_umi": 10945.5,
+ "mito_cut_pct": 0.10236206412315368,
+ "bytes_downloaded": 487596728,
+ "seconds": 573.5
+}
